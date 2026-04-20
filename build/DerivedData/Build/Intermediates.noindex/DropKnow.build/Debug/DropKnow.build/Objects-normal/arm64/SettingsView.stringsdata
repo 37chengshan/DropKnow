@@ -1,0 +1,88 @@
+{
+  "source": "/Users/cc/Desktop/DropKnow/DropKnow/Views/SettingsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "监听目录",
+        "location": {
+          "startingColumn": 21,
+          "startingLine": 12
+        }
+      },
+      {
+        "comment": "",
+        "key": "提示",
+        "location": {
+          "startingColumn": 21,
+          "startingLine": 66
+        }
+      },
+      {
+        "comment": "",
+        "key": "状态",
+        "location": {
+          "startingColumn": 21,
+          "startingLine": 71
+        }
+      },
+      {
+        "comment": "",
+        "key": "添加自定义目录",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 59
+        }
+      },
+      {
+        "comment": "",
+        "key": "默认推荐目录",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 38
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 33,
+          "startingLine": 20
+        }
+      },
+      {
+        "comment": "",
+        "key": "自定义目录",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 43
+        }
+      },
+      {
+        "comment": "",
+        "key": "移除",
+        "location": {
+          "startingColumn": 40,
+          "startingLine": 47
+        }
+      },
+      {
+        "comment": "",
+        "key": "首次仅导入最近 7 天的文件。",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 67
+        }
+      },
+      {
+        "comment": "",
+        "key": "不会逐条发系统通知，只在应用内做汇总提示。",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 68
+        }
+      }
+    ]
+  },
+  "version": 1
+}

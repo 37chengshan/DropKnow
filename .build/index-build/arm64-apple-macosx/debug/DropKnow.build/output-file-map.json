@@ -1,0 +1,572 @@
+{
+  "": {
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/master.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/App/DropKnowAppModel.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DropKnowAppModel.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DropKnowAppModel.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DropKnowAppModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DropKnowAppModel.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DropKnowAppModel.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/App/DropKnowMainWindowView.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DropKnowMainWindowView.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DropKnowMainWindowView.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DropKnowMainWindowView~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DropKnowMainWindowView.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DropKnowMainWindowView.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/App/DropKnowV1Container.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DropKnowV1Container.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DropKnowV1Container.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DropKnowV1Container~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DropKnowV1Container.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DropKnowV1Container.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/DocumentDetailScene/DocumentDetailScene.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailScene.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailScene.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailScene~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailScene.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailScene.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/MenuBarScene/MenuBarScene.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MenuBarScene.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MenuBarScene.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MenuBarScene~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MenuBarScene.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MenuBarScene.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/QuickPanelScene/QuickPanelScene.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/QuickPanelScene.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/QuickPanelScene.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/QuickPanelScene~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/QuickPanelScene.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/QuickPanelScene.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/SettingsScene/SettingsScene.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SettingsScene.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SettingsScene.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SettingsScene~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SettingsScene.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SettingsScene.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DTOs.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DTOs.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DTOs.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DTOs~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DTOs.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DTOs.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DatabaseMappers.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DatabaseMappers.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DatabaseMappers.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DatabaseMappers~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DatabaseMappers.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DatabaseMappers.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DatabaseRows.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DatabaseRows.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DatabaseRows.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DatabaseRows~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DatabaseRows.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DatabaseRows.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DomainModels.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DomainModels.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DomainModels.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DomainModels~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DomainModels.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DomainModels.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/DocumentEnums.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentEnums.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentEnums.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentEnums~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentEnums.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentEnums.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/EventEnums.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EventEnums.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EventEnums.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EventEnums~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EventEnums.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EventEnums.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/ParseJobEnums.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ParseJobEnums.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ParseJobEnums.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ParseJobEnums~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ParseJobEnums.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ParseJobEnums.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/SearchEnums.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SearchEnums.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SearchEnums.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SearchEnums~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SearchEnums.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SearchEnums.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/UnknownCaseCodable.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/UnknownCaseCodable.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/UnknownCaseCodable.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/UnknownCaseCodable~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/UnknownCaseCodable.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/UnknownCaseCodable.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Protocols/IngestionPipelineProtocols.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionPipelineProtocols.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionPipelineProtocols.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionPipelineProtocols~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionPipelineProtocols.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionPipelineProtocols.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/DropKnowApp.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DropKnowApp.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DropKnowApp.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DropKnowApp~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DropKnowApp.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DropKnowApp.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/DocumentDetail/ViewModels/DocumentDetailViewModel.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailViewModel.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailViewModel.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailViewModel.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailViewModel.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Events/DocumentEventExtractionService.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentEventExtractionService.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentEventExtractionService.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentEventExtractionService~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentEventExtractionService.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentEventExtractionService.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/FileFingerprintService.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/FileFingerprintService.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/FileFingerprintService.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/FileFingerprintService~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/FileFingerprintService.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/FileFingerprintService.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/InMemoryIngestionPersistence.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/InMemoryIngestionPersistence.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/InMemoryIngestionPersistence.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/InMemoryIngestionPersistence~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/InMemoryIngestionPersistence.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/InMemoryIngestionPersistence.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/InMemoryPipelineEventBus.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/InMemoryPipelineEventBus.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/InMemoryPipelineEventBus.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/InMemoryPipelineEventBus~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/InMemoryPipelineEventBus.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/InMemoryPipelineEventBus.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/IngestionCoordinator.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionCoordinator.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionCoordinator.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionCoordinator~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionCoordinator.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionCoordinator.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/IngestionPipelineTypes.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionPipelineTypes.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionPipelineTypes.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionPipelineTypes~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionPipelineTypes.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionPipelineTypes.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/MockPipelineFactory.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MockPipelineFactory.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MockPipelineFactory.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MockPipelineFactory~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MockPipelineFactory.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MockPipelineFactory.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/PipelineClock.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/PipelineClock.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/PipelineClock.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/PipelineClock~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/PipelineClock.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/PipelineClock.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Ingestion/EndToEndSmokeRunner.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EndToEndSmokeRunner.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EndToEndSmokeRunner.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EndToEndSmokeRunner~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EndToEndSmokeRunner.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EndToEndSmokeRunner.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Ingestion/IngestionCoordinatorFacade.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionCoordinatorFacade.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionCoordinatorFacade.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionCoordinatorFacade~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionCoordinatorFacade.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionCoordinatorFacade.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Ingestion/IngestionServiceContracts.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionServiceContracts.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionServiceContracts.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionServiceContracts~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionServiceContracts.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionServiceContracts.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Ingestion/IngestionServices.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionServices.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionServices.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionServices~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionServices.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/IngestionServices.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/MenuBar/ViewModels/ImportantRemindersViewModel.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ImportantRemindersViewModel.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ImportantRemindersViewModel.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ImportantRemindersViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ImportantRemindersViewModel.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ImportantRemindersViewModel.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/MenuBar/ViewModels/RecentFilesViewModel.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RecentFilesViewModel.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RecentFilesViewModel.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RecentFilesViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RecentFilesViewModel.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RecentFilesViewModel.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Parsing/DocumentParsingService.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentParsingService.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentParsingService.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentParsingService~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentParsingService.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentParsingService.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/PrivacyGate/PrivacyGateService.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/PrivacyGateService.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/PrivacyGateService.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/PrivacyGateService~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/PrivacyGateService.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/PrivacyGateService.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Search/ViewModels/SearchViewModel.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SearchViewModel.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SearchViewModel.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SearchViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SearchViewModel.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SearchViewModel.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Summarization/DocumentSummarizationService.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentSummarizationService.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentSummarizationService.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentSummarizationService~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentSummarizationService.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentSummarizationService.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/UIBridge/UIBridgeModels.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/UIBridgeModels.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/UIBridgeModels.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/UIBridgeModels~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/UIBridgeModels.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/UIBridgeModels.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/UIBridge/UIBridgeServices.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/UIBridgeServices.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/UIBridgeServices.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/UIBridgeServices~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/UIBridgeServices.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/UIBridgeServices.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/DebouncedStableFileEmitter.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DebouncedStableFileEmitter.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DebouncedStableFileEmitter.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DebouncedStableFileEmitter~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DebouncedStableFileEmitter.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DebouncedStableFileEmitter.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/DirectoryAuthorization.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DirectoryAuthorization.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DirectoryAuthorization.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DirectoryAuthorization~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DirectoryAuthorization.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DirectoryAuthorization.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/DirectoryWatcherService.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DirectoryWatcherService.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DirectoryWatcherService.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DirectoryWatcherService~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DirectoryWatcherService.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DirectoryWatcherService.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/FileStabilityDetector.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/FileStabilityDetector.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/FileStabilityDetector.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/FileStabilityDetector~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/FileStabilityDetector.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/FileStabilityDetector.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/RecentFileScanner.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RecentFileScanner.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RecentFileScanner.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RecentFileScanner~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RecentFileScanner.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RecentFileScanner.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/TemporaryFileFilter.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/TemporaryFileFilter.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/TemporaryFileFilter.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/TemporaryFileFilter~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/TemporaryFileFilter.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/TemporaryFileFilter.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/WatchDeduper.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/WatchDeduper.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/WatchDeduper.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/WatchDeduper~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/WatchDeduper.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/WatchDeduper.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/WatchOrchestrator.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/WatchOrchestrator.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/WatchOrchestrator.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/WatchOrchestrator~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/WatchOrchestrator.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/WatchOrchestrator.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/WatcherContracts.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/WatcherContracts.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/WatcherContracts.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/WatcherContracts~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/WatcherContracts.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/WatcherContracts.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/WatcherLogger.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/WatcherLogger.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/WatcherLogger.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/WatcherLogger~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/WatcherLogger.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/WatcherLogger.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Database/DatabaseInitializer.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DatabaseInitializer.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DatabaseInitializer.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DatabaseInitializer~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DatabaseInitializer.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DatabaseInitializer.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/JSONRepairService.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/JSONRepairService.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/JSONRepairService.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/JSONRepairService~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/JSONRepairService.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/JSONRepairService.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderClient.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderClient.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderClient.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderClient.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderClient.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderClientFactory.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderClientFactory.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderClientFactory.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderClientFactory~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderClientFactory.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderClientFactory.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderCommonContracts.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderCommonContracts.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderCommonContracts.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderCommonContracts~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderCommonContracts.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderCommonContracts.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderConfig.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderConfig.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderConfig.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderConfig~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderConfig.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderConfig.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderError.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderError.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderError.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderError~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderError.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderError.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderErrorMapper.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderErrorMapper.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderErrorMapper.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderErrorMapper~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderErrorMapper.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderErrorMapper.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderExecutionSupport.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderExecutionSupport.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderExecutionSupport.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderExecutionSupport~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderExecutionSupport.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderExecutionSupport.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderProtocols.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderProtocols.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderProtocols.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderProtocols~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderProtocols.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ProviderProtocols.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/EventExtraction/EventExtractionContracts.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EventExtractionContracts.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EventExtractionContracts.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EventExtractionContracts~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EventExtractionContracts.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EventExtractionContracts.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/EventExtraction/EventExtractionProvider.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EventExtractionProvider.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EventExtractionProvider.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EventExtractionProvider~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EventExtractionProvider.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EventExtractionProvider.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Mock/MockProviderClient.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MockProviderClient.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MockProviderClient.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MockProviderClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MockProviderClient.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MockProviderClient.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/SearchQA/SearchQAContracts.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SearchQAContracts.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SearchQAContracts.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SearchQAContracts~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SearchQAContracts.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SearchQAContracts.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/SearchQA/SearchQAProvider.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SearchQAProvider.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SearchQAProvider.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SearchQAProvider~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SearchQAProvider.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SearchQAProvider.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Summary/SummaryContracts.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SummaryContracts.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SummaryContracts.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SummaryContracts~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SummaryContracts.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SummaryContracts.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Summary/SummaryProvider.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SummaryProvider.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SummaryProvider.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SummaryProvider~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SummaryProvider.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SummaryProvider.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/MainApp.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MainApp.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MainApp.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MainApp~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MainApp.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MainApp.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Repositories/InMemoryRepositories.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/InMemoryRepositories.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/InMemoryRepositories.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/InMemoryRepositories~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/InMemoryRepositories.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/InMemoryRepositories.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Repositories/RepositoryTypes.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RepositoryTypes.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RepositoryTypes.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RepositoryTypes~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RepositoryTypes.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RepositoryTypes.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/EvidenceSnippetList.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EvidenceSnippetList.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EvidenceSnippetList.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EvidenceSnippetList~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EvidenceSnippetList.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/EvidenceSnippetList.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/ImportantEventCard.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ImportantEventCard.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ImportantEventCard.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ImportantEventCard~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ImportantEventCard.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ImportantEventCard.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/QuotaBadge.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/QuotaBadge.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/QuotaBadge.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/QuotaBadge~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/QuotaBadge.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/QuotaBadge.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/RiskGateSheet.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RiskGateSheet.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RiskGateSheet.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RiskGateSheet~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RiskGateSheet.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RiskGateSheet.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/SummaryCard.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SummaryCard.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SummaryCard.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SummaryCard~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SummaryCard.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SummaryCard.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/ToastBannerView.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ToastBannerView.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ToastBannerView.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ToastBannerView~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ToastBannerView.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ToastBannerView.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Errors/ErrorCode.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ErrorCode.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ErrorCode.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ErrorCode~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ErrorCode.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ErrorCode.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Views/DocumentDetailView.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailView.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailView.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailView~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailView.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailView.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Views/ImportantView.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ImportantView.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ImportantView.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ImportantView~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ImportantView.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/ImportantView.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Views/MenuBarRootView.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MenuBarRootView.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MenuBarRootView.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MenuBarRootView~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MenuBarRootView.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/MenuBarRootView.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Views/RecentFilesView.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RecentFilesView.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RecentFilesView.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RecentFilesView~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RecentFilesView.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/RecentFilesView.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Views/SettingsView.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SettingsView.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SettingsView.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SettingsView~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SettingsView.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnow.build/SettingsView.dia"
+  }
+}

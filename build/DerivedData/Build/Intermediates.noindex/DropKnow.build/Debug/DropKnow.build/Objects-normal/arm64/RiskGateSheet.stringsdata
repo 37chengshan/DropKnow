@@ -1,0 +1,32 @@
+{
+  "source": "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/RiskGateSheet.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "隐私风险提示",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 16
+        }
+      },
+      {
+        "comment": "",
+        "key": "忽略",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 22
+        }
+      },
+      {
+        "comment": "",
+        "key": "继续",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 23
+        }
+      }
+    ]
+  },
+  "version": 1
+}

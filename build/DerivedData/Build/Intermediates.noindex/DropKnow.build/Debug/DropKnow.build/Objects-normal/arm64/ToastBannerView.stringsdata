@@ -1,0 +1,16 @@
+{
+  "source": "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/ToastBannerView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "关闭",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 38
+        }
+      }
+    ]
+  },
+  "version": 1
+}

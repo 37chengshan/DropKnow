@@ -1,0 +1,16 @@
+{
+  "source": "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/SummaryCard.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "建议动作：%@",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 22
+        }
+      }
+    ]
+  },
+  "version": 1
+}
