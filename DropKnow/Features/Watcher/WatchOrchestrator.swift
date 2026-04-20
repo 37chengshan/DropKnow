@@ -16,8 +16,19 @@ public actor WatchOrchestrator {
     }
 
     public func run() async {
+        await run(onEvent: nil, onIngestionResult: nil)
+    }
+
+    public func run(
+        onEvent: (@Sendable (WatcherEvent) async -> Void)?,
+        onIngestionResult: (@Sendable (FileWatchEvent, IngestionResult) async -> Void)?
+    ) async {
         let stream = await watcher.makeEventStream()
         for await event in stream {
+            if let onEvent {
+                await onEvent(event)
+            }
+
             switch event {
             case .file_ready(let fileEvent):
                 let request = IngestionRequest(
@@ -29,7 +40,10 @@ public actor WatchOrchestrator {
                 )
 
                 Task.detached(priority: .utility) {
-                    _ = await self.coordinator.ingest(request)
+                    let result = await self.coordinator.ingest(request)
+                    if let onIngestionResult {
+                        await onIngestionResult(fileEvent, result)
+                    }
                 }
             case .file_skipped:
                 continue
@@ -41,6 +55,10 @@ public actor WatchOrchestrator {
                 continue
             }
         }
+    }
+
+    public func stop() async {
+        await watcher.stop()
     }
 
     public func ingestNow(file_url: URL, source_type: String = "manual", watch_directory_id: String? = nil) async -> IngestionResult {

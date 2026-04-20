@@ -258,6 +258,42 @@ struct SearchResultRowProps {
 问答模式下展示答案 + 证据
 
 ### Props
+
+## 5.9 2026-04-20 体验打磨补充规范
+
+### QuickPanel 状态驱动布局
+
+`QuickPanelScene` 必须按模式和状态展示，不允许单一文本框 + 文本输出：
+
+1. 顶部：`QueryInputBar` + `ModeSegmentedControl`
+2. 中部：
+    - `search` 模式显示 `SearchResultList`
+    - `qa` 模式显示 `AnswerResultView`
+3. 默认态显示 `SuggestionList`
+4. 底部显示 `BottomContextBar`（当前模式、状态文案、可用动作）
+
+### DocumentDetail 固定骨架
+
+`DocumentDetailScene` 在任意状态下保持稳定骨架：
+
+1. `DetailHeader`
+2. `SummaryHeroBlock`
+3. `ActionRequiredSection`
+4. `EvidenceSnippetSection`
+5. `EventCandidatesSection`
+
+`blocked` / `failed` / `partialSuccess` 仅替换局部区块文案，不退化为整页纯文本。
+
+### MenuBar 固定层级
+
+`MenuBarScene` 固定：
+
+1. `StatusHeader`
+2. `ImportantReminderSection`
+3. `RecentDocumentsSection`
+4. `QuickActionsSection`
+
+不再使用“最近文件 / 重要提醒”二选一作为唯一信息结构。
 ```swift
 struct AnswerResultViewProps {
     let answer: String

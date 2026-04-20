@@ -45,6 +45,13 @@ public actor DirectoryWatcherService: FileWatching {
         }
     }
 
+    public func stop() async {
+        watchTask?.cancel()
+        watchTask = nil
+        continuation?.finish()
+        continuation = nil
+    }
+
     private func startIfNeeded() {
         guard watchTask == nil else { return }
 

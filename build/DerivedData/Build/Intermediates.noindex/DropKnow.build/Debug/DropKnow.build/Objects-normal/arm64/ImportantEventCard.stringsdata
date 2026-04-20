@@ -1,0 +1,16 @@
+{
+  "source": "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/ImportantEventCard.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "高优先",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 31
+        }
+      }
+    ]
+  },
+  "version": 1
+}

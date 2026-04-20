@@ -1,0 +1,72 @@
+{
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderClientFactory.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderClientFactory.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderClientFactory.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderClientFactory.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderClientFactory.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderClientFactory.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderCommonContracts.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderCommonContracts.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderCommonContracts.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderCommonContracts.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderCommonContracts.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderCommonContracts.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderConfig.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderConfig.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderConfig.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderConfig.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderConfig.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderConfig.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderError.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderError.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderError.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderError.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderError.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderError.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderErrorMapper.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderErrorMapper.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderErrorMapper.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderErrorMapper.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderErrorMapper.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderErrorMapper.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderExecutionSupport.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderExecutionSupport.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderExecutionSupport.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderExecutionSupport.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderExecutionSupport.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderExecutionSupport.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderProtocols.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderProtocols.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderProtocols.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderProtocols.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderProtocols.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ProviderProtocols.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/EventExtraction/EventExtractionContracts.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/EventExtractionContracts.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/EventExtractionContracts.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/EventExtractionContracts.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/EventExtractionContracts.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/EventExtractionContracts.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/EventExtraction/EventExtractionProvider.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/EventExtractionProvider.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/EventExtractionProvider.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/EventExtractionProvider.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/EventExtractionProvider.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/EventExtractionProvider.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Mock/MockProviderClient.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/MockProviderClient.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/MockProviderClient.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/MockProviderClient.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/MockProviderClient.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/MockProviderClient.swiftdeps"
+  }
+}

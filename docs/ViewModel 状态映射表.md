@@ -229,3 +229,30 @@ enum QuickPanelState {
 3. Detail Window 要允许“摘要成功但事件失败”的部分成功态
 4. 升级 CTA 只在 `quota_exceeded`、`feature_locked` 等阻断原因下出现
 5. 菜单栏与侧栏共用 `RecentDocumentItemViewData`，避免两套 badge 逻辑
+
+## 9. 2026-04-20 页面体验落地补充
+
+本轮 UI 打磨按“状态优先”补充以下强约束：
+
+1. `SearchViewModel` 对外统一为以下状态集合：
+    - `idle`
+    - `retrieving`
+    - `assembling`
+    - `answering`
+    - `searchResults`
+    - `answer`
+    - `noResult`
+    - `blocked`
+    - `failed`
+2. `DocumentDetailViewModel` 增加 `partialSuccess` 语义：
+    - 用于“摘要缺失但事件已生成”或“摘要成功但事件缺失”等部分成功路径
+    - UI 必须展示“成功部分 + 缺失部分 + 下一步动作”
+3. `MenuBar` 顶层固定状态头，不再只依赖 tab 切换：
+    - 显示最近刷新时间
+    - 显示处理活跃状态（有处理中任务时展示）
+4. `Settings` 统一分区为能力管理视图：
+    - 目录与权限
+    - 隐私与门禁
+    - 日历能力
+    - 订阅与配额
+    - 诊断信息

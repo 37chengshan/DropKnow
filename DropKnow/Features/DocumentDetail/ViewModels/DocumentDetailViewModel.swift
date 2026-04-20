@@ -11,6 +11,7 @@ public final class DocumentDetailViewModel {
         case loading
         case empty
         case ready(DocumentDetailData)
+        case partialSuccess(DocumentDetailData, message: String)
         case waitingUserConfirmation(DocumentDetailData)
         case blocked(reason: String)
         case failed(message: String)
@@ -79,7 +80,15 @@ public final class DocumentDetailViewModel {
 
             switch payload.document.lifecycle_status {
             case .ready:
-                state = .ready(data)
+                let hasSummary = (data.summary?.isEmpty == false)
+                let hasEvents = !data.events.isEmpty
+                if hasSummary && hasEvents {
+                    state = .ready(data)
+                } else if hasSummary || hasEvents {
+                    state = .partialSuccess(data, message: "部分结果可用，仍有能力未完成。")
+                } else {
+                    state = .failed(message: "ready_without_content")
+                }
             case .waiting_user_confirmation:
                 state = .waitingUserConfirmation(data)
             case .blocked:

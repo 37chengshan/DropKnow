@@ -1,0 +1,2278 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowPackageTests.xctest/Contents/MacOS/DropKnowPackageTests",
+      "packagePath" : "/Users/cc/Desktop/DropKnow",
+      "productName" : "DropKnowPackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.DropKnow-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/sources",
+      "importPath" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/App/DropKnowAppModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/App/DropKnowMainWindowView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/App/DropKnowV1Container.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/DocumentDetailScene/DocumentDetailScene.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/MenuBarScene/MenuBarScene.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/QuickPanelScene/QuickPanelScene.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/SettingsScene/SettingsScene.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DTOs.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DatabaseMappers.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DatabaseRows.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DomainModels.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/DocumentEnums.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/EventEnums.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/ParseJobEnums.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/SearchEnums.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/UnknownCaseCodable.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Protocols/IngestionPipelineProtocols.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/DropKnowApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/DocumentDetail/ViewModels/DocumentDetailViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Events/DocumentEventExtractionService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/FileFingerprintService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/InMemoryIngestionPersistence.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/InMemoryPipelineEventBus.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/IngestionCoordinator.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/IngestionPipelineTypes.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/MockPipelineFactory.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/PipelineClock.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Ingestion/EndToEndSmokeRunner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Ingestion/IngestionCoordinatorFacade.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Ingestion/IngestionServiceContracts.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Ingestion/IngestionServices.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/MenuBar/ViewModels/ImportantRemindersViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/MenuBar/ViewModels/RecentFilesViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Parsing/DocumentParsingService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/PrivacyGate/PrivacyGateService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Search/ViewModels/SearchViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Summarization/DocumentSummarizationService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/UIBridge/UIBridgeModels.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/UIBridge/UIBridgeServices.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/DebouncedStableFileEmitter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/DirectoryAuthorization.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/DirectoryWatcherService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/FileStabilityDetector.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/RecentFileScanner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/TemporaryFileFilter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/WatchDeduper.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/WatchOrchestrator.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/WatcherContracts.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/WatcherLogger.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Database/DatabaseInitializer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/JSONRepairService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderClient.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderClientFactory.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderCommonContracts.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderConfig.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderError.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderErrorMapper.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderExecutionSupport.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderProtocols.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/EventExtraction/EventExtractionContracts.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/EventExtraction/EventExtractionProvider.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Mock/MockProviderClient.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/SearchQA/SearchQAContracts.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/SearchQA/SearchQAProvider.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Summary/SummaryContracts.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Summary/SummaryProvider.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/MainApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Repositories/InMemoryRepositories.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Repositories/RepositoryTypes.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/EvidenceSnippetList.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/ImportantEventCard.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/QuotaBadge.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/RiskGateSheet.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/SummaryCard.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/ToastBannerView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Errors/ErrorCode.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Views/DocumentDetailView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Views/ImportantView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Views/MenuBarRootView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Views/RecentFilesView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Views/SettingsView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "DropKnow",
+      "moduleOutputPath" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/Modules/DropKnow.swiftmodule",
+      "objects" : [
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DropKnowAppModel.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DropKnowMainWindowView.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DropKnowV1Container.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailScene.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/MenuBarScene.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/QuickPanelScene.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SettingsScene.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DTOs.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DatabaseMappers.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DatabaseRows.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DomainModels.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentEnums.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/EventEnums.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ParseJobEnums.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SearchEnums.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/UnknownCaseCodable.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/IngestionPipelineProtocols.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DropKnowApp.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailViewModel.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentEventExtractionService.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/FileFingerprintService.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/InMemoryIngestionPersistence.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/InMemoryPipelineEventBus.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/IngestionCoordinator.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/IngestionPipelineTypes.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/MockPipelineFactory.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/PipelineClock.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/EndToEndSmokeRunner.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/IngestionCoordinatorFacade.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/IngestionServiceContracts.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/IngestionServices.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ImportantRemindersViewModel.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/RecentFilesViewModel.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentParsingService.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/PrivacyGateService.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SearchViewModel.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentSummarizationService.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/UIBridgeModels.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/UIBridgeServices.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DebouncedStableFileEmitter.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DirectoryAuthorization.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DirectoryWatcherService.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/FileStabilityDetector.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/RecentFileScanner.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/TemporaryFileFilter.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/WatchDeduper.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/WatchOrchestrator.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/WatcherContracts.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/WatcherLogger.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DatabaseInitializer.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/JSONRepairService.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderClient.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderClientFactory.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderCommonContracts.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderConfig.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderError.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderErrorMapper.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderExecutionSupport.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderProtocols.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/EventExtractionContracts.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/EventExtractionProvider.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/MockProviderClient.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SearchQAContracts.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SearchQAProvider.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SummaryContracts.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SummaryProvider.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/MainApp.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/InMemoryRepositories.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/RepositoryTypes.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/EvidenceSnippetList.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ImportantEventCard.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/QuotaBadge.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/RiskGateSheet.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SummaryCard.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ToastBannerView.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ErrorCode.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailView.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ImportantView.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/MenuBarRootView.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/RecentFilesView.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SettingsView.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/include/DropKnow-Swift.h",
+        "-color-diagnostics",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "dropknow"
+      ],
+      "outputFileMapPath" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DropKnowAppModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DropKnowMainWindowView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DropKnowV1Container.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailScene.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/MenuBarScene.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/QuickPanelScene.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SettingsScene.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DTOs.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DatabaseMappers.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DatabaseRows.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DomainModels.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentEnums.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/EventEnums.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ParseJobEnums.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SearchEnums.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/UnknownCaseCodable.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/IngestionPipelineProtocols.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DropKnowApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentEventExtractionService.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/FileFingerprintService.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/InMemoryIngestionPersistence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/InMemoryPipelineEventBus.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/IngestionCoordinator.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/IngestionPipelineTypes.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/MockPipelineFactory.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/PipelineClock.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/EndToEndSmokeRunner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/IngestionCoordinatorFacade.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/IngestionServiceContracts.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/IngestionServices.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ImportantRemindersViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/RecentFilesViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentParsingService.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/PrivacyGateService.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SearchViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentSummarizationService.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/UIBridgeModels.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/UIBridgeServices.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DebouncedStableFileEmitter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DirectoryAuthorization.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DirectoryWatcherService.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/FileStabilityDetector.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/RecentFileScanner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/TemporaryFileFilter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/WatchDeduper.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/WatchOrchestrator.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/WatcherContracts.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/WatcherLogger.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DatabaseInitializer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/JSONRepairService.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderClient.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderClientFactory.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderCommonContracts.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderConfig.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderError.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderErrorMapper.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderExecutionSupport.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderProtocols.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/EventExtractionContracts.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/EventExtractionProvider.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/MockProviderClient.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SearchQAContracts.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SearchQAProvider.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SummaryContracts.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SummaryProvider.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/MainApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/InMemoryRepositories.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/RepositoryTypes.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/EvidenceSnippetList.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ImportantEventCard.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/QuotaBadge.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/RiskGateSheet.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SummaryCard.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ToastBannerView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ErrorCode.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ImportantView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/MenuBarRootView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/RecentFilesView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SettingsView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/Modules/DropKnow.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/cc/Desktop/DropKnow/DropKnow/App/DropKnowAppModel.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/App/DropKnowMainWindowView.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/App/DropKnowV1Container.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/DocumentDetailScene/DocumentDetailScene.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/MenuBarScene/MenuBarScene.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/QuickPanelScene/QuickPanelScene.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/SettingsScene/SettingsScene.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DTOs.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DatabaseMappers.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DatabaseRows.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DomainModels.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/DocumentEnums.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/EventEnums.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/ParseJobEnums.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/SearchEnums.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/UnknownCaseCodable.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Protocols/IngestionPipelineProtocols.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/DropKnowApp.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/DocumentDetail/ViewModels/DocumentDetailViewModel.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Events/DocumentEventExtractionService.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/FileFingerprintService.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/InMemoryIngestionPersistence.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/InMemoryPipelineEventBus.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/IngestionCoordinator.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/IngestionPipelineTypes.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/MockPipelineFactory.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/PipelineClock.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Ingestion/EndToEndSmokeRunner.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Ingestion/IngestionCoordinatorFacade.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Ingestion/IngestionServiceContracts.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Ingestion/IngestionServices.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/MenuBar/ViewModels/ImportantRemindersViewModel.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/MenuBar/ViewModels/RecentFilesViewModel.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Parsing/DocumentParsingService.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/PrivacyGate/PrivacyGateService.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Search/ViewModels/SearchViewModel.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Summarization/DocumentSummarizationService.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/UIBridge/UIBridgeModels.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/UIBridge/UIBridgeServices.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/DebouncedStableFileEmitter.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/DirectoryAuthorization.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/DirectoryWatcherService.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/FileStabilityDetector.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/RecentFileScanner.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/TemporaryFileFilter.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/WatchDeduper.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/WatchOrchestrator.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/WatcherContracts.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/WatcherLogger.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Database/DatabaseInitializer.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/JSONRepairService.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderClient.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderClientFactory.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderCommonContracts.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderConfig.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderError.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderErrorMapper.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderExecutionSupport.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderProtocols.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/EventExtraction/EventExtractionContracts.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/EventExtraction/EventExtractionProvider.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Mock/MockProviderClient.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/SearchQA/SearchQAContracts.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/SearchQA/SearchQAProvider.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Summary/SummaryContracts.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Summary/SummaryProvider.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/MainApp.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Repositories/InMemoryRepositories.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Repositories/RepositoryTypes.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/EvidenceSnippetList.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/ImportantEventCard.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/QuotaBadge.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/RiskGateSheet.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/SummaryCard.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/ToastBannerView.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Errors/ErrorCode.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Views/DocumentDetailView.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Views/ImportantView.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Views/MenuBarRootView.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Views/RecentFilesView.swift",
+        "/Users/cc/Desktop/DropKnow/DropKnow/Views/SettingsView.swift"
+      ],
+      "tempsPath" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.DropKnowPackageTests-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowPackageTests.build/sources",
+      "importPath" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowPackageTests.derived/runner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/Modules/DropKnowTests.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowPackageTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "DropKnowPackageTests",
+      "moduleOutputPath" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/Modules/DropKnowPackageTests.swiftmodule",
+      "objects" : [
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowPackageTests.build/runner.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowPackageTests.build/include/DropKnowPackageTests-Swift.h",
+        "-color-diagnostics",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "dropknow"
+      ],
+      "outputFileMapPath" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowPackageTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/Modules/DropKnowPackageTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowPackageTests.derived/runner.swift"
+      ],
+      "tempsPath" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowPackageTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.DropKnowTests-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/sources",
+      "importPath" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/Tests/IntegrationTests/IngestionPipelineIntegrationTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/Tests/IntegrationTests/WatcherRenameTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/Tests/UITests/UISmokeTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/Tests/UnitTests/EnumFallbackTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/Tests/UnitTests/ErrorCodeRetryPolicyTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/Tests/UnitTests/ProviderParsingTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/Tests/UnitTests/RepositoryLayerTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/Modules/DropKnow.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "DropKnowTests",
+      "moduleOutputPath" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/Modules/DropKnowTests.swiftmodule",
+      "objects" : [
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/IngestionPipelineIntegrationTests.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/WatcherRenameTests.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/UISmokeTests.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/EnumFallbackTests.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/ErrorCodeRetryPolicyTests.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/ProviderParsingTests.swift.o",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/RepositoryLayerTests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-color-diagnostics",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "dropknow"
+      ],
+      "outputFileMapPath" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/IngestionPipelineIntegrationTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/WatcherRenameTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/UISmokeTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/EnumFallbackTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/ErrorCodeRetryPolicyTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/ProviderParsingTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/RepositoryLayerTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/Modules/DropKnowTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/cc/Desktop/DropKnow/Tests/IntegrationTests/IngestionPipelineIntegrationTests.swift",
+        "/Users/cc/Desktop/DropKnow/Tests/IntegrationTests/WatcherRenameTests.swift",
+        "/Users/cc/Desktop/DropKnow/Tests/UITests/UISmokeTests.swift",
+        "/Users/cc/Desktop/DropKnow/Tests/UnitTests/EnumFallbackTests.swift",
+        "/Users/cc/Desktop/DropKnow/Tests/UnitTests/ErrorCodeRetryPolicyTests.swift",
+        "/Users/cc/Desktop/DropKnow/Tests/UnitTests/ProviderParsingTests.swift",
+        "/Users/cc/Desktop/DropKnow/Tests/UnitTests/RepositoryLayerTests.swift"
+      ],
+      "tempsPath" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "DropKnow" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "DropKnow",
+      "-package-name",
+      "dropknow",
+      "-c",
+      "/Users/cc/Desktop/DropKnow/DropKnow/App/DropKnowAppModel.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/App/DropKnowMainWindowView.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/App/DropKnowV1Container.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/DocumentDetailScene/DocumentDetailScene.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/MenuBarScene/MenuBarScene.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/QuickPanelScene/QuickPanelScene.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/SettingsScene/SettingsScene.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DTOs.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DatabaseMappers.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DatabaseRows.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DomainModels.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/DocumentEnums.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/EventEnums.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/ParseJobEnums.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/SearchEnums.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/UnknownCaseCodable.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Protocols/IngestionPipelineProtocols.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/DropKnowApp.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/DocumentDetail/ViewModels/DocumentDetailViewModel.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Events/DocumentEventExtractionService.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/FileFingerprintService.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/InMemoryIngestionPersistence.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/InMemoryPipelineEventBus.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/IngestionCoordinator.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/IngestionPipelineTypes.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/MockPipelineFactory.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/PipelineClock.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Ingestion/EndToEndSmokeRunner.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Ingestion/IngestionCoordinatorFacade.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Ingestion/IngestionServiceContracts.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Ingestion/IngestionServices.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/MenuBar/ViewModels/ImportantRemindersViewModel.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/MenuBar/ViewModels/RecentFilesViewModel.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Parsing/DocumentParsingService.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/PrivacyGate/PrivacyGateService.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Search/ViewModels/SearchViewModel.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Summarization/DocumentSummarizationService.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/UIBridge/UIBridgeModels.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/UIBridge/UIBridgeServices.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/DebouncedStableFileEmitter.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/DirectoryAuthorization.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/DirectoryWatcherService.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/FileStabilityDetector.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/RecentFileScanner.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/TemporaryFileFilter.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/WatchDeduper.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/WatchOrchestrator.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/WatcherContracts.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/WatcherLogger.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Database/DatabaseInitializer.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/JSONRepairService.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderClient.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderClientFactory.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderCommonContracts.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderConfig.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderError.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderErrorMapper.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderExecutionSupport.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderProtocols.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/EventExtraction/EventExtractionContracts.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/EventExtraction/EventExtractionProvider.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Mock/MockProviderClient.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/SearchQA/SearchQAContracts.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/SearchQA/SearchQAProvider.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Summary/SummaryContracts.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Summary/SummaryProvider.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/MainApp.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Repositories/InMemoryRepositories.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Repositories/RepositoryTypes.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/EvidenceSnippetList.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/ImportantEventCard.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/QuotaBadge.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/RiskGateSheet.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/SummaryCard.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/ToastBannerView.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Errors/ErrorCode.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Views/DocumentDetailView.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Views/ImportantView.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Views/MenuBarRootView.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Views/RecentFilesView.swift",
+      "/Users/cc/Desktop/DropKnow/DropKnow/Views/SettingsView.swift",
+      "-I",
+      "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/include/DropKnow-Swift.h",
+      "-color-diagnostics",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "dropknow",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "DropKnowPackageTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "DropKnowPackageTests",
+      "-package-name",
+      "dropknow",
+      "-c",
+      "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowPackageTests.derived/runner.swift",
+      "-I",
+      "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowPackageTests.build/include/DropKnowPackageTests-Swift.h",
+      "-color-diagnostics",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "dropknow",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "DropKnowTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "DropKnowTests",
+      "-package-name",
+      "dropknow",
+      "-c",
+      "/Users/cc/Desktop/DropKnow/Tests/IntegrationTests/IngestionPipelineIntegrationTests.swift",
+      "/Users/cc/Desktop/DropKnow/Tests/IntegrationTests/WatcherRenameTests.swift",
+      "/Users/cc/Desktop/DropKnow/Tests/UITests/UISmokeTests.swift",
+      "/Users/cc/Desktop/DropKnow/Tests/UnitTests/EnumFallbackTests.swift",
+      "/Users/cc/Desktop/DropKnow/Tests/UnitTests/ErrorCodeRetryPolicyTests.swift",
+      "/Users/cc/Desktop/DropKnow/Tests/UnitTests/ProviderParsingTests.swift",
+      "/Users/cc/Desktop/DropKnow/Tests/UnitTests/RepositoryLayerTests.swift",
+      "-I",
+      "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-color-diagnostics",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "dropknow",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "DropKnow" : [
+
+    ],
+    "DropKnowPackageTests" : [
+      "DropKnowTests",
+      "DropKnow"
+    ],
+    "DropKnowTests" : [
+      "DropKnow"
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+    "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowPackageTests.derived/runner.swift" : {
+      "inputs" : [
+
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowPackageTests.derived/runner.swift"
+        }
+      ]
+    }
+  },
+  "traitConfiguration" : {
+    "default" : {
+
+    }
+  },
+  "writeCommands" : {
+    "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/App/DropKnowAppModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/App/DropKnowMainWindowView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/App/DropKnowV1Container.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/DocumentDetailScene/DocumentDetailScene.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/MenuBarScene/MenuBarScene.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/QuickPanelScene/QuickPanelScene.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/SettingsScene/SettingsScene.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DTOs.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DatabaseMappers.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DatabaseRows.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DomainModels.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/DocumentEnums.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/EventEnums.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/ParseJobEnums.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/SearchEnums.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/UnknownCaseCodable.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Protocols/IngestionPipelineProtocols.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/DropKnowApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/DocumentDetail/ViewModels/DocumentDetailViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Events/DocumentEventExtractionService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/FileFingerprintService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/InMemoryIngestionPersistence.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/InMemoryPipelineEventBus.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/IngestionCoordinator.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/IngestionPipelineTypes.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/MockPipelineFactory.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/PipelineClock.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Ingestion/EndToEndSmokeRunner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Ingestion/IngestionCoordinatorFacade.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Ingestion/IngestionServiceContracts.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Ingestion/IngestionServices.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/MenuBar/ViewModels/ImportantRemindersViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/MenuBar/ViewModels/RecentFilesViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Parsing/DocumentParsingService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/PrivacyGate/PrivacyGateService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Search/ViewModels/SearchViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Summarization/DocumentSummarizationService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/UIBridge/UIBridgeModels.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/UIBridge/UIBridgeServices.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/DebouncedStableFileEmitter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/DirectoryAuthorization.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/DirectoryWatcherService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/FileStabilityDetector.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/RecentFileScanner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/TemporaryFileFilter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/WatchDeduper.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/WatchOrchestrator.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/WatcherContracts.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/WatcherLogger.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Database/DatabaseInitializer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/JSONRepairService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderClient.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderClientFactory.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderCommonContracts.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderConfig.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderError.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderErrorMapper.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderExecutionSupport.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Core/ProviderProtocols.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/EventExtraction/EventExtractionContracts.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/EventExtraction/EventExtractionProvider.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Mock/MockProviderClient.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/SearchQA/SearchQAContracts.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/SearchQA/SearchQAProvider.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Summary/SummaryContracts.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Infrastructure/Providers/Summary/SummaryProvider.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/MainApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Repositories/InMemoryRepositories.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Repositories/RepositoryTypes.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/EvidenceSnippetList.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/ImportantEventCard.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/QuotaBadge.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/RiskGateSheet.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/SummaryCard.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/ToastBannerView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Errors/ErrorCode.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Views/DocumentDetailView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Views/ImportantView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Views/MenuBarRootView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Views/RecentFilesView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/DropKnow/Views/SettingsView.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/sources"
+    },
+    "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowPackageTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowPackageTests.derived/runner.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowPackageTests.build/sources"
+    },
+    "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowPackageTests.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DTOs.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DatabaseInitializer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DatabaseMappers.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DatabaseRows.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DebouncedStableFileEmitter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DirectoryAuthorization.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DirectoryWatcherService.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailScene.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentDetailViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentEnums.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentEventExtractionService.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentParsingService.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DocumentSummarizationService.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DomainModels.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DropKnowApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DropKnowAppModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DropKnowMainWindowView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/DropKnowV1Container.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/EndToEndSmokeRunner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ErrorCode.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/EventEnums.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/EventExtractionContracts.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/EventExtractionProvider.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/EvidenceSnippetList.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/FileFingerprintService.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/FileStabilityDetector.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ImportantEventCard.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ImportantRemindersViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ImportantView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/InMemoryIngestionPersistence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/InMemoryPipelineEventBus.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/InMemoryRepositories.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/IngestionCoordinator.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/IngestionCoordinatorFacade.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/IngestionPipelineProtocols.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/IngestionPipelineTypes.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/IngestionServiceContracts.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/IngestionServices.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/JSONRepairService.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/MainApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/MenuBarRootView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/MenuBarScene.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/MockPipelineFactory.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/MockProviderClient.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ParseJobEnums.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/PipelineClock.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/PrivacyGateService.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderClient.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderClientFactory.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderCommonContracts.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderConfig.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderError.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderErrorMapper.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderExecutionSupport.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ProviderProtocols.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/QuickPanelScene.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/QuotaBadge.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/RecentFileScanner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/RecentFilesView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/RecentFilesViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/RepositoryTypes.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/RiskGateSheet.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SearchEnums.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SearchQAContracts.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SearchQAProvider.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SearchViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SettingsScene.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SettingsView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SummaryCard.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SummaryContracts.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/SummaryProvider.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/TemporaryFileFilter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/ToastBannerView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/UIBridgeModels.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/UIBridgeServices.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/UnknownCaseCodable.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/WatchDeduper.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/WatchOrchestrator.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/WatcherContracts.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnow.build/WatcherLogger.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/EnumFallbackTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/ErrorCodeRetryPolicyTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/IngestionPipelineIntegrationTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/ProviderParsingTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/RepositoryLayerTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/UISmokeTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/WatcherRenameTests.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowPackageTests.product/Objects.LinkFileList"
+    },
+    "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/Tests/IntegrationTests/IngestionPipelineIntegrationTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/Tests/IntegrationTests/WatcherRenameTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/Tests/UITests/UISmokeTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/Tests/UnitTests/EnumFallbackTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/Tests/UnitTests/ErrorCodeRetryPolicyTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/Tests/UnitTests/ProviderParsingTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/cc/Desktop/DropKnow/Tests/UnitTests/RepositoryLayerTests.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/DropKnowTests.build/sources"
+    },
+    "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/cc/Desktop/DropKnow/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+    }
+  }
+}

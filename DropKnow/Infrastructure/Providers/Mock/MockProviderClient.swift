@@ -42,12 +42,12 @@ public actor MockProviderClient: ProviderClient {
                 raw_text: """
                 {
                   "document_type": "general_notice",
-                  "one_line_summary": "已生成默认摘要",
-                  "action_required": "请阅读关键信息",
-                  "key_points": ["关键点1", "关键点2"],
+                  "one_line_summary": "这是一份需要用户尽快处理的通知类文件。",
+                  "action_required": "请确认时间、地点和需要准备的事项。",
+                  "key_points": ["重点1：确认文件内容", "重点2：核对时间地点", "重点3：按要求完成后续动作"],
                   "time_signals": [{"raw_time_text": "明天", "normalized_time": null, "signal_type": "relative"}],
-                  "location_signals": [],
-                  "supporting_snippets": ["示例证据片段"],
+                  "location_signals": ["上海"],
+                  "supporting_snippets": ["文档里明确提到了时间与地点信息。"],
                   "risk_flags": [],
                   "confidence": 0.82
                 }

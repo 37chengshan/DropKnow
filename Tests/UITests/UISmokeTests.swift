@@ -8,11 +8,13 @@ import SwiftUI
 #endif
 
 final class UISmokeTests: XCTestCase {
+    @MainActor
     func testScenesCanBeInstantiated() {
         let container = DropKnowV1Container()
+        let appModel = DropKnowAppModel(container: container)
         _ = MenuBarSceneView(container: container)
         _ = QuickPanelSceneView(container: container)
-        _ = SettingsSceneView()
+        _ = SettingsSceneView(model: appModel)
         _ = DocumentDetailSceneView(document_id: "doc_fake", container: container)
         XCTAssertTrue(true)
     }

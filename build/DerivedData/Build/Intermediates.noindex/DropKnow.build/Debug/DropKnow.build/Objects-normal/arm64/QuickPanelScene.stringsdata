@@ -1,0 +1,32 @@
+{
+  "source": "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/QuickPanelScene/QuickPanelScene.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "状态：%@",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 21
+        }
+      },
+      {
+        "comment": "",
+        "key": "输入问题",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 13
+        }
+      },
+      {
+        "comment": "",
+        "key": "搜索",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 14
+        }
+      }
+    ]
+  },
+  "version": 1
+}

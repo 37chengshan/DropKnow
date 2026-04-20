@@ -1,0 +1,72 @@
+{
+  "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/DocumentEnums.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentEnums.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentEnums.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentEnums.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentEnums.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentEnums.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/EventEnums.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/EventEnums.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/EventEnums.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/EventEnums.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/EventEnums.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/EventEnums.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/ParseJobEnums.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ParseJobEnums.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ParseJobEnums.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ParseJobEnums.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ParseJobEnums.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/ParseJobEnums.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/SearchEnums.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/SearchEnums.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/SearchEnums.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/SearchEnums.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/SearchEnums.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/SearchEnums.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Enums/UnknownCaseCodable.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/UnknownCaseCodable.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/UnknownCaseCodable.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/UnknownCaseCodable.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/UnknownCaseCodable.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/UnknownCaseCodable.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Protocols/IngestionPipelineProtocols.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/IngestionPipelineProtocols.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/IngestionPipelineProtocols.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/IngestionPipelineProtocols.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/IngestionPipelineProtocols.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/IngestionPipelineProtocols.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/DocumentDetail/ViewModels/DocumentDetailViewModel.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentDetailViewModel.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentDetailViewModel.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentDetailViewModel.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentDetailViewModel.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentDetailViewModel.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Events/DocumentEventExtractionService.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentEventExtractionService.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentEventExtractionService.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentEventExtractionService.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentEventExtractionService.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentEventExtractionService.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/FileFingerprintService.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/FileFingerprintService.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/FileFingerprintService.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/FileFingerprintService.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/FileFingerprintService.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/FileFingerprintService.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Import/IngestionCoordinator.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/IngestionCoordinator.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/IngestionCoordinator.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/IngestionCoordinator.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/IngestionCoordinator.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/IngestionCoordinator.swiftdeps"
+  }
+}

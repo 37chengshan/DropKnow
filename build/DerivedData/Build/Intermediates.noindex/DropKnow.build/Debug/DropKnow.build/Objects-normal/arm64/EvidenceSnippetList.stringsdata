@@ -1,0 +1,32 @@
+{
+  "source": "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/EvidenceSnippetList.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "证据片段",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 12
+        }
+      },
+      {
+        "comment": "",
+        "key": "暂无证据",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 15
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld. %@",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 20
+        }
+      }
+    ]
+  },
+  "version": 1
+}

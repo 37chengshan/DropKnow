@@ -12,7 +12,12 @@ let package = Package(
             name: "DropKnow",
             dependencies: [],
             path: "DropKnow",
-            exclude: ["Resources/SampleData"]
+            exclude: [
+                "Assets.xcassets",
+                "Infrastructure/Database/DatabaseREADME.md",
+                "Infrastructure/Database/migration_v1.sql",
+                "Infrastructure/Database/schema.sql"
+            ]
         ),
         .testTarget(
             name: "DropKnowTests",

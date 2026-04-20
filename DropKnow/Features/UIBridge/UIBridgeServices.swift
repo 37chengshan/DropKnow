@@ -13,7 +13,7 @@ public protocol DocumentDetailServicing: Sendable {
 }
 
 public protocol SearchServicing: Sendable {
-    func ask(question: String) async -> SearchSnapshot
+    func ask(question: String, mode: QuickMode) async -> SearchSnapshot
 }
 
 public actor DashboardService: DashboardServicing {
@@ -55,6 +55,7 @@ public actor DashboardService: DashboardServicing {
                         lifecycle_status: document.lifecycle_status,
                         block_reason: document.block_reason,
                         summary_text: summary?.one_line_summary,
+                        key_points: Self.decodeStringArray(summary?.key_points_json),
                         last_error_code: document.last_error_code,
                         imported_at: document.imported_at
                     )
@@ -114,6 +115,11 @@ public actor DashboardService: DashboardServicing {
         default:
             return 0
         }
+    }
+
+    private static func decodeStringArray(_ json: String?) -> [String] {
+        guard let json, let data = json.data(using: .utf8) else { return [] }
+        return (try? JSONDecoder().decode([String].self, from: data)) ?? []
     }
 }
 
@@ -290,19 +296,160 @@ public actor DocumentDetailService: DocumentDetailServicing {
     }
 }
 
-public struct SearchService: SearchServicing {
-    public init() {}
+public actor SearchService: SearchServicing {
+    private let documentRepository: DocumentRepository
+    private let summaryRepository: SummaryRepository
+    private let eventRepository: EventRepository
 
-    public func ask(question: String) async -> SearchSnapshot {
+    public init(
+        documentRepository: DocumentRepository,
+        summaryRepository: SummaryRepository,
+        eventRepository: EventRepository
+    ) {
+        self.documentRepository = documentRepository
+        self.summaryRepository = summaryRepository
+        self.eventRepository = eventRepository
+    }
+
+    public func ask(question: String, mode: QuickMode) async -> SearchSnapshot {
         let trimmed = question.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else {
-            return SearchSnapshot(status: .idle, answer: "", citations: [])
+            return SearchSnapshot(status: .idle, mode: mode, answer: "", citations: [], results: [])
         }
 
-        return SearchSnapshot(
-            status: .no_result,
-            answer: "V1 最小搜索尚未接入检索索引。",
-            citations: []
-        )
+        let documentsResult = await documentRepository.listRecent(limit: 120)
+        guard case .success(let documents) = documentsResult else {
+            return SearchSnapshot(status: .failed, mode: mode, answer: "读取本地索引失败，请稍后重试。", citations: [], results: [])
+        }
+
+        let readyDocuments = documents.filter { $0.lifecycle_status == .ready }
+        guard !readyDocuments.isEmpty else {
+            return SearchSnapshot(
+                status: .blocked,
+                mode: mode,
+                answer: "尚无可检索内容，请先导入并完成解析。",
+                citations: [],
+                results: [],
+                block_reason: .empty_index
+            )
+        }
+
+        let keywords = tokenizedKeywords(from: trimmed)
+        var results: [SearchSnapshot.SearchResultItem] = []
+
+        for document in readyDocuments {
+            let summaryResult = await summaryRepository.get(document_id: document.id)
+            let eventsResult = await eventRepository.get(document_id: document.id)
+
+            let summaryText: String
+            let summaryEvidence: String
+            if case .success(let summary) = summaryResult, let summary {
+                summaryText = [summary.one_line_summary, summary.action_required, summary.key_points_json].joined(separator: " ")
+                summaryEvidence = summary.one_line_summary
+            } else {
+                summaryText = ""
+                summaryEvidence = ""
+            }
+
+            let eventEvidence: [String]
+            if case .success(let events) = eventsResult {
+                eventEvidence = events.map { "\($0.title) \($0.raw_time_text) \($0.evidence_snippet)" }
+            } else {
+                eventEvidence = []
+            }
+
+            let mergedHaystack = ([summaryText] + eventEvidence).joined(separator: " ").lowercased()
+            let hitCount = keywords.reduce(into: 0) { count, keyword in
+                if mergedHaystack.contains(keyword) {
+                    count += 1
+                }
+            }
+            let requiredHits = max(1, Int(ceil(Double(keywords.count) * 0.5)))
+            let matched = hitCount >= requiredHits
+            guard matched else { continue }
+
+            let subtitle: String
+            if summaryEvidence.isEmpty {
+                subtitle = "找到相关事件线索"
+            } else {
+                subtitle = summaryEvidence
+            }
+
+            let evidence = eventEvidence.first ?? summaryEvidence
+            results.append(
+                SearchSnapshot.SearchResultItem(
+                    document_id: document.id,
+                    file_name: document.file_name,
+                    title: document.file_name,
+                    subtitle: subtitle,
+                    evidence: evidence
+                )
+            )
+        }
+
+        if results.isEmpty {
+            return SearchSnapshot(
+                status: .no_result,
+                mode: mode,
+                answer: "未检索到匹配内容，请尝试更具体的关键词。",
+                citations: [],
+                results: []
+            )
+        }
+
+        let ranked = Array(results.prefix(8))
+        switch mode {
+        case .search:
+            return SearchSnapshot(status: .success, mode: mode, answer: "", citations: [], results: ranked)
+        case .qa:
+            let citations = ranked.prefix(3).enumerated().map { index, item in
+                CitationResponse(
+                    document_id: item.document_id,
+                    chunk_id: "summary_\(index + 1)",
+                    file_name: item.file_name,
+                    evidence_snippet: item.evidence
+                )
+            }
+            let answerLines = citations.enumerated().map { index, citation in
+                "\(index + 1). \(citation.file_name)：\(citation.evidence_snippet)"
+            }
+            return SearchSnapshot(
+                status: .success,
+                mode: mode,
+                answer: "根据本地证据，与你的问题最相关的信息如下：\n\n\(answerLines.joined(separator: "\n"))",
+                citations: Array(citations),
+                results: ranked
+            )
+        }
+    }
+
+    private func tokenizedKeywords(from question: String) -> [String] {
+        let lowered = question.lowercased()
+        let separators = CharacterSet.whitespacesAndNewlines.union(.punctuationCharacters)
+        var words = lowered.components(separatedBy: separators).filter { !$0.isEmpty }
+
+        if words.count == 1, let token = words.first, containsCJK(token), token.count >= 4 {
+            words = cjkNGrams(token, n: 2)
+        }
+
+        if words.isEmpty {
+            return [lowered]
+        }
+
+        return words
+    }
+
+    private func containsCJK(_ text: String) -> Bool {
+        text.unicodeScalars.contains { scalar in
+            (0x4E00...0x9FFF).contains(scalar.value)
+        }
+    }
+
+    private func cjkNGrams(_ text: String, n: Int) -> [String] {
+        let characters = Array(text)
+        guard characters.count >= n else { return [text] }
+        return (0...(characters.count - n)).map { index in
+            String(characters[index..<(index + n)])
+        }
     }
 }

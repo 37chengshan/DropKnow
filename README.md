@@ -1,6 +1,6 @@
-# DropKnow Project Skeleton
+# DropKnow
 
-本目录根据《落知_信息架构_技术架构_数据表设计_前端设计.md》初始化为第一版工程骨架，供后续 Xcode 工程和 Swift 源码直接落位。
+本仓库是 DropKnow 的 macOS 工程主仓，按《落知_信息架构_技术架构_数据表设计_前端设计.md》分层实现。
 
 ## 目录约定
 
@@ -12,6 +12,13 @@
 - `Resources/`: 资源与样例数据
 - `Tests/`: 单测、集成测试、UI 测试
 
+## 当前启动入口
+
+- 主入口：`DropKnow/DropKnowApp.swift`
+- 旧占位入口（非 @main）：`DropKnow/MainApp.swift`
+- 主窗口容器：`DropKnow/App/DropKnowMainWindowView.swift`
+- 依赖装配容器：`DropKnow/App/DropKnowV1Container.swift`
+
 ## 推荐先后顺序
 
 1. 先补 `Domain/Enums` 与 `Domain/Entities`
@@ -21,7 +28,15 @@
 
 ## 配套实施文档
 
-- [/Users/cc/luozhi/docs/数据库迁移清单.md](/Users/cc/luozhi/docs/数据库迁移清单.md)
-- [/Users/cc/luozhi/docs/Swift enum DTO 对照表.md](/Users/cc/luozhi/docs/Swift%20enum%20DTO%20对照表.md)
-- [/Users/cc/luozhi/docs/Provider 输入输出契约.md](/Users/cc/luozhi/docs/Provider%20输入输出契约.md)
-- [/Users/cc/luozhi/docs/ViewModel 状态映射表.md](/Users/cc/luozhi/docs/ViewModel%20状态映射表.md)
+- `docs/数据库迁移清单.md`
+- `docs/Swift enum DTO 对照表.md`
+- `docs/Provider 输入输出契约.md`
+- `docs/ViewModel 状态映射表.md`
+
+## 快速验证
+
+```bash
+cd /Users/cc/Desktop/DropKnow
+swift build
+swift test
+```

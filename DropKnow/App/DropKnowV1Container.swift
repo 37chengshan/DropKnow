@@ -47,7 +47,11 @@ public final class DropKnowV1Container: @unchecked Sendable {
             eventRepository: eventRepository,
             coordinatorFacade: coordinatorFacade
         )
-        self.searchService = SearchService()
+        self.searchService = SearchService(
+            documentRepository: documentRepository,
+            summaryRepository: summaryRepository,
+            eventRepository: eventRepository
+        )
     }
 
     public func makeRecentFilesViewModel() -> RecentFilesViewModel {

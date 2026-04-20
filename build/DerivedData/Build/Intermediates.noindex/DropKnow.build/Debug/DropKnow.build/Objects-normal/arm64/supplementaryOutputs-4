@@ -1,0 +1,72 @@
+{
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/MenuBar/ViewModels/RecentFilesViewModel.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/RecentFilesViewModel.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/RecentFilesViewModel.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/RecentFilesViewModel.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/RecentFilesViewModel.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/RecentFilesViewModel.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Parsing/DocumentParsingService.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentParsingService.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentParsingService.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentParsingService.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentParsingService.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentParsingService.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/PrivacyGate/PrivacyGateService.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/PrivacyGateService.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/PrivacyGateService.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/PrivacyGateService.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/PrivacyGateService.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/PrivacyGateService.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Search/ViewModels/SearchViewModel.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/SearchViewModel.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/SearchViewModel.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/SearchViewModel.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/SearchViewModel.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/SearchViewModel.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Summarization/DocumentSummarizationService.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentSummarizationService.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentSummarizationService.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentSummarizationService.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentSummarizationService.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentSummarizationService.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/UIBridge/UIBridgeModels.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/UIBridgeModels.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/UIBridgeModels.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/UIBridgeModels.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/UIBridgeModels.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/UIBridgeModels.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/UIBridge/UIBridgeServices.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/UIBridgeServices.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/UIBridgeServices.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/UIBridgeServices.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/UIBridgeServices.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/UIBridgeServices.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/DebouncedStableFileEmitter.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DebouncedStableFileEmitter.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DebouncedStableFileEmitter.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DebouncedStableFileEmitter.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DebouncedStableFileEmitter.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DebouncedStableFileEmitter.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/DirectoryAuthorization.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DirectoryAuthorization.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DirectoryAuthorization.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DirectoryAuthorization.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DirectoryAuthorization.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DirectoryAuthorization.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Features/Watcher/DirectoryWatcherService.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DirectoryWatcherService.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DirectoryWatcherService.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DirectoryWatcherService.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DirectoryWatcherService.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DirectoryWatcherService.swiftdeps"
+  }
+}

@@ -14,6 +14,7 @@ public final class RecentFilesViewModel {
         public let document_id: String
         public let file_name: String
         public let subtitle: String
+        public let key_points: [String]
         public let lifecycle_status: DocumentLifecycleStatus
         public let imported_at: String
 
@@ -21,12 +22,14 @@ public final class RecentFilesViewModel {
             document_id: String,
             file_name: String,
             subtitle: String,
+            key_points: [String],
             lifecycle_status: DocumentLifecycleStatus,
             imported_at: String
         ) {
             self.document_id = document_id
             self.file_name = file_name
             self.subtitle = subtitle
+            self.key_points = key_points
             self.lifecycle_status = lifecycle_status
             self.imported_at = imported_at
         }
@@ -55,6 +58,7 @@ public final class RecentFilesViewModel {
                     document_id: $0.document_id,
                     file_name: $0.file_name,
                     subtitle: Self.subtitle(from: $0),
+                    key_points: $0.key_points,
                     lifecycle_status: $0.lifecycle_status,
                     imported_at: $0.imported_at
                 )

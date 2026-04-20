@@ -49,6 +49,7 @@ public enum WatcherEvent: Sendable, Equatable {
 
 public protocol FileWatching: Sendable {
     func makeEventStream() async -> AsyncStream<WatcherEvent>
+    func stop() async
 }
 
 public actor MockFileWatcher: FileWatching {
@@ -68,6 +69,11 @@ public actor MockFileWatcher: FileWatching {
 
     public func emitFile(_ event: FileWatchEvent) {
         continuation?.yield(.file_ready(event))
+    }
+
+    public func stop() async {
+        continuation?.finish()
+        continuation = nil
     }
 
     public func finish() {

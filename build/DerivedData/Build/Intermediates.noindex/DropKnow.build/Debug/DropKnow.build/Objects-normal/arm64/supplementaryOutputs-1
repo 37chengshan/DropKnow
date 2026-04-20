@@ -1,0 +1,72 @@
+{
+  "/Users/cc/Desktop/DropKnow/DropKnow/App/DropKnowMainWindowView.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DropKnowMainWindowView.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DropKnowMainWindowView.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DropKnowMainWindowView.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DropKnowMainWindowView.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DropKnowMainWindowView.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/App/DropKnowV1Container.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DropKnowV1Container.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DropKnowV1Container.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DropKnowV1Container.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DropKnowV1Container.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DropKnowV1Container.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/DocumentDetailScene/DocumentDetailScene.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentDetailScene.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentDetailScene.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentDetailScene.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentDetailScene.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DocumentDetailScene.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/MenuBarScene/MenuBarScene.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/MenuBarScene.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/MenuBarScene.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/MenuBarScene.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/MenuBarScene.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/MenuBarScene.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/QuickPanelScene/QuickPanelScene.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/QuickPanelScene.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/QuickPanelScene.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/QuickPanelScene.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/QuickPanelScene.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/QuickPanelScene.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/App/Scenes/SettingsScene/SettingsScene.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/SettingsScene.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/SettingsScene.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/SettingsScene.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/SettingsScene.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/SettingsScene.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DTOs.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DTOs.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DTOs.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DTOs.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DTOs.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DTOs.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DatabaseMappers.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DatabaseMappers.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DatabaseMappers.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DatabaseMappers.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DatabaseMappers.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DatabaseMappers.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DatabaseRows.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DatabaseRows.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DatabaseRows.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DatabaseRows.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DatabaseRows.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DatabaseRows.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/DropKnow/Domain/Entities/DomainModels.swift" : {
+    "const-values" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DomainModels.swiftconstvalues",
+    "dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DomainModels.d",
+    "diagnostics" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DomainModels.dia",
+    "object" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DomainModels.o",
+    "swift-dependencies" : "/Users/cc/Desktop/DropKnow/build/DerivedData/Build/Intermediates.noindex/DropKnow.build/Debug/DropKnow.build/Objects-normal/arm64/DomainModels.swiftdeps"
+  }
+}

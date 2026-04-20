@@ -6,6 +6,7 @@ public struct RecentFileSnapshot: Equatable, Sendable {
     public let lifecycle_status: DocumentLifecycleStatus
     public let block_reason: BlockReason
     public let summary_text: String?
+    public let key_points: [String]
     public let last_error_code: ErrorCode?
     public let imported_at: String
 
@@ -15,6 +16,7 @@ public struct RecentFileSnapshot: Equatable, Sendable {
         lifecycle_status: DocumentLifecycleStatus,
         block_reason: BlockReason,
         summary_text: String?,
+        key_points: [String],
         last_error_code: ErrorCode?,
         imported_at: String
     ) {
@@ -23,6 +25,7 @@ public struct RecentFileSnapshot: Equatable, Sendable {
         self.lifecycle_status = lifecycle_status
         self.block_reason = block_reason
         self.summary_text = summary_text
+        self.key_points = key_points
         self.last_error_code = last_error_code
         self.imported_at = imported_at
     }
@@ -72,13 +75,42 @@ public struct DocumentDetailSnapshot: Equatable, Sendable {
 }
 
 public struct SearchSnapshot: Equatable, Sendable {
+    public struct SearchResultItem: Equatable, Sendable {
+        public let document_id: String
+        public let file_name: String
+        public let title: String
+        public let subtitle: String
+        public let evidence: String
+
+        public init(document_id: String, file_name: String, title: String, subtitle: String, evidence: String) {
+            self.document_id = document_id
+            self.file_name = file_name
+            self.title = title
+            self.subtitle = subtitle
+            self.evidence = evidence
+        }
+    }
+
     public let status: SearchStatus
+    public let mode: QuickMode
     public let answer: String
     public let citations: [CitationResponse]
+    public let results: [SearchResultItem]
+    public let block_reason: SearchBlockReason
 
-    public init(status: SearchStatus, answer: String, citations: [CitationResponse]) {
+    public init(
+        status: SearchStatus,
+        mode: QuickMode,
+        answer: String,
+        citations: [CitationResponse],
+        results: [SearchResultItem],
+        block_reason: SearchBlockReason = .none
+    ) {
         self.status = status
+        self.mode = mode
         self.answer = answer
         self.citations = citations
+        self.results = results
+        self.block_reason = block_reason
     }
 }

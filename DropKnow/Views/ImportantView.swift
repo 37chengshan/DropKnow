@@ -2,9 +2,11 @@ import SwiftUI
 
 public struct ImportantView: View {
     @State private var viewModel: ImportantRemindersViewModel
+    private let refreshToken: Int
 
-    public init(viewModel: ImportantRemindersViewModel) {
+    public init(viewModel: ImportantRemindersViewModel, refreshToken: Int = 0) {
         _viewModel = State(initialValue: viewModel)
+        self.refreshToken = refreshToken
     }
 
     public var body: some View {
@@ -40,7 +42,7 @@ public struct ImportantView: View {
                 .listStyle(.plain)
             }
         }
-        .task {
+        .task(id: refreshToken) {
             await viewModel.load()
         }
     }

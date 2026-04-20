@@ -1,0 +1,16 @@
+{
+  "source": "/Users/cc/Desktop/DropKnow/DropKnow/Shared/Components/QuotaBadge.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "%lld/%lld",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 22
+        }
+      }
+    ]
+  },
+  "version": 1
+}

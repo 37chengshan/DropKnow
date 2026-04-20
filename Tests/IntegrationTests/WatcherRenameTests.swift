@@ -32,15 +32,23 @@ final class WatcherRenameTests: XCTestCase {
 
         let stream = await watcher.makeEventStream()
 
-        let expectation = expectation(description: "ready file emitted")
+        let readyExpectation = expectation(description: "ready file emitted")
+        let scanReadyExpectation = expectation(description: "initial scan completed")
         Task {
             for await event in stream {
-                if case .file_ready(let ready) = event, ready.file_url.lastPathComponent == "final-note.txt" {
-                    expectation.fulfill()
-                    break
+                switch event {
+                case .initial_scan_completed:
+                    scanReadyExpectation.fulfill()
+                case .file_ready(let ready) where ready.file_url.lastPathComponent == "final-note.txt":
+                    readyExpectation.fulfill()
+                    return
+                default:
+                    continue
                 }
             }
         }
+
+        await fulfillment(of: [scanReadyExpectation], timeout: 4)
 
         let tempDownload = root.appendingPathComponent("final-note.txt.crdownload")
         let finalFile = root.appendingPathComponent("final-note.txt")
@@ -48,7 +56,7 @@ final class WatcherRenameTests: XCTestCase {
         try "demo".write(to: tempDownload, atomically: true, encoding: .utf8)
         try FileManager.default.moveItem(at: tempDownload, to: finalFile)
 
-        wait(for: [expectation], timeout: 8)
+        await fulfillment(of: [readyExpectation], timeout: 10)
     }
 }
 #endif

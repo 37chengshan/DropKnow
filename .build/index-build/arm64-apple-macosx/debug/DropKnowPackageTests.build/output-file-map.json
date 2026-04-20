@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowPackageTests.build/master.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowPackageTests.derived/runner.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowPackageTests.build/runner.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowPackageTests.build/runner.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowPackageTests.build/runner~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowPackageTests.build/runner.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowPackageTests.build/runner.dia"
+  }
+}

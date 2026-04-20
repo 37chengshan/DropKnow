@@ -1,0 +1,64 @@
+{
+  "source": "/Users/cc/Desktop/DropKnow/DropKnow/Views/RecentFilesView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "暂无最近文件",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 20
+        }
+      },
+      {
+        "comment": "",
+        "key": "加载最近文件...",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 17
+        }
+      },
+      {
+        "comment": "",
+        "key": "加载失败",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 25
+        }
+      },
+      {
+        "comment": "",
+        "key": "收起重点",
+        "location": {
+          "startingColumn": 47,
+          "startingLine": 51
+        }
+      },
+      {
+        "comment": "",
+        "key": "点击展开重点",
+        "location": {
+          "startingColumn": 64,
+          "startingLine": 51
+        }
+      },
+      {
+        "comment": "",
+        "key": "重点",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 60
+        }
+      },
+      {
+        "comment": "",
+        "key": "•",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 65
+        }
+      }
+    ]
+  },
+  "version": 1
+}

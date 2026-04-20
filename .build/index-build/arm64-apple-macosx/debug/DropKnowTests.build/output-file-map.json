@@ -1,0 +1,54 @@
+{
+  "": {
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/master.swiftdeps"
+  },
+  "/Users/cc/Desktop/DropKnow/Tests/IntegrationTests/IngestionPipelineIntegrationTests.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/IngestionPipelineIntegrationTests.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/IngestionPipelineIntegrationTests.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/IngestionPipelineIntegrationTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/IngestionPipelineIntegrationTests.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/IngestionPipelineIntegrationTests.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/Tests/IntegrationTests/WatcherRenameTests.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/WatcherRenameTests.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/WatcherRenameTests.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/WatcherRenameTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/WatcherRenameTests.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/WatcherRenameTests.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/Tests/UITests/UISmokeTests.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/UISmokeTests.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/UISmokeTests.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/UISmokeTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/UISmokeTests.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/UISmokeTests.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/Tests/UnitTests/EnumFallbackTests.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/EnumFallbackTests.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/EnumFallbackTests.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/EnumFallbackTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/EnumFallbackTests.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/EnumFallbackTests.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/Tests/UnitTests/ErrorCodeRetryPolicyTests.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/ErrorCodeRetryPolicyTests.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/ErrorCodeRetryPolicyTests.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/ErrorCodeRetryPolicyTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/ErrorCodeRetryPolicyTests.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/ErrorCodeRetryPolicyTests.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/Tests/UnitTests/ProviderParsingTests.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/ProviderParsingTests.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/ProviderParsingTests.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/ProviderParsingTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/ProviderParsingTests.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/ProviderParsingTests.dia"
+  },
+  "/Users/cc/Desktop/DropKnow/Tests/UnitTests/RepositoryLayerTests.swift": {
+    "dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/RepositoryLayerTests.d",
+    "object": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/RepositoryLayerTests.swift.o",
+    "swiftmodule": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/RepositoryLayerTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/RepositoryLayerTests.swiftdeps",
+    "diagnostics": "/Users/cc/Desktop/DropKnow/.build/index-build/arm64-apple-macosx/debug/DropKnowTests.build/RepositoryLayerTests.dia"
+  }
+}

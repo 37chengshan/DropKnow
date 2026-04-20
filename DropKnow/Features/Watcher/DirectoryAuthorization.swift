@@ -1,6 +1,6 @@
 import Foundation
 
-public struct WatchDirectoryRegistration: Sendable, Equatable {
+public struct WatchDirectoryRegistration: Sendable, Equatable, Codable {
     public let id: String
     public let display_name: String
     public let path_hint: String
