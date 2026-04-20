@@ -1,0 +1,10 @@
+# Default owner for all changes
+* @37chengshan
+
+# Core app and feature code
+/DropKnow/ @37chengshan
+/Tests/ @37chengshan
+
+# CI and workflow governance
+/.github/ @37chengshan
+/script/ @37chengshan

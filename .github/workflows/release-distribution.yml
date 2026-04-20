@@ -1,0 +1,95 @@
+name: Release Distribution
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Tag to release (optional when manually triggered)"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  build-test-package:
+    name: build-test-package
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve release tag
+        id: release_tag
+        run: |
+          set -euo pipefail
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            tag="${GITHUB_REF_NAME}"
+          elif [[ -n "${{ github.event.inputs.release_tag }}" ]]; then
+            tag="${{ github.event.inputs.release_tag }}"
+          else
+            echo "No release tag provided for workflow_dispatch." >&2
+            exit 1
+          fi
+
+          if [[ ! "$tag" =~ ^v[0-9A-Za-z._-]+$ ]]; then
+            echo "Invalid release tag: $tag" >&2
+            exit 1
+          fi
+
+          if [[ "${GITHUB_REF_TYPE}" != "tag" ]]; then
+            git fetch --tags --force
+            if ! git rev-parse "refs/tags/$tag" >/dev/null 2>&1; then
+              echo "Tag does not exist in repository: $tag" >&2
+              exit 1
+            fi
+          fi
+
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
+      - name: Build and test
+        run: |
+          set -euo pipefail
+          swift build --configuration release 2>&1 | tee release-build.log
+          swift test 2>&1 | tee release-test.log
+
+      - name: Package distribution files
+        run: |
+          set -euo pipefail
+          tag="${{ steps.release_tag.outputs.tag }}"
+          package_dir="dist/DropKnow-${tag}"
+          mkdir -p "$package_dir"
+
+          cp -R DropKnow "$package_dir/"
+          cp -R docs "$package_dir/"
+          cp -R script "$package_dir/"
+          cp README.md "$package_dir/"
+          cp Package.swift "$package_dir/"
+          cp release-build.log "$package_dir/"
+          cp release-test.log "$package_dir/"
+
+          tar -czf "DropKnow-${tag}.tar.gz" -C dist "DropKnow-${tag}"
+
+      - name: Upload distribution artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dropknow-release-${{ steps.release_tag.outputs.tag }}
+          path: |
+            DropKnow-${{ steps.release_tag.outputs.tag }}.tar.gz
+            release-build.log
+            release-test.log
+          if-no-files-found: error
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.release_tag.outputs.tag }}
+          files: |
+            DropKnow-${{ steps.release_tag.outputs.tag }}.tar.gz
+            release-build.log
+            release-test.log
+          fail_on_unmatched_files: true
+          generate_release_notes: true

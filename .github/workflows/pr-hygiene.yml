@@ -1,0 +1,44 @@
+name: PR Hygiene
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+    branches:
+      - main
+
+permissions:
+  pull-requests: read
+
+jobs:
+  title-and-body-check:
+    name: title-and-body-check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate PR title and body
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const title = (pr.title || '').trim();
+            const body = (pr.body || '');
+
+            const titlePattern = /^(feat|fix|chore|docs|refactor|test|perf|ci)(\([^)]+\))?:\s.+$/;
+            const requiredSections = [
+              '## 变更摘要',
+              '## 验证步骤',
+              '## 风险与回滚'
+            ];
+
+            const errors = [];
+            if (!titlePattern.test(title)) {
+              errors.push('PR 标题不符合 Conventional Commits：type(scope): subject');
+            }
+
+            const missingSections = requiredSections.filter((section) => !body.includes(section));
+            if (missingSections.length > 0) {
+              errors.push(`PR 描述缺少必填段落: ${missingSections.join(', ')}`);
+            }
+
+            if (errors.length > 0) {
+              core.setFailed(errors.join('\n'));
+            }
