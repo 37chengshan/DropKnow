@@ -12,6 +12,9 @@ public final class DropKnowV1Container: @unchecked Sendable {
     public let privacyDecisionRepository: PrivacyDecisionRepository
     public let notificationRepository: NotificationRepository
     public let quotaRepository: QuotaRepository
+    public let subscriptionService: SubscriptionFeatureService
+    public let calendarService: CalendarFeatureService
+    public let searchQAProvider: SearchQAProvider
 
     public let dashboardService: DashboardService
     public let detailService: DocumentDetailService
@@ -35,6 +38,23 @@ public final class DropKnowV1Container: @unchecked Sendable {
         self.notificationRepository = NotificationRepository(transaction: tx, store: aux)
         self.quotaRepository = QuotaRepository(transaction: tx, store: aux)
 
+        self.subscriptionService = SubscriptionFeatureService(quotaRepository: quotaRepository, planType: .free)
+        self.calendarService = CalendarFeatureService(
+            bridge: InMemoryCalendarBridge(),
+            subscriptionService: subscriptionService
+        )
+
+        let qaConfig = ProviderConfig(
+            provider_id: "provider_search_qa_mock",
+            provider_type: .zhipu,
+            model_name: "glm-4",
+            base_url: "mock://qa",
+            timeout_ms: 8_000,
+            retry_policy: RetryPolicy(max_attempts: 3, initial_delay_ms: 100, max_delay_ms: 1_000),
+            transport: .mock
+        )
+        self.searchQAProvider = SearchQAProvider(config: qaConfig)
+
         self.coordinatorFacade = IngestionCoordinatorFacade(coordinator: bundle.coordinator)
         self.dashboardService = DashboardService(
             documentRepository: documentRepository,
@@ -45,12 +65,15 @@ public final class DropKnowV1Container: @unchecked Sendable {
             documentRepository: documentRepository,
             summaryRepository: summaryRepository,
             eventRepository: eventRepository,
-            coordinatorFacade: coordinatorFacade
+            coordinatorFacade: coordinatorFacade,
+            calendarService: calendarService
         )
         self.searchService = SearchService(
             documentRepository: documentRepository,
             summaryRepository: summaryRepository,
-            eventRepository: eventRepository
+            eventRepository: eventRepository,
+            subscriptionService: subscriptionService,
+            qaProvider: searchQAProvider
         )
     }
 

@@ -86,8 +86,9 @@ public struct SettingsView: View {
 
                 sectionCard(title: "订阅与配额", subtitle: "展示当前能力边界") {
                     VStack(alignment: .leading, spacing: 8) {
-                        QuotaBadge(label: "解析额度", used: 3, limit: 20)
-                        QuotaBadge(label: "问答额度", used: 0, limit: 10)
+                        QuotaBadge(label: "解析额度", used: model.quotaSnapshot.parseUsed, limit: model.quotaSnapshot.parseLimit)
+                        QuotaBadge(label: "问答额度", used: model.quotaSnapshot.qaUsed, limit: model.quotaSnapshot.qaLimit)
+                        QuotaBadge(label: "搜索额度", used: model.quotaSnapshot.searchUsed, limit: model.quotaSnapshot.searchLimit)
                         Text("免费版默认限制高级问答与部分自动化能力。")
                             .font(.caption)
                             .foregroundStyle(.secondary)

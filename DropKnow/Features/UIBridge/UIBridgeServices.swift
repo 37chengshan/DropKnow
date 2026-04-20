@@ -74,7 +74,9 @@ public actor DashboardService: DashboardServicing {
             var reminders: [ImportantReminderSnapshot] = []
 
             for document in documents {
-                guard document.event_status == .has_candidate || document.event_status == .has_calendar_event else {
+                guard document.event_status == .has_candidate
+                    || document.event_status == .has_accepted_event
+                    || document.event_status == .has_calendar_event else {
                     continue
                 }
 
@@ -100,21 +102,37 @@ public actor DashboardService: DashboardServicing {
             }
 
             let sorted = reminders.sorted {
-                priority(for: $0.event_status) > priority(for: $1.event_status)
+                priority(for: $0) > priority(for: $1)
             }
             return .success(Array(sorted.prefix(max(limit, 0))))
         }
     }
 
-    private func priority(for status: DocumentEventStatus) -> Int {
-        switch status {
+    private func priority(for reminder: ImportantReminderSnapshot) -> Int {
+        let statusScore: Int
+        switch reminder.event_status {
         case .has_calendar_event:
-            return 2
+            statusScore = 3
+        case .has_accepted_event:
+            statusScore = 2
         case .has_candidate:
-            return 1
+            statusScore = 1
         default:
-            return 0
+            statusScore = 0
         }
+
+        let confidenceScore = reminder.confidence >= 0.8 ? 2 : (reminder.confidence >= 0.55 ? 1 : 0)
+        let urgencyScore = urgencyScoreFromTimeText(reminder.raw_time_text, title: reminder.title)
+        return statusScore * 100 + confidenceScore * 10 + urgencyScore
+    }
+
+    private func urgencyScoreFromTimeText(_ rawTimeText: String, title: String) -> Int {
+        let haystack = "\(title.lowercased()) \(rawTimeText.lowercased())"
+        let urgentTokens = ["今天", "明天", "今晚", "ddl", "截止", "考试", "面试", "缴费", "报名"]
+        if urgentTokens.contains(where: { haystack.contains($0) }) {
+            return 2
+        }
+        return rawTimeText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? 0 : 1
     }
 
     private static func decodeStringArray(_ json: String?) -> [String] {
@@ -128,17 +146,20 @@ public actor DocumentDetailService: DocumentDetailServicing {
     private let summaryRepository: SummaryRepository
     private let eventRepository: EventRepository
     private let coordinatorFacade: IngestionCoordinatorFacade
+    private let calendarService: (any CalendarFeatureServicing)?
 
     public init(
         documentRepository: DocumentRepository,
         summaryRepository: SummaryRepository,
         eventRepository: EventRepository,
-        coordinatorFacade: IngestionCoordinatorFacade
+        coordinatorFacade: IngestionCoordinatorFacade,
+        calendarService: (any CalendarFeatureServicing)? = nil
     ) {
         self.documentRepository = documentRepository
         self.summaryRepository = summaryRepository
         self.eventRepository = eventRepository
         self.coordinatorFacade = coordinatorFacade
+        self.calendarService = calendarService
     }
 
     public func fetchDocumentDetail(document_id: String) async -> RepositoryResult<DocumentDetailSnapshot?> {
@@ -213,6 +234,29 @@ public actor DocumentDetailService: DocumentDetailServicing {
             return .success(false)
         }
 
+        guard let calendarService else {
+            return .failure(RepositoryFailure(error_code: .calendar_write_failed, message: "calendar service unavailable"))
+        }
+
+        let addResult = await calendarService.addEvent(from: target)
+
+        let nextStatus: CalendarStatus
+        let nextIdentifier: String?
+        switch addResult {
+        case .added(let eventIdentifier):
+            nextStatus = .added
+            nextIdentifier = eventIdentifier
+        case .featureLocked:
+            nextStatus = .feature_locked
+            nextIdentifier = target.calendar_event_identifier
+        case .notEligible:
+            nextStatus = .failed
+            nextIdentifier = target.calendar_event_identifier
+        case .permissionDenied, .writeFailed:
+            nextStatus = .failed
+            nextIdentifier = target.calendar_event_identifier
+        }
+
         let updated = DocumentEventDTO(
             id: target.id,
             document_id: target.document_id,
@@ -228,16 +272,16 @@ public actor DocumentDetailService: DocumentDetailServicing {
             confidence: target.confidence,
             calendar_eligible: target.calendar_eligible,
             decision_status: .accepted,
-            calendar_status: .added,
-            calendar_event_identifier: target.calendar_event_identifier,
+            calendar_status: nextStatus,
+            calendar_event_identifier: nextIdentifier,
             created_at: target.created_at,
             updated_at: PipelineClock.nowString()
         )
 
         let updateResult = await eventRepository.update(updated)
         switch updateResult {
-        case .success:
-            return .success(true)
+        case .success(let saved):
+            return .success(saved.calendar_status == .added)
         case .failure(let failure):
             return .failure(failure)
         }
@@ -300,15 +344,21 @@ public actor SearchService: SearchServicing {
     private let documentRepository: DocumentRepository
     private let summaryRepository: SummaryRepository
     private let eventRepository: EventRepository
+    private let subscriptionService: SubscriptionFeatureServicing
+    private let qaProvider: (any SearchQAProviding)?
 
     public init(
         documentRepository: DocumentRepository,
         summaryRepository: SummaryRepository,
-        eventRepository: EventRepository
+        eventRepository: EventRepository,
+        subscriptionService: SubscriptionFeatureServicing,
+        qaProvider: (any SearchQAProviding)? = nil
     ) {
         self.documentRepository = documentRepository
         self.summaryRepository = summaryRepository
         self.eventRepository = eventRepository
+        self.subscriptionService = subscriptionService
+        self.qaProvider = qaProvider
     }
 
     public func ask(question: String, mode: QuickMode) async -> SearchSnapshot {
@@ -331,6 +381,29 @@ public actor SearchService: SearchServicing {
                 citations: [],
                 results: [],
                 block_reason: .empty_index
+            )
+        }
+
+        let gateResult = await subscriptionService.consumeSearchQuota(mode: mode, reference_date: Self.referenceDateString())
+        switch gateResult {
+        case .allowed:
+            break
+        case .blocked(let reason, let message):
+            return SearchSnapshot(
+                status: .blocked,
+                mode: mode,
+                answer: message,
+                citations: [],
+                results: [],
+                block_reason: reason
+            )
+        case .failed(let message):
+            return SearchSnapshot(
+                status: .failed,
+                mode: mode,
+                answer: message,
+                citations: [],
+                results: []
             )
         }
 
@@ -402,25 +475,86 @@ public actor SearchService: SearchServicing {
         case .search:
             return SearchSnapshot(status: .success, mode: mode, answer: "", citations: [], results: ranked)
         case .qa:
-            let citations = ranked.prefix(3).enumerated().map { index, item in
-                CitationResponse(
+            guard let qaProvider else {
+                return fallbackQASnapshot(from: ranked, mode: mode)
+            }
+
+            let retrievedItems = ranked.prefix(3).enumerated().map { index, item in
+                SearchQARetrievedItem(
                     document_id: item.document_id,
                     chunk_id: "summary_\(index + 1)",
                     file_name: item.file_name,
-                    evidence_snippet: item.evidence
+                    snippet: item.evidence
                 )
             }
-            let answerLines = citations.enumerated().map { index, citation in
-                "\(index + 1). \(citation.file_name)：\(citation.evidence_snippet)"
+
+            do {
+                let response = try await qaProvider.generate(
+                    request: SearchQAProviderRequest(
+                        question: trimmed,
+                        reference_date: Self.referenceDateString(),
+                        user_timezone: TimeZone.current.identifier,
+                        retrieved_items: retrievedItems
+                    )
+                )
+
+                if response.answer_type == .not_found {
+                    return SearchSnapshot(
+                        status: .no_result,
+                        mode: mode,
+                        answer: response.answer,
+                        citations: [],
+                        results: ranked
+                    )
+                }
+
+                return SearchSnapshot(
+                    status: .success,
+                    mode: mode,
+                    answer: response.answer,
+                    citations: response.citations,
+                    results: ranked
+                )
+            } catch {
+                return SearchSnapshot(
+                    status: .failed,
+                    mode: mode,
+                    answer: "问答服务暂时不可用，请稍后重试。",
+                    citations: [],
+                    results: ranked
+                )
             }
-            return SearchSnapshot(
-                status: .success,
-                mode: mode,
-                answer: "根据本地证据，与你的问题最相关的信息如下：\n\n\(answerLines.joined(separator: "\n"))",
-                citations: Array(citations),
-                results: ranked
+        }
+    }
+
+    private func fallbackQASnapshot(from ranked: [SearchSnapshot.SearchResultItem], mode: QuickMode) -> SearchSnapshot {
+        let citations = ranked.prefix(3).enumerated().map { index, item in
+            CitationResponse(
+                document_id: item.document_id,
+                chunk_id: "summary_\(index + 1)",
+                file_name: item.file_name,
+                evidence_snippet: item.evidence
             )
         }
+        let answerLines = citations.enumerated().map { index, citation in
+            "\(index + 1). \(citation.file_name)：\(citation.evidence_snippet)"
+        }
+        return SearchSnapshot(
+            status: .success,
+            mode: mode,
+            answer: "根据本地证据，与你的问题最相关的信息如下：\n\n\(answerLines.joined(separator: "\n"))",
+            citations: Array(citations),
+            results: ranked
+        )
+    }
+
+    private static func referenceDateString() -> String {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: Date())
     }
 
     private func tokenizedKeywords(from question: String) -> [String] {

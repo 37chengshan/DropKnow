@@ -5,6 +5,33 @@ import Observation
 @MainActor
 @Observable
 public final class DropKnowAppModel {
+    public struct QuotaDisplaySnapshot: Equatable, Sendable {
+        public let parseUsed: Int
+        public let parseLimit: Int
+        public let qaUsed: Int
+        public let qaLimit: Int
+        public let searchUsed: Int
+        public let searchLimit: Int
+
+        public init(parseUsed: Int, parseLimit: Int, qaUsed: Int, qaLimit: Int, searchUsed: Int, searchLimit: Int) {
+            self.parseUsed = parseUsed
+            self.parseLimit = parseLimit
+            self.qaUsed = qaUsed
+            self.qaLimit = qaLimit
+            self.searchUsed = searchUsed
+            self.searchLimit = searchLimit
+        }
+
+        public static let empty = QuotaDisplaySnapshot(
+            parseUsed: 0,
+            parseLimit: 5,
+            qaUsed: 0,
+            qaLimit: 5,
+            searchUsed: 0,
+            searchLimit: 10
+        )
+    }
+
     public struct Banner: Equatable, Sendable {
         public enum Style: String, Sendable {
             case info
@@ -29,6 +56,7 @@ public final class DropKnowAppModel {
     public private(set) var watcherStatusText: String = "未启动"
     public private(set) var contentRevision: Int = 0
     public private(set) var settingsMessage: String?
+    public private(set) var quotaSnapshot: QuotaDisplaySnapshot = .empty
 
     public let container: DropKnowV1Container
 
@@ -49,6 +77,7 @@ public final class DropKnowAppModel {
         guard !isStarted else { return }
         isStarted = true
         loadWatchRegistrations()
+        await refreshQuotaSnapshot()
         await startWatcher()
     }
 
@@ -224,7 +253,29 @@ public final class DropKnowAppModel {
             await MainActor.run {
                 self?.contentRevision += 1
             }
+            await self?.refreshQuotaSnapshot()
         }
+    }
+
+    private func refreshQuotaSnapshot() async {
+        let snapshot = await container.subscriptionService.fetchQuotaSnapshot(reference_date: Self.referenceDateString())
+        quotaSnapshot = QuotaDisplaySnapshot(
+            parseUsed: snapshot.parse_used,
+            parseLimit: snapshot.parse_limit,
+            qaUsed: snapshot.qa_used,
+            qaLimit: snapshot.qa_limit,
+            searchUsed: snapshot.advanced_search_used,
+            searchLimit: snapshot.advanced_search_limit
+        )
+    }
+
+    private static func referenceDateString() -> String {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: Date())
     }
 
     private func showBanner(title: String, message: String, style: Banner.Style) {
