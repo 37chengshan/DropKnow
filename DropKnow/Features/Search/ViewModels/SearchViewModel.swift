@@ -34,6 +34,7 @@ public final class SearchViewModel {
 
     public var mode: QuickMode = .search
     public private(set) var state: State
+    public var selectedSuggestionIndex: Int?
 
     private let service: any SearchServicing
     private var latestRequestID: UUID = UUID()
