@@ -1,4 +1,5 @@
 import SwiftUI
+import EventKit
 
 public struct SettingsView: View {
     @State private var model: DropKnowAppModel
@@ -76,12 +77,7 @@ public struct SettingsView: View {
                 }
 
                 sectionCard(title: "日历能力", subtitle: "仅在用户主动触发后写入日历") {
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text("当前行为：不做静默自动入历。")
-                        Text("如遇权限缺失或不可入历，将在详情页给出可解释状态。")
-                    }
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
+                    CalendarPermissionRow()
                 }
 
                 sectionCard(title: "订阅与配额", subtitle: "展示当前能力边界") {
@@ -92,6 +88,15 @@ public struct SettingsView: View {
                         Text("免费版默认限制高级问答与部分自动化能力。")
                             .font(.caption)
                             .foregroundStyle(.secondary)
+                        HStack {
+                            Text("版本")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            Spacer()
+                            Text(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
                     }
                 }
 
@@ -224,4 +229,95 @@ private enum SectionState {
     case loading
     case empty
     case rows([Entry])
+}
+
+private struct CalendarPermissionRow: View {
+    @State private var authStatus: EKAuthorizationStatus = .notDetermined
+    @State private var isRequesting = false
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack {
+                Circle().fill(statusColor).frame(width: 8, height: 8)
+                Text(statusText).font(.footnote)
+                Spacer()
+                if authStatus == .notDetermined {
+                    Button("请求授权") {
+                        requestAccess()
+                    }
+                    .buttonStyle(.borderless)
+                    .disabled(isRequesting)
+                } else if authStatus == .denied || authStatus == .restricted {
+                    Button("打开系统设置") {
+                        openSystemSettings()
+                    }
+                    .buttonStyle(.borderless)
+                }
+            }
+            Text("当前行为：不做静默自动入历。")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            Text("如遇权限缺失或不可入历，将在详情页给出可解释状态。")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+        .task {
+            await loadAuthorizationStatus()
+        }
+    }
+
+    private var statusText: String {
+        switch authStatus {
+        case .authorized: return "已授权"
+        case .denied: return "已拒绝"
+        case .restricted: return "受限制"
+        case .notDetermined: return "未决定"
+        case .fullAccess: return "完全访问"
+        case .writeOnly: return "仅写入"
+        @unknown default: return "未知"
+        }
+    }
+
+    private var statusColor: Color {
+        switch authStatus {
+        case .authorized, .fullAccess: return .green
+        case .writeOnly: return .yellow
+        case .denied, .restricted: return .red
+        case .notDetermined: return .orange
+        @unknown default: return .gray
+        }
+    }
+
+    private func loadAuthorizationStatus() async {
+        let status = EKEventStore.authorizationStatus(for: .event)
+        await MainActor.run {
+            authStatus = status
+        }
+    }
+
+    private func requestAccess() {
+        isRequesting = true
+        let store = EKEventStore()
+        if #available(macOS 14.0, *) {
+            store.requestWriteOnlyAccessToEvents { granted, _ in
+                Task { @MainActor in
+                    authStatus = granted ? .writeOnly : .denied
+                    isRequesting = false
+                }
+            }
+        } else {
+            store.requestAccess(to: .event) { granted, _ in
+                Task { @MainActor in
+                    authStatus = granted ? .authorized : .denied
+                    isRequesting = false
+                }
+            }
+        }
+    }
+
+    private func openSystemSettings() {
+        if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Calendars") {
+            NSWorkspace.shared.open(url)
+        }
+    }
 }
