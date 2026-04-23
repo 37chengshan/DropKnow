@@ -74,3 +74,21 @@ public struct ParseJobDTO: Codable, Equatable, Sendable {
     public let error_code: ErrorCode?
     public let error_message: String?
 }
+
+public struct ChunkSearchResult: Codable, Equatable, Sendable {
+    public let chunk_id: String
+    public let document_id: String
+    public let chunk_index: Int
+    public let content: String
+    public let content_preview: String
+    public let char_count: Int
+
+    public init(chunk_id: String, document_id: String, chunk_index: Int, content: String, content_preview: String, char_count: Int) {
+        self.chunk_id = chunk_id
+        self.document_id = document_id
+        self.chunk_index = chunk_index
+        self.content = content
+        self.content_preview = content_preview
+        self.char_count = char_count
+    }
+}

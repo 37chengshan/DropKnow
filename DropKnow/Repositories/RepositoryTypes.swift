@@ -30,6 +30,31 @@ public protocol RepositoryTransactioning: Sendable {
     ) async -> RepositoryResult<T>
 }
 
+/// Shared persistence surface consumed by repositories.
+/// Both in-memory and SQLite backends conform to this protocol.
+public protocol RepositoryPersistenceBacking: IngestionPersistence {
+    func listRecentDocuments(limit: Int) async -> [DocumentDTO]
+    func deleteDocument(document_id: String) async -> Bool
+
+    func allDocumentTexts() async -> [String: ParsedTextRecord]
+    func deleteDocumentText(document_id: String) async -> Bool
+
+    func fetchSummary(document_id: String) async -> DocumentSummaryDTO?
+    func listRecentSummaries(limit: Int) async -> [DocumentSummaryDTO]
+    func deleteSummary(document_id: String) async -> Bool
+
+    func fetchEvents(document_id: String) async -> [DocumentEventDTO]
+    func listRecentEvents(limit: Int) async -> [DocumentEventDTO]
+    func upsertEvent(_ event: DocumentEventDTO) async
+    func deleteEvent(event_id: String) async -> Bool
+
+    func listRecentParseJobs(limit: Int) async -> [ParseJobDTO]
+    func fetchParseJob(job_id: String) async -> ParseJobDTO?
+    func deleteParseJob(job_id: String) async -> Bool
+
+    func searchChunks(query: String, limit: Int) async throws -> [ChunkSearchResult]
+}
+
 public actor InMemoryRepositoryTransactionManager: RepositoryTransactioning {
     public init() {}
 

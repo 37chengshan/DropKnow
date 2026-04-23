@@ -408,59 +408,18 @@ public actor SearchService: SearchServicing {
         }
 
         let keywords = tokenizedKeywords(from: trimmed)
-        var results: [SearchSnapshot.SearchResultItem] = []
+        let ftsQuery = buildFTSQuery(from: keywords)
 
-        for document in readyDocuments {
-            let summaryResult = await summaryRepository.get(document_id: document.id)
-            let eventsResult = await eventRepository.get(document_id: document.id)
-
-            let summaryText: String
-            let summaryEvidence: String
-            if case .success(let summary) = summaryResult, let summary {
-                summaryText = [summary.one_line_summary, summary.action_required, summary.key_points_json].joined(separator: " ")
-                summaryEvidence = summary.one_line_summary
-            } else {
-                summaryText = ""
-                summaryEvidence = ""
-            }
-
-            let eventEvidence: [String]
-            if case .success(let events) = eventsResult {
-                eventEvidence = events.map { "\($0.title) \($0.raw_time_text) \($0.evidence_snippet)" }
-            } else {
-                eventEvidence = []
-            }
-
-            let mergedHaystack = ([summaryText] + eventEvidence).joined(separator: " ").lowercased()
-            let hitCount = keywords.reduce(into: 0) { count, keyword in
-                if mergedHaystack.contains(keyword) {
-                    count += 1
-                }
-            }
-            let requiredHits = max(1, Int(ceil(Double(keywords.count) * 0.5)))
-            let matched = hitCount >= requiredHits
-            guard matched else { continue }
-
-            let subtitle: String
-            if summaryEvidence.isEmpty {
-                subtitle = "找到相关事件线索"
-            } else {
-                subtitle = summaryEvidence
-            }
-
-            let evidence = eventEvidence.first ?? summaryEvidence
-            results.append(
-                SearchSnapshot.SearchResultItem(
-                    document_id: document.id,
-                    file_name: document.file_name,
-                    title: document.file_name,
-                    subtitle: subtitle,
-                    evidence: evidence
-                )
-            )
+        let chunksResult = await documentRepository.searchChunks(query: ftsQuery, limit: 20)
+        let chunks: [ChunkSearchResult]
+        switch chunksResult {
+        case .success(let results):
+            chunks = results
+        case .failure:
+            return SearchSnapshot(status: .failed, mode: mode, answer: "检索服务暂时不可用，请稍后重试。", citations: [], results: [])
         }
 
-        if results.isEmpty {
+        guard !chunks.isEmpty else {
             return SearchSnapshot(
                 status: .no_result,
                 mode: mode,
@@ -470,21 +429,41 @@ public actor SearchService: SearchServicing {
             )
         }
 
-        let ranked = Array(results.prefix(8))
+        let ranked = Array(chunks.prefix(8))
         switch mode {
         case .search:
-            return SearchSnapshot(status: .success, mode: mode, answer: "", citations: [], results: ranked)
+            var results: [SearchSnapshot.SearchResultItem] = []
+            for chunk in ranked {
+                let docsResult = await documentRepository.get(id: chunk.document_id)
+                let fileName: String
+                if case .success(let doc) = docsResult, let doc {
+                    fileName = doc.file_name
+                } else {
+                    fileName = "未知文件"
+                }
+                results.append(
+                    SearchSnapshot.SearchResultItem(
+                        document_id: chunk.document_id,
+                        file_name: fileName,
+                        title: fileName,
+                        subtitle: chunk.content_preview,
+                        evidence: chunk.content_preview
+                    )
+                )
+            }
+            return SearchSnapshot(status: .success, mode: mode, answer: "", citations: [], results: results)
+
         case .qa:
             guard let qaProvider else {
-                return fallbackQASnapshot(from: ranked, mode: mode)
+                return fallbackQASnapshotFromChunks(from: Array(chunks.prefix(3)), mode: mode)
             }
 
-            let retrievedItems = ranked.prefix(3).enumerated().map { index, item in
+            let retrievedItems = chunks.prefix(3).map { chunk in
                 SearchQARetrievedItem(
-                    document_id: item.document_id,
-                    chunk_id: "summary_\(index + 1)",
-                    file_name: item.file_name,
-                    snippet: item.evidence
+                    document_id: chunk.document_id,
+                    chunk_id: chunk.chunk_id,
+                    file_name: "",
+                    snippet: chunk.content_preview
                 )
             }
 
@@ -494,7 +473,7 @@ public actor SearchService: SearchServicing {
                         question: trimmed,
                         reference_date: Self.referenceDateString(),
                         user_timezone: TimeZone.current.identifier,
-                        retrieved_items: retrievedItems
+                        retrieved_items: Array(retrievedItems)
                     )
                 )
 
@@ -504,7 +483,7 @@ public actor SearchService: SearchServicing {
                         mode: mode,
                         answer: response.answer,
                         citations: [],
-                        results: ranked
+                        results: []
                     )
                 }
 
@@ -513,7 +492,7 @@ public actor SearchService: SearchServicing {
                     mode: mode,
                     answer: response.answer,
                     citations: response.citations,
-                    results: ranked
+                    results: []
                 )
             } catch {
                 return SearchSnapshot(
@@ -521,30 +500,38 @@ public actor SearchService: SearchServicing {
                     mode: mode,
                     answer: "问答服务暂时不可用，请稍后重试。",
                     citations: [],
-                    results: ranked
+                    results: []
                 )
             }
         }
     }
 
-    private func fallbackQASnapshot(from ranked: [SearchSnapshot.SearchResultItem], mode: QuickMode) -> SearchSnapshot {
-        let citations = ranked.prefix(3).enumerated().map { index, item in
+    private func buildFTSQuery(from keywords: [String]) -> String {
+        let escaped = keywords.map { keyword in
+            let escaped = keyword.replacingOccurrences(of: "\"", with: "\"\"")
+            return "\"\(escaped)\""
+        }
+        return escaped.joined(separator: " ")
+    }
+
+    private func fallbackQASnapshotFromChunks(from chunks: [ChunkSearchResult], mode: QuickMode) -> SearchSnapshot {
+        let citations = chunks.map { chunk in
             CitationResponse(
-                document_id: item.document_id,
-                chunk_id: "summary_\(index + 1)",
-                file_name: item.file_name,
-                evidence_snippet: item.evidence
+                document_id: chunk.document_id,
+                chunk_id: chunk.chunk_id,
+                file_name: "",
+                evidence_snippet: chunk.content_preview
             )
         }
         let answerLines = citations.enumerated().map { index, citation in
-            "\(index + 1). \(citation.file_name)：\(citation.evidence_snippet)"
+            "\(index + 1). [文档片段] \(citation.evidence_snippet)"
         }
         return SearchSnapshot(
             status: .success,
             mode: mode,
             answer: "根据本地证据，与你的问题最相关的信息如下：\n\n\(answerLines.joined(separator: "\n"))",
-            citations: Array(citations),
-            results: ranked
+            citations: citations,
+            results: []
         )
     }
 

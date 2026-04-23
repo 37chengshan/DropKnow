@@ -1,6 +1,6 @@
 import Foundation
 
-public actor InMemoryIngestionPersistence: IngestionPersistence {
+public actor InMemoryIngestionPersistence: RepositoryPersistenceBacking {
     private var documents: [String: DocumentDTO] = [:]
     private var parseJobs: [String: ParseJobDTO] = [:]
     private var parseJobsByDocument: [String: [String]] = [:]
@@ -181,7 +181,7 @@ public actor InMemoryIngestionPersistence: IngestionPersistence {
         return ids.compactMap { parseJobs[$0] }
     }
 
-    public func listRecentDocuments(limit: Int) -> [DocumentDTO] {
+    public func listRecentDocuments(limit: Int) async -> [DocumentDTO] {
         documents.values
             .sorted { $0.imported_at > $1.imported_at }
             .prefix(max(limit, 0))
@@ -192,7 +192,7 @@ public actor InMemoryIngestionPersistence: IngestionPersistence {
         documents[document.id] = document
     }
 
-    public func deleteDocument(document_id: String) -> Bool {
+    public func deleteDocument(document_id: String) async -> Bool {
         let existed = documents.removeValue(forKey: document_id) != nil
         texts.removeValue(forKey: document_id)
         summaries.removeValue(forKey: document_id)
@@ -206,38 +206,38 @@ public actor InMemoryIngestionPersistence: IngestionPersistence {
         return existed
     }
 
-    public func allDocumentTexts() -> [String: ParsedTextRecord] {
+    public func allDocumentTexts() async -> [String: ParsedTextRecord] {
         texts
     }
 
-    public func fetchDocumentText(document_id: String) -> ParsedTextRecord? {
+    public func fetchDocumentText(document_id: String) async throws -> ParsedTextRecord? {
         texts[document_id]
     }
 
-    public func deleteDocumentText(document_id: String) -> Bool {
+    public func deleteDocumentText(document_id: String) async -> Bool {
         texts.removeValue(forKey: document_id) != nil
     }
 
-    public func fetchSummary(document_id: String) -> DocumentSummaryDTO? {
+    public func fetchSummary(document_id: String) async -> DocumentSummaryDTO? {
         summaries[document_id]
     }
 
-    public func listRecentSummaries(limit: Int) -> [DocumentSummaryDTO] {
+    public func listRecentSummaries(limit: Int) async -> [DocumentSummaryDTO] {
         summaries.values
             .sorted { $0.updated_at > $1.updated_at }
             .prefix(max(limit, 0))
             .map { $0 }
     }
 
-    public func deleteSummary(document_id: String) -> Bool {
+    public func deleteSummary(document_id: String) async -> Bool {
         summaries.removeValue(forKey: document_id) != nil
     }
 
-    public func fetchEvents(document_id: String) -> [DocumentEventDTO] {
+    public func fetchEvents(document_id: String) async -> [DocumentEventDTO] {
         events[document_id, default: []]
     }
 
-    public func listRecentEvents(limit: Int) -> [DocumentEventDTO] {
+    public func listRecentEvents(limit: Int) async -> [DocumentEventDTO] {
         events.values
             .flatMap { $0 }
             .sorted { $0.updated_at > $1.updated_at }
@@ -245,7 +245,7 @@ public actor InMemoryIngestionPersistence: IngestionPersistence {
             .map { $0 }
     }
 
-    public func upsertEvent(_ event: DocumentEventDTO) {
+    public func upsertEvent(_ event: DocumentEventDTO) async {
         var existing = events[event.document_id, default: []]
         if let index = existing.firstIndex(where: { $0.id == event.id }) {
             existing[index] = event
@@ -255,7 +255,7 @@ public actor InMemoryIngestionPersistence: IngestionPersistence {
         events[event.document_id] = existing
     }
 
-    public func deleteEvent(event_id: String) -> Bool {
+    public func deleteEvent(event_id: String) async -> Bool {
         var deleted = false
         var copied = events
 
@@ -271,18 +271,18 @@ public actor InMemoryIngestionPersistence: IngestionPersistence {
         return deleted
     }
 
-    public func listRecentParseJobs(limit: Int) -> [ParseJobDTO] {
+    public func listRecentParseJobs(limit: Int) async -> [ParseJobDTO] {
         parseJobs.values
             .sorted { ($0.started_at ?? "") > ($1.started_at ?? "") }
             .prefix(max(limit, 0))
             .map { $0 }
     }
 
-    public func fetchParseJob(job_id: String) -> ParseJobDTO? {
+    public func fetchParseJob(job_id: String) async -> ParseJobDTO? {
         parseJobs[job_id]
     }
 
-    public func deleteParseJob(job_id: String) -> Bool {
+    public func deleteParseJob(job_id: String) async -> Bool {
         guard let job = parseJobs.removeValue(forKey: job_id) else {
             return false
         }
@@ -290,6 +290,15 @@ public actor InMemoryIngestionPersistence: IngestionPersistence {
         let filtered = parseJobsByDocument[job.document_id, default: []].filter { $0 != job_id }
         parseJobsByDocument[job.document_id] = filtered
         return true
+    }
+
+    public func saveDocumentChunk(document_id: String, chunk_index: Int, content: String, content_preview: String, char_count: Int) async throws {
+        // No-op for in-memory implementation
+    }
+
+    public func searchChunks(query: String, limit: Int) async throws -> [ChunkSearchResult] {
+        // No-op for in-memory implementation - returns empty results
+        return []
     }
 
     private static func encodeJSONString<T: Encodable>(_ value: T) -> String {
