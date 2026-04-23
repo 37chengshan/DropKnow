@@ -4,10 +4,12 @@ public struct RecentFilesView: View {
     @State private var viewModel: RecentFilesViewModel
     @State private var expandedIDs: Set<String> = []
     private let refreshToken: Int
+    private let onSelectDocument: ((String) -> Void)?
 
-    public init(viewModel: RecentFilesViewModel, refreshToken: Int = 0) {
+    public init(viewModel: RecentFilesViewModel, refreshToken: Int = 0, onSelectDocument: ((String) -> Void)? = nil) {
         _viewModel = State(initialValue: viewModel)
         self.refreshToken = refreshToken
+        self.onSelectDocument = onSelectDocument
     }
 
     public var body: some View {
@@ -54,6 +56,9 @@ public struct RecentFilesView: View {
                                     )
                                 }
                                 .buttonStyle(.plain)
+                                .onTapGesture {
+                                    onSelectDocument?(item.document_id)
+                                }
 
                                 HStack(spacing: 12) {
                                     Text(isExpanded ? "收起重点" : "展开重点")

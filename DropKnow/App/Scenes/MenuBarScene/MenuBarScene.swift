@@ -10,6 +10,7 @@ public struct MenuBarSceneView: View {
     @State private var isProcessing: Bool = false
     @State private var toastBanner: ToastBannerView.Model?
     @State private var lastSeenEventCount: Int = 0
+    @State private var selectedDocument: DocumentSelection?
 
     public init(container: DropKnowV1Container = DropKnowV1Container(), refreshToken: Int = 0) {
         self.container = container
@@ -32,7 +33,13 @@ public struct MenuBarSceneView: View {
             VStack(alignment: .leading, spacing: 8) {
                 Text("最近文件")
                     .font(.headline)
-                RecentFilesView(viewModel: container.makeRecentFilesViewModel(), refreshToken: refreshToken)
+                RecentFilesView(
+                    viewModel: container.makeRecentFilesViewModel(),
+                    refreshToken: refreshToken,
+                    onSelectDocument: { docId in
+                        selectedDocument = DocumentSelection(id: docId)
+                    }
+                )
                     .frame(minHeight: 220)
             }
 
@@ -57,6 +64,9 @@ public struct MenuBarSceneView: View {
             }
         }
         .animation(.easeInOut(duration: 0.25), value: toastBanner != nil)
+        .sheet(item: $selectedDocument) { selection in
+            DocumentDetailSceneView(document_id: selection.id, container: container)
+        }
     }
 
     private var statusHeader: some View {
@@ -186,6 +196,10 @@ struct ProcessingStatusBadge: View {
         .background(Color(nsColor: .windowBackgroundColor).opacity(0.8))
         .clipShape(Capsule())
     }
+}
+
+private struct DocumentSelection: Identifiable {
+    let id: String
 }
 
 #Preview {

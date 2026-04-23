@@ -32,8 +32,8 @@ public struct DocumentDetailView: View {
             ProgressView("加载详情...")
         case .empty:
             Text("文档不存在")
-        case .processing:
-            Text("处理中...")
+        case .processing(let document_id, let file_name):
+            processingView(document_id: document_id, file_name: file_name)
         case .partialSuccess(let data, let message):
             detailContent(data: data, inlineNotice: message)
         case .blocked(let reason):
@@ -55,6 +55,20 @@ public struct DocumentDetailView: View {
             VStack(alignment: .leading, spacing: 16) {
                 detailHeader(title: "状态说明", subtitle: title)
                 inlineBanner(text: message, color: .orange)
+                summaryPlaceholder
+                actionSection(documentID: document_id, filePath: nil)
+                evidencePlaceholder
+                eventPlaceholder
+            }
+            .padding(16)
+        }
+    }
+
+    private func processingView(document_id: String, file_name: String) -> some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                detailHeader(title: file_name, subtitle: "文档详情")
+                inlineBanner(text: "文档正在处理中，请稍后刷新查看完整内容。", color: .blue)
                 summaryPlaceholder
                 actionSection(documentID: document_id, filePath: nil)
                 evidencePlaceholder

@@ -1,16 +1,14 @@
 import SwiftUI
 
-public enum CornerRadius {
-    public static let small: CGFloat = 6
-    public static let medium: CGFloat = 8
-    public static let large: CGFloat = 12
-    public static let extraLarge: CGFloat = 16
+enum DesignCornerRadius {
+    static let small: CGFloat = 6
+    static let medium: CGFloat = 8
+    static let large: CGFloat = 12
+    static let extraLarge: CGFloat = 16
 
-    // MARK: - Component
-
-    public static let badge: CGFloat = 4
-    public static let button: CGFloat = 8
-    public static let card: CGFloat = 10
-    public static let sheet: CGFloat = 12
-    public static let toast: CGFloat = 16
+    static let badge: CGFloat = 4
+    static let button: CGFloat = 8
+    static let card: CGFloat = 10
+    static let sheet: CGFloat = 12
+    static let toast: CGFloat = 16
 }
