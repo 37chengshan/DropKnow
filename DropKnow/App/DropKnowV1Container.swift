@@ -2,7 +2,7 @@ import Foundation
 import os.log
 
 public final class DropKnowV1Container: @unchecked Sendable {
-    public enum RuntimeMode: Sendable {
+    public enum RuntimeMode {
         case sqlite(
             databaseURL: URL? = nil,
             sqlDirectoryURL: URL? = nil

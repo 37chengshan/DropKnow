@@ -1,6 +1,6 @@
 import Foundation
 
-public struct MockPipelineBundle: Sendable {
+public struct MockPipelineBundle {
     public let watcher: MockFileWatcher
     public let orchestrator: WatchOrchestrator
     public let coordinator: IngestionCoordinator

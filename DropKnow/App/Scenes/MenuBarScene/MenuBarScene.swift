@@ -8,6 +8,8 @@ public struct MenuBarSceneView: View {
     private let refreshToken: Int
     @Environment(\.openWindow) private var openWindow
     @State private var isProcessing: Bool = false
+    @State private var toastBanner: ToastBannerView.Model?
+    @State private var lastSeenEventCount: Int = 0
 
     public init(container: DropKnowV1Container = DropKnowV1Container(), refreshToken: Int = 0) {
         self.container = container
@@ -41,6 +43,20 @@ public struct MenuBarSceneView: View {
         .task(id: refreshToken) {
             await refreshProcessingStatus()
         }
+        .task {
+            await monitorNotificationEvents()
+        }
+        .overlay(alignment: .top) {
+            if let banner = toastBanner {
+                ToastBannerView(model: banner) {
+                    toastBanner = nil
+                }
+                .padding(.horizontal, 12)
+                .padding(.top, 8)
+                .transition(.move(edge: .top).combined(with: .opacity))
+            }
+        }
+        .animation(.easeInOut(duration: 0.25), value: toastBanner != nil)
     }
 
     private var statusHeader: some View {
@@ -89,6 +105,52 @@ public struct MenuBarSceneView: View {
             isProcessing = jobs.contains(where: { $0.status == .running || $0.status == .queued })
         case .failure:
             isProcessing = false
+        }
+    }
+
+    private func monitorNotificationEvents() async {
+        let eventBus = container.eventBus
+        lastSeenEventCount = eventBus.events.count
+
+        while !Task.isCancelled {
+            try? await Task.sleep(nanoseconds: 500_000_000)
+
+            let currentCount = eventBus.events.count
+            guard currentCount > lastSeenEventCount else { continue }
+
+            let newEvents = eventBus.events.suffix(currentCount - lastSeenEventCount)
+            for event in newEvents {
+                if case .notification_requested(let document_id) = event {
+                    await showDocumentImportedBanner(document_id: document_id)
+                }
+            }
+            lastSeenEventCount = currentCount
+        }
+    }
+
+    private func showDocumentImportedBanner(document_id: String) async {
+        let docResult = await container.documentRepository.get(id: document_id)
+        let fileName: String
+        switch docResult {
+        case .success(let doc):
+            fileName = doc?.file_name ?? "文档"
+        case .failure:
+            fileName = "文档"
+        }
+
+        await MainActor.run {
+            toastBanner = ToastBannerView.Model(
+                title: "文档已导入",
+                message: fileName,
+                style: .success
+            )
+        }
+
+        try? await Task.sleep(nanoseconds: 3_000_000_000)
+        await MainActor.run {
+            if toastBanner?.title == "文档已导入" && toastBanner?.message == fileName {
+                toastBanner = nil
+            }
         }
     }
 }

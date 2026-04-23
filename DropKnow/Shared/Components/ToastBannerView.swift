@@ -1,6 +1,18 @@
 import SwiftUI
 
 public struct ToastBannerView: View {
+    public struct Model: Equatable, Sendable {
+        public let title: String
+        public let message: String
+        public let style: DropKnowAppModel.Banner.Style
+
+        public init(title: String, message: String, style: DropKnowAppModel.Banner.Style) {
+            self.title = title
+            self.message = message
+            self.style = style
+        }
+    }
+
     public let title: String
     public let message: String
     public let style: DropKnowAppModel.Banner.Style
@@ -15,6 +27,13 @@ public struct ToastBannerView: View {
         self.title = title
         self.message = message
         self.style = style
+        self.onDismiss = onDismiss
+    }
+
+    public init(model: Model, onDismiss: (() -> Void)? = nil) {
+        self.title = model.title
+        self.message = model.message
+        self.style = model.style
         self.onDismiss = onDismiss
     }
 
