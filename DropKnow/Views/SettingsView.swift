@@ -95,6 +95,8 @@ public struct SettingsView: View {
                     }
                 }
 
+                ProviderStatusSection()
+
                 sectionCard(title: "诊断信息", subtitle: "定位当前系统状态") {
                     VStack(alignment: .leading, spacing: 6) {
                         Label(model.watcherStatusText, systemImage: "dot.radiowaves.left.and.right")
@@ -125,4 +127,101 @@ public struct SettingsView: View {
         .background(.thinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
+}
+
+private struct SettingsSectionCard<Content: View>: View {
+    let title: String
+    let subtitle: String
+    @ViewBuilder let content: () -> Content
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.headline)
+            Text(subtitle)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            content()
+        }
+        .padding(12)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.thinMaterial)
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+    }
+}
+
+private struct ProviderStatusSection: View {
+    @State private var sectionState: SectionState = .loading
+
+    var body: some View {
+        SettingsSectionCard(title: "Provider 配置", subtitle: "展示当前已加载的 provider 状态") {
+            VStack(alignment: .leading, spacing: 8) {
+                switch sectionState {
+                case .loading:
+                    HStack {
+                        Text("加载中...")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                        Spacer()
+                    }
+                case .empty:
+                    HStack {
+                        Circle().fill(Color.orange).frame(width: 8, height: 8)
+                        Text("所有 Provider")
+                            .font(.footnote)
+                        Spacer()
+                        Text("未配置")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                    }
+                case .rows(let entries):
+                    ForEach(entries) { entry in
+                        HStack {
+                            Circle().fill(entry.color).frame(width: 8, height: 8)
+                            Text(entry.label).font(.footnote)
+                            Spacer()
+                            Text(entry.statusText).font(.footnote).foregroundStyle(.secondary)
+                        }
+                    }
+                }
+            }
+        }
+        .task { await loadProviderStatus() }
+    }
+
+    private func loadProviderStatus() async {
+        let configs = ProviderConfigLoader.load()
+        if configs.isEmpty {
+            sectionState = .empty
+            return
+        }
+        var entries: [Entry] = []
+        entries.append(entry(for: "摘要服务 (Summary)", config: configs.first { $0.provider_id == "provider_summary_mock" }))
+        entries.append(entry(for: "事件抽取 (Event)", config: configs.first { $0.provider_id == "provider_event_mock" }))
+        entries.append(entry(for: "问答搜索 (QA)", config: configs.first { $0.provider_id == "provider_search_qa_mock" }))
+        sectionState = .rows(entries)
+    }
+
+    private func entry(for label: String, config: ProviderConfig?) -> Entry {
+        if let config, !config.base_url.isEmpty {
+            return Entry(label: label, statusText: "\(config.model_name) @ \(config.base_url)", color: .green)
+        } else if config != nil {
+            return Entry(label: label, statusText: "Mock 模式", color: .yellow)
+        } else {
+            return Entry(label: label, statusText: "未配置", color: .orange)
+        }
+    }
+}
+
+private struct Entry: Identifiable {
+    let id = UUID()
+    let label: String
+    let statusText: String
+    let color: Color
+}
+
+private enum SectionState {
+    case loading
+    case empty
+    case rows([Entry])
 }

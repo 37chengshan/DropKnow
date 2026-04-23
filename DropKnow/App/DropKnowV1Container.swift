@@ -11,6 +11,7 @@ public final class DropKnowV1Container: @unchecked Sendable {
     }
 
     public let bundle: MockPipelineBundle
+    public var eventBus: InMemoryPipelineEventBus { bundle.event_bus }
 
     public let watchDirectoryRepository: WatchDirectoryRepository
     public let documentRepository: DocumentRepository
