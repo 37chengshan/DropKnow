@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import SwiftUI
 
 @Observable
 public final class RecentFilesViewModel {
@@ -32,6 +33,27 @@ public final class RecentFilesViewModel {
             self.key_points = key_points
             self.lifecycle_status = lifecycle_status
             self.imported_at = imported_at
+        }
+
+        public var statusBadgeText: String {
+            switch lifecycle_status {
+            case .ready: return "就绪"
+            case .processing, .detected: return "处理中"
+            case .waiting_user_confirmation: return "待确认"
+            case .blocked: return "已阻断"
+            case .failed: return "失败"
+            case .unknown: return "未知"
+            }
+        }
+
+        public var statusColor: Color {
+            switch lifecycle_status {
+            case .ready: return .green
+            case .processing, .detected: return .orange
+            case .waiting_user_confirmation: return .yellow
+            case .blocked, .failed: return .red
+            case .unknown: return .gray
+            }
         }
     }
 

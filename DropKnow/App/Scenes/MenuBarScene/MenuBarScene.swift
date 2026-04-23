@@ -60,25 +60,33 @@ public struct MenuBarSceneView: View {
     }
 
     private var statusHeader: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 4) {
-                Text("DropKnow")
-                    .font(.title3.weight(.semibold))
-                Text("最近刷新：\(refreshToken > 0 ? "已更新" : "启动中")")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                Text(isProcessing ? "处理状态：处理中" : "处理状态：空闲")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+        VStack(spacing: 6) {
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("DropKnow")
+                        .font(.title3.weight(.semibold))
+                    HStack(spacing: 4) {
+                        Circle()
+                            .fill(isProcessing ? Color.orange : Color.green)
+                            .frame(width: 6, height: 6)
+                        Text(isProcessing ? "处理中" : "空闲")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                Spacer()
+                ProcessingStatusBadge(isProcessing: isProcessing)
             }
-            Spacer()
-            Text("状态总览")
-                .font(.caption)
-                .padding(.horizontal, 8)
-                .padding(.vertical, 4)
-                .background(.thinMaterial)
-                .clipShape(Capsule())
+            HStack {
+                Text("最近刷新：\(refreshToken > 0 ? "已更新" : "启动中")")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                Spacer()
+            }
         }
+        .padding(10)
+        .background(.ultraThinMaterial)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 
     private var quickActions: some View {
@@ -152,6 +160,31 @@ public struct MenuBarSceneView: View {
                 toastBanner = nil
             }
         }
+    }
+}
+
+struct ProcessingStatusBadge: View {
+    let isProcessing: Bool
+
+    var body: some View {
+        HStack(spacing: 4) {
+            if isProcessing {
+                ProgressView()
+                    .scaleEffect(0.6)
+                    .frame(width: 12, height: 12)
+            } else {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundStyle(.green)
+                    .font(.caption)
+            }
+            Text(isProcessing ? "处理中" : "就绪")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
+        .background(Color(nsColor: .windowBackgroundColor).opacity(0.8))
+        .clipShape(Capsule())
     }
 }
 

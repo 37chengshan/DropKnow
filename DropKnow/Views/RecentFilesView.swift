@@ -33,26 +33,50 @@ public struct RecentFilesView: View {
                 List(viewModel.items, id: \.document_id) { item in
                     let isExpanded = expandedIDs.contains(item.document_id)
                     VStack(alignment: .leading, spacing: 10) {
-                        Button {
-                            if isExpanded {
-                                expandedIDs.remove(item.document_id)
-                            } else {
-                                expandedIDs.insert(item.document_id)
-                            }
-                        } label: {
-                            SummaryCard(
-                                file_name: item.file_name,
-                                summary: item.subtitle,
-                                action_required: nil
+                        HStack(alignment: .top, spacing: 8) {
+                            StatusBadge(
+                                text: item.statusBadgeText,
+                                color: item.statusColor
                             )
-                        }
-                        .buttonStyle(.plain)
-                        .overlay(alignment: .bottomTrailing) {
-                            Text(isExpanded ? "收起重点" : "点击展开重点")
-                                .font(.caption2)
-                                .foregroundStyle(.secondary)
-                                .padding(.trailing, 4)
-                                .padding(.bottom, 4)
+
+                            VStack(alignment: .leading, spacing: 6) {
+                                Button {
+                                    if isExpanded {
+                                        expandedIDs.remove(item.document_id)
+                                    } else {
+                                        expandedIDs.insert(item.document_id)
+                                    }
+                                } label: {
+                                    SummaryCard(
+                                        file_name: item.file_name,
+                                        summary: item.subtitle,
+                                        action_required: nil
+                                    )
+                                }
+                                .buttonStyle(.plain)
+
+                                HStack(spacing: 12) {
+                                    Text(isExpanded ? "收起重点" : "展开重点")
+                                        .font(.caption2)
+                                        .foregroundStyle(.secondary)
+
+                                    Spacer()
+
+                                    QuickActionButton(
+                                        icon: "eye",
+                                        label: "预览"
+                                    ) {
+                                        // TODO: 预览文档
+                                    }
+
+                                    QuickActionButton(
+                                        icon: "folder",
+                                        label: "Finder"
+                                    ) {
+                                        // TODO: 在 Finder 中显示
+                                    }
+                                }
+                            }
                         }
 
                         if isExpanded && !item.key_points.isEmpty {
@@ -82,5 +106,39 @@ public struct RecentFilesView: View {
         .task(id: refreshToken) {
             await viewModel.load()
         }
+    }
+}
+
+struct StatusBadge: View {
+    let text: String
+    let color: Color
+
+    var body: some View {
+        Text(text)
+            .font(.caption2.weight(.medium))
+            .padding(.horizontal, 6)
+            .padding(.vertical, 2)
+            .background(color.opacity(0.15))
+            .foregroundStyle(color)
+            .clipShape(Capsule())
+    }
+}
+
+struct QuickActionButton: View {
+    let icon: String
+    let label: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 4) {
+                Image(systemName: icon)
+                    .font(.caption2)
+                Text(label)
+                    .font(.caption2)
+            }
+            .foregroundStyle(.secondary)
+        }
+        .buttonStyle(.plain)
     }
 }
