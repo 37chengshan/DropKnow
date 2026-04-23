@@ -420,6 +420,12 @@ public actor SearchService: SearchServicing {
         }
 
         guard !chunks.isEmpty else {
+            if mode == .qa {
+                let eventFallback = await buildEventFallbackSnapshot(question: trimmed, mode: mode)
+                if !eventFallback.citations.isEmpty {
+                    return eventFallback
+                }
+            }
             return SearchSnapshot(
                 status: .no_result,
                 mode: mode,
@@ -531,6 +537,48 @@ public actor SearchService: SearchServicing {
             mode: mode,
             answer: "根据本地证据，与你的问题最相关的信息如下：\n\n\(answerLines.joined(separator: "\n"))",
             citations: citations,
+            results: []
+        )
+    }
+
+    private func buildEventFallbackSnapshot(question: String, mode: QuickMode) async -> SearchSnapshot {
+        let eventsResult = await eventRepository.listRecent(limit: 50)
+        guard case .success(let events) = eventsResult else {
+            return SearchSnapshot(status: .no_result, mode: mode, answer: "", citations: [], results: [])
+        }
+
+        let keywords = tokenizedKeywords(from: question)
+        let matching = events.filter { event in
+            keywords.contains { keyword in
+                event.title.lowercased().contains(keyword.lowercased()) ||
+                event.raw_time_text.lowercased().contains(keyword.lowercased()) ||
+                event.evidence_snippet.lowercased().contains(keyword.lowercased())
+            }
+        }
+
+        guard !matching.isEmpty else {
+            return SearchSnapshot(status: .no_result, mode: mode, answer: "", citations: [], results: [])
+        }
+
+        let citations = matching.prefix(5).map { event in
+            CitationResponse(
+                document_id: event.document_id,
+                chunk_id: event.id,
+                file_name: "",
+                evidence_snippet: event.evidence_snippet
+            )
+        }
+
+        let answerLines: [String] = matching.prefix(5).enumerated().map { index, event in
+            let dateInfo = event.raw_time_text.isEmpty ? "" : "（\(event.raw_time_text)）"
+            return "\(index + 1). [事件] \(event.title)\(dateInfo)"
+        }
+
+        return SearchSnapshot(
+            status: .success,
+            mode: mode,
+            answer: "根据事件记录，与你的问题最相关的信息如下：\n\n\(answerLines.joined(separator: "\n"))",
+            citations: Array(citations),
             results: []
         )
     }

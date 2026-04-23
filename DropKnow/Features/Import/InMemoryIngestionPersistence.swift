@@ -293,13 +293,71 @@ public actor InMemoryIngestionPersistence: RepositoryPersistenceBacking {
     }
 
     public func saveDocumentChunk(document_id: String, chunk_index: Int, content: String, content_preview: String, char_count: Int) async throws {
-        // No-op for in-memory implementation
+        let chunk = InMemoryChunk(
+            chunk_id: "\(document_id)_chunk_\(chunk_index)",
+            document_id: document_id,
+            content: content,
+            content_preview: content_preview,
+            char_count: char_count
+        )
+        chunks[chunk.chunk_id] = chunk
     }
 
     public func searchChunks(query: String, limit: Int) async throws -> [ChunkSearchResult] {
-        // No-op for in-memory implementation - returns empty results
-        return []
+        // Simple keyword extraction from FTS query (strip quotes and operators)
+        let raw = query
+            .replacingOccurrences(of: "AND", with: " ")
+            .replacingOccurrences(of: "OR", with: " ")
+            .replacingOccurrences(of: "NOT", with: " ")
+            .replacingOccurrences(of: "\"", with: "")
+
+        let keywords = raw
+            .components(separatedBy: CharacterSet.alphanumerics.inverted)
+            .filter { !$0.isEmpty && $0.count > 1 }
+
+        if keywords.isEmpty {
+            return Array(chunks.values.prefix(limit)).map { chunk in
+                ChunkSearchResult(
+                    chunk_id: chunk.chunk_id,
+                    document_id: chunk.document_id,
+                    chunk_index: Int(chunk.chunk_id.components(separatedBy: "_chunk_").last ?? "0") ?? 0,
+                    content: chunk.content,
+                    content_preview: chunk.content_preview,
+                    char_count: chunk.char_count
+                )
+            }
+        }
+
+        var matched: [InMemoryChunk] = []
+        for chunk in chunks.values {
+            let content = chunk.content.lowercased()
+            let keywordMatches = keywords.filter { content.contains($0.lowercased()) }
+            if keywordMatches.count >= max(1, keywords.count / 2) {
+                matched.append(chunk)
+            }
+        }
+
+        return Array(matched.prefix(limit)).map { chunk in
+            ChunkSearchResult(
+                chunk_id: chunk.chunk_id,
+                document_id: chunk.document_id,
+                chunk_index: Int(chunk.chunk_id.components(separatedBy: "_chunk_").last ?? "0") ?? 0,
+                content: chunk.content,
+                content_preview: chunk.content_preview,
+                char_count: chunk.char_count
+            )
+        }
     }
+
+    private struct InMemoryChunk: Sendable {
+        let chunk_id: String
+        let document_id: String
+        let content: String
+        let content_preview: String
+        let char_count: Int
+    }
+
+    private var chunks: [String: InMemoryChunk] = [:]
 
     private static func encodeJSONString<T: Encodable>(_ value: T) -> String {
         let encoder = JSONEncoder()
