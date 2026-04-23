@@ -9,7 +9,7 @@ public enum ProviderClientFactory {
         case .mock:
             return MockProviderClient(handler: mockHandler)
         case .http_placeholder:
-            return HTTPProviderClientPlaceholder()
+            return HTTPProviderClient()
         }
     }
 }
