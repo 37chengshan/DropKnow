@@ -1,0 +1,56 @@
+# Build products
+.build/
+/.build/
+DerivedData/
+build/
+*.build/
+*.xcodeproj
+!project.xcworkspace
+xcuserdata/
+*.xcuserstate
+*.moved-aside
+
+# Swift Package Manager
+.swiftpm/
+Packages/
+
+# Xcode
+*.xcworkspace
+!project.xcworkspace
+project.xcworkspace/contents.xcworkspacedata
+
+# IDE
+.DS_Store
+*.swp
+*.swo
+*~
+.AppleDouble
+.LSOverride
+.com.apple.templates.template.plist
+.vscode/
+
+# Release artifacts
+dist/
+
+# Logs
+*.log
+
+# Secrets
+.env
+.env.local
+.env.*
+*.pem
+*secret*
+*credential*
+
+# Files access
+Access write paths
+Library/Application Support/DropKnow/*
+
+# Temporary
+*.tmp
+*.temp
+.tmp/
+
+# Git
+.git/

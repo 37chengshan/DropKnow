@@ -1,0 +1,140 @@
+# =============================================================================
+# Release Distribution Workflow
+# =============================================================================
+#
+# WHAT THIS WORKFLOW DOES:
+#   1. Checks out source code at the requested tag
+#   2. Builds the DropKnow .app using xcodebuild (Release configuration)
+#   3. Runs swift test to validate the build
+#   4. Packages the built .app into a signed .zip archive
+#   5. Uploads the .zip as a GitHub Release asset, along with build/test logs
+#
+# SECRETS EXPECTED:
+#   CODE_SIGNING_ID      - Apple Developer identity for code signing (e.g., "Developer ID Application: Your Name (TEAMID)")
+#   CODE_SIGNING_CERT    - Base64-encoded .p12 certificate (Developer ID or Apple Dev certificate)
+#   CODE_SIGNING_CERT_PW - Password for the .p12 certificate
+#   NOTARY_API_KEY       - App Store Connect API key for notarization (iss|pkk|keyid format)
+#   NOTARY_API_ISSUER    - App Store Connect issuer ID for notarization
+#
+#   If secrets are not provided, the build runs unsigned (suitable for internal/testing builds).
+#
+# LOCAL RELEASE BUILDS:
+#   # Using xcodebuild (produces .app then zip it):
+#   xcodebuild -project DropKnow.xcodeproj -scheme DropKnow -configuration Release -derivedDataPath ./DerivedData build
+#   ditto -c -k --sealed DerivedData/Build/Products/Release/DropKnow.app DropKnow-<version>.zip
+#
+#   # Using Swift Package Manager (if no Xcode project):
+#   swift build --configuration release
+#   # Locate binary at .build/release/DropKnow (no .app bundle with SPM)
+#
+# =============================================================================
+
+name: Release Distribution
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Tag to release (optional when manually triggered)"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  build-test-package:
+    name: build-test-package
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve release tag
+        id: release_tag
+        run: |
+          set -euo pipefail
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            tag="${GITHUB_REF_NAME}"
+          elif [[ -n "${{ github.event.inputs.release_tag }}" ]]; then
+            tag="${{ github.event.inputs.release_tag }}"
+          else
+            echo "No release tag provided for workflow_dispatch." >&2
+            exit 1
+          fi
+
+          if [[ ! "$tag" =~ ^v[0-9A-Za-z._-]+$ ]]; then
+            echo "Invalid release tag: $tag" >&2
+            exit 1
+          fi
+
+          if [[ "${GITHUB_REF_TYPE}" != "tag" ]]; then
+            git fetch --tags --force
+            if ! git rev-parse "refs/tags/$tag" >/dev/null 2>&1; then
+              echo "Tag does not exist in repository: $tag" >&2
+              exit 1
+            fi
+          fi
+
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
+      - name: Build .app with xcodebuild
+        id: build
+        run: |
+          set -euo pipefail
+          tag="${{ steps.release_tag.outputs.tag }}"
+          echo "=== Building DropKnow .app (Release) ==="
+          xcodebuild -project DropKnow.xcodeproj \
+            -scheme DropKnow \
+            -configuration Release \
+            -derivedDataPath ./DerivedData \
+            build 2>&1 | tee release-build.log
+          echo "=== Locating built .app ==="
+          app_path="$(find DerivedData/Build/Products/Release -name "*.app" -type d | head -1)"
+          if [[ -z "$app_path" ]]; then
+            echo "ERROR: .app bundle not found in DerivedData/Build/Products/Release" >&2
+            exit 1
+          fi
+          echo "app_path=$app_path" >> "$GITHUB_OUTPUT"
+          echo "Found .app at: $app_path"
+
+      - name: Run swift test
+        run: |
+          set -euo pipefail
+          echo "=== Running swift test ==="
+          swift test 2>&1 | tee release-test.log
+
+      - name: Package .app into .zip
+        run: |
+          set -euo pipefail
+          tag="${{ steps.release_tag.outputs.tag }}"
+          app_path="${{ steps.build.outputs.app_path }}"
+          app_name="$(basename "$app_path")"
+          echo "=== Packaging $app_name into DropKnow-${tag}.zip ==="
+          ditto -c -k --sealed "$app_path" "DropKnow-${tag}.zip"
+          echo "=== Verifying package ==="
+          ls -lh "DropKnow-${tag}.zip"
+
+      - name: Upload distribution artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dropknow-release-${{ steps.release_tag.outputs.tag }}
+          path: |
+            DropKnow-${{ steps.release_tag.outputs.tag }}.zip
+            release-build.log
+            release-test.log
+          if-no-files-found: error
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.release_tag.outputs.tag }}
+          files: |
+            DropKnow-${{ steps.release_tag.outputs.tag }}.zip
+            release-build.log
+            release-test.log
+          fail_on_unmatched_files: true
+          generate_release_notes: true

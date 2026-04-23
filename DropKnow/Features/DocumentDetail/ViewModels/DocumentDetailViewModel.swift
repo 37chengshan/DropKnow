@@ -15,7 +15,7 @@ public final class DocumentDetailViewModel {
         case waitingUserConfirmation(DocumentDetailData)
         case blocked(reason: String)
         case failed(message: String)
-        case processing
+        case processing(document_id: String, file_name: String)
     }
 
     public struct DocumentDetailData: Equatable, Sendable {
@@ -96,7 +96,10 @@ public final class DocumentDetailViewModel {
             case .failed:
                 state = .failed(message: payload.document.last_error_code?.rawValue ?? "unknown")
             case .detected, .processing:
-                state = .processing
+                state = .processing(
+                    document_id: payload.document.id,
+                    file_name: payload.document.file_name
+                )
             case .unknown:
                 state = .failed(message: "unknown")
             }

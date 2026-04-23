@@ -11,6 +11,8 @@ public enum ProviderError: Error, Sendable, Equatable {
     case network(message: String)
     case malformed_response
     case unsupported_transport
+    case bad_request
+    case upstream_error
 }
 
 public extension ProviderError {
@@ -28,7 +30,7 @@ public extension ProviderError {
             return "invalid_json"
         case .schema_validation_failed:
             return "schema_validation"
-        case .offline, .network:
+        case .offline, .network, .bad_request, .upstream_error:
             return "network"
         case .malformed_response:
             return "malformed_response"
@@ -39,9 +41,9 @@ public extension ProviderError {
 
     var shouldRetry: Bool {
         switch self {
-        case .rate_limited, .timeout, .service_unavailable, .offline, .network:
+        case .rate_limited, .timeout, .service_unavailable, .offline, .network, .upstream_error:
             return true
-        case .invalid_json, .schema_validation_failed, .auth, .malformed_response, .unsupported_transport:
+        case .invalid_json, .schema_validation_failed, .auth, .malformed_response, .unsupported_transport, .bad_request:
             return false
         }
     }
@@ -86,6 +88,10 @@ public extension ProviderError {
         case .offline, .network:
             return .network_offline
         case .unsupported_transport:
+            return .provider_service_unavailable
+        case .bad_request:
+            return .provider_service_unavailable
+        case .upstream_error:
             return .provider_service_unavailable
         }
     }

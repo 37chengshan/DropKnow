@@ -1,15 +1,21 @@
 import Foundation
+import Observation
 
-public actor InMemoryPipelineEventBus: PipelineEventPublishing {
-    private var events: [PipelineEvent] = []
+@Observable
+public final class InMemoryPipelineEventBus: PipelineEventPublishing {
+    public private(set) var events: [PipelineEvent] = []
 
     public init() {}
 
-    public func publish(_ event: PipelineEvent) async {
+    public nonisolated func publish(_ event: PipelineEvent) {
         events.append(event)
     }
 
-    public func allEvents() -> [PipelineEvent] {
+    public func clear() {
+        events.removeAll()
+    }
+
+    public nonisolated func allEvents() -> [PipelineEvent] {
         events
     }
 }

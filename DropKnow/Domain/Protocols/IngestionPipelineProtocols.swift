@@ -160,8 +160,11 @@ public protocol IngestionPersistence: Sendable {
     func createDocument(_ input: NewDocumentInput) async throws -> DocumentDTO
     func updateDocument(document_id: String, update: DocumentPipelineUpdate) async throws -> DocumentDTO?
     func saveDocumentText(document_id: String, record: ParsedTextRecord) async throws
+    func fetchDocumentText(document_id: String) async throws -> ParsedTextRecord?
     func saveSummary(document_id: String, summary: SummaryProviderResponse, provider: ProviderConfig) async throws
     func saveEvents(document_id: String, events: [EventCandidateResponse]) async throws
+    func saveDocumentChunk(document_id: String, chunk_index: Int, content: String, content_preview: String, char_count: Int) async throws
+    func searchChunks(query: String, limit: Int) async throws -> [ChunkSearchResult]
 
     func createParseJob(_ input: ParseJobCreateInput) async throws -> ParseJobDTO
     func updateParseJob(_ input: ParseJobUpdateInput) async throws -> ParseJobDTO?
@@ -170,12 +173,13 @@ public protocol IngestionPersistence: Sendable {
     func fetchParseJobs(document_id: String) async throws -> [ParseJobDTO]
 }
 
-public protocol PipelineEventPublishing: Sendable {
-    func publish(_ event: PipelineEvent) async
+public protocol PipelineEventPublishing {
+    func publish(_ event: PipelineEvent)
 }
 
 public enum PipelineEvent: Sendable, Equatable {
     case document_updated(document_id: String)
     case ingestion_finished(document_id: String)
     case ingestion_failed(document_id: String, error_code: ErrorCode)
+    case notification_requested(document_id: String)
 }

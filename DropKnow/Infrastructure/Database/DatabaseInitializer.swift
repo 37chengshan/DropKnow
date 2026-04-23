@@ -36,6 +36,37 @@ public enum DatabaseInitializer {
                 migrationV1SQLURL: migrationURL
             )
         }
+
+        public static func defaultApplicationSupportDirectory(fileManager: FileManager = .default) throws -> URL {
+            let appSupport = try fileManager.url(
+                for: .applicationSupportDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create: true
+            )
+            return appSupport.appendingPathComponent("DropKnow", isDirectory: true)
+        }
+
+        public static func defaultSQLDirectory(bundle: Bundle = .main, fileManager: FileManager = .default) -> URL {
+            if let bundledPath = bundle.resourceURL?
+                .appendingPathComponent("Infrastructure/Database", isDirectory: true),
+               fileManager.fileExists(atPath: bundledPath.appendingPathComponent("schema.sql").path) {
+                return bundledPath
+            }
+
+            // Local fallback for SwiftPM tests and developer runs.
+            return URL(fileURLWithPath: #filePath).deletingLastPathComponent()
+        }
+
+        public static func appDefault(
+            fileManager: FileManager = .default,
+            bundle: Bundle = .main
+        ) throws -> Configuration {
+            try .default(
+                databaseDirectory: defaultApplicationSupportDirectory(fileManager: fileManager),
+                sqlDirectory: defaultSQLDirectory(bundle: bundle, fileManager: fileManager)
+            )
+        }
     }
 
     public enum InitializationError: LocalizedError {
@@ -121,6 +152,16 @@ public enum DatabaseInitializer {
                 throw error
             }
         }
+    }
+
+    @discardableResult
+    public static func initializeDefault(
+        fileManager: FileManager = .default,
+        bundle: Bundle = .main
+    ) throws -> Configuration {
+        let configuration = try Configuration.appDefault(fileManager: fileManager, bundle: bundle)
+        try initialize(configuration)
+        return configuration
     }
 
     private static func migrationExists(version: String, on db: OpaquePointer) throws -> Bool {

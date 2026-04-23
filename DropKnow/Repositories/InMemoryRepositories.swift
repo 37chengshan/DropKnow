@@ -275,10 +275,10 @@ public actor WatchDirectoryRepository {
 
 public actor DocumentRepository {
     private let transaction: any RepositoryTransactioning
-    private let persistence: InMemoryIngestionPersistence
+    private let persistence: any RepositoryPersistenceBacking
 
     public init(
-        persistence: InMemoryIngestionPersistence,
+        persistence: any RepositoryPersistenceBacking,
         transaction: any RepositoryTransactioning = InMemoryRepositoryTransactionManager()
     ) {
         self.persistence = persistence
@@ -324,14 +324,23 @@ public actor DocumentRepository {
     public func listRecent(limit: Int) async -> RepositoryResult<[DocumentDTO]> {
         .success(await persistence.listRecentDocuments(limit: limit))
     }
+
+    public func searchChunks(query: String, limit: Int) async -> RepositoryResult<[ChunkSearchResult]> {
+        do {
+            let results = try await persistence.searchChunks(query: query, limit: limit)
+            return .success(results)
+        } catch {
+            return .dbReadFailure("search chunks failed: \(error.localizedDescription)")
+        }
+    }
 }
 
 public actor DocumentTextRepository {
     private let transaction: any RepositoryTransactioning
-    private let persistence: InMemoryIngestionPersistence
+    private let persistence: any RepositoryPersistenceBacking
 
     public init(
-        persistence: InMemoryIngestionPersistence,
+        persistence: any RepositoryPersistenceBacking,
         transaction: any RepositoryTransactioning = InMemoryRepositoryTransactionManager()
     ) {
         self.persistence = persistence
@@ -350,10 +359,14 @@ public actor DocumentTextRepository {
     }
 
     public func get(document_id: String) async -> RepositoryResult<DocumentTextDTO?> {
-        guard let item = await persistence.fetchDocumentText(document_id: document_id) else {
-            return .success(nil)
+        do {
+            guard let item = try await persistence.fetchDocumentText(document_id: document_id) else {
+                return .success(nil)
+            }
+            return .success(DocumentTextDTO(document_id: document_id, record: item))
+        } catch {
+            return .dbReadFailure("get document_text failed: \(error.localizedDescription)")
         }
-        return .success(DocumentTextDTO(document_id: document_id, record: item))
     }
 
     public func update(document_id: String, record: ParsedTextRecord) async -> RepositoryResult<DocumentTextDTO> {
@@ -377,10 +390,10 @@ public actor DocumentTextRepository {
 
 public actor SummaryRepository {
     private let transaction: any RepositoryTransactioning
-    private let persistence: InMemoryIngestionPersistence
+    private let persistence: any RepositoryPersistenceBacking
 
     public init(
-        persistence: InMemoryIngestionPersistence,
+        persistence: any RepositoryPersistenceBacking,
         transaction: any RepositoryTransactioning = InMemoryRepositoryTransactionManager()
     ) {
         self.persistence = persistence
@@ -419,10 +432,10 @@ public actor SummaryRepository {
 
 public actor EventRepository {
     private let transaction: any RepositoryTransactioning
-    private let persistence: InMemoryIngestionPersistence
+    private let persistence: any RepositoryPersistenceBacking
 
     public init(
-        persistence: InMemoryIngestionPersistence,
+        persistence: any RepositoryPersistenceBacking,
         transaction: any RepositoryTransactioning = InMemoryRepositoryTransactionManager()
     ) {
         self.persistence = persistence
@@ -464,10 +477,10 @@ public actor EventRepository {
 
 public actor ParseJobRepository {
     private let transaction: any RepositoryTransactioning
-    private let persistence: InMemoryIngestionPersistence
+    private let persistence: any RepositoryPersistenceBacking
 
     public init(
-        persistence: InMemoryIngestionPersistence,
+        persistence: any RepositoryPersistenceBacking,
         transaction: any RepositoryTransactioning = InMemoryRepositoryTransactionManager()
     ) {
         self.persistence = persistence

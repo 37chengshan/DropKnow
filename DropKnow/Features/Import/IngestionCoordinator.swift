@@ -68,7 +68,7 @@ public actor IngestionCoordinator {
 
             let documentID = newDocument.id
             interruptedDocumentIDs.remove(documentID)
-            await eventPublisher.publish(.document_updated(document_id: documentID))
+        eventPublisher.publish(.document_updated(document_id: documentID))
             return try await processPipeline(document_id: documentID, request: request, start_stage: .import)
         } catch let pipelineError as IngestionPipelineError {
             return await handleTopLevelPipelineError(pipelineError)
@@ -187,8 +187,8 @@ public actor IngestionCoordinator {
         )
 
         interruptedDocumentIDs.remove(document_id)
-        await eventPublisher.publish(.document_updated(document_id: document_id))
-        await eventPublisher.publish(.ingestion_finished(document_id: document_id))
+        eventPublisher.publish(.document_updated(document_id: document_id))
+        eventPublisher.publish(.ingestion_finished(document_id: document_id))
         return .ready(document_id: document_id)
     }
 
@@ -281,7 +281,7 @@ public actor IngestionCoordinator {
                 error_code: code,
                 error_message: "pipeline stopped after parse failure"
             )
-            await eventPublisher.publish(.ingestion_failed(document_id: document_id, error_code: code))
+            eventPublisher.publish(.ingestion_failed(document_id: document_id, error_code: code))
             if isUnsupported {
                 return .terminal(.unsupported_file(document_id: document_id))
             }
@@ -325,7 +325,7 @@ public actor IngestionCoordinator {
                 error_code: .gate_sensitive_confirmation_required,
                 error_message: "waiting user confirmation"
             )
-            await eventPublisher.publish(.document_updated(document_id: document_id))
+            eventPublisher.publish(.document_updated(document_id: document_id))
             return .stop(.waiting_user_confirmation(document_id: document_id))
 
         case .blocked_policy:
@@ -346,7 +346,7 @@ public actor IngestionCoordinator {
                 error_code: .gate_policy_blocked,
                 error_message: "policy blocked"
             )
-            await eventPublisher.publish(.ingestion_failed(document_id: document_id, error_code: .gate_policy_blocked))
+            eventPublisher.publish(.ingestion_failed(document_id: document_id, error_code: .gate_policy_blocked))
             return .stop(.failed(document_id: document_id, error_code: .gate_policy_blocked))
 
         case .blocked_quota:
@@ -367,7 +367,7 @@ public actor IngestionCoordinator {
                 error_code: .quota_parse_exceeded,
                 error_message: "quota blocked"
             )
-            await eventPublisher.publish(.ingestion_failed(document_id: document_id, error_code: .quota_parse_exceeded))
+            eventPublisher.publish(.ingestion_failed(document_id: document_id, error_code: .quota_parse_exceeded))
             return .stop(.quota_blocked(document_id: document_id))
         }
     }
@@ -425,7 +425,7 @@ public actor IngestionCoordinator {
                 error_code: code,
                 error_message: "summary failed"
             )
-            await eventPublisher.publish(.ingestion_failed(document_id: document_id, error_code: code))
+            eventPublisher.publish(.ingestion_failed(document_id: document_id, error_code: code))
             return .stop(.provider_failed(document_id: document_id, error_code: code))
         }
     }
@@ -480,15 +480,84 @@ public actor IngestionCoordinator {
                 error_code: code,
                 error_message: "event extraction failed"
             )
-            await eventPublisher.publish(.ingestion_failed(document_id: document_id, error_code: code))
+            eventPublisher.publish(.ingestion_failed(document_id: document_id, error_code: code))
             return .stop(.provider_failed(document_id: document_id, error_code: code))
         }
     }
 
     private func runIndexStage(document_id: String) async throws -> IngestionBranch {
         let handle = try await beginStage(document_id: document_id, stage: .index, provider_id: nil)
-        try await completeStageSuccess(handle)
-        return .proceed
+        do {
+            guard let textRecord = try await persistence.fetchDocumentText(document_id: document_id) else {
+                try await completeStageSuccess(handle)
+                return .proceed
+            }
+
+            let plainText = textRecord.plain_text
+            let chunks = chunkText(plainText)
+
+            for (index, chunk) in chunks.enumerated() {
+                let preview = String(chunk.prefix(200))
+                try await persistence.saveDocumentChunk(
+                    document_id: document_id,
+                    chunk_index: index,
+                    content: chunk,
+                    content_preview: preview,
+                    char_count: chunk.count
+                )
+            }
+
+            try await completeStageSuccess(handle)
+            return .proceed
+        } catch {
+            try await completeStageFailure(handle, error_code: .db_write_failed, message: String(describing: error))
+            return .proceed
+        }
+    }
+
+    private func chunkText(_ text: String, minSize: Int = 300, maxSize: Int = 500) -> [String] {
+        guard !text.isEmpty else { return [] }
+
+        var chunks: [String] = []
+        var currentChunk = ""
+        let lines = text.components(separatedBy: .newlines)
+        let nonEmptyLines = lines.filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
+
+        for line in nonEmptyLines {
+            let trimmed = line.trimmingCharacters(in: .whitespaces)
+            guard !trimmed.isEmpty else { continue }
+
+            if currentChunk.isEmpty {
+                currentChunk = trimmed
+            } else if currentChunk.count + trimmed.count + 1 <= maxSize {
+                currentChunk += " " + trimmed
+            } else {
+                if currentChunk.count >= minSize {
+                    chunks.append(currentChunk)
+                    currentChunk = trimmed
+                } else {
+                    currentChunk += " " + trimmed
+                }
+            }
+
+            if currentChunk.count > maxSize {
+                let endIndex = currentChunk.index(currentChunk.startIndex, offsetBy: maxSize)
+                let part = String(currentChunk[..<endIndex])
+                chunks.append(part)
+                currentChunk = String(currentChunk[endIndex...])
+            }
+        }
+
+        if currentChunk.count >= minSize {
+            chunks.append(currentChunk)
+        } else if !chunks.isEmpty {
+            let lastIndex = chunks.count - 1
+            chunks[lastIndex] += " " + currentChunk
+        } else if !currentChunk.isEmpty {
+            chunks.append(currentChunk)
+        }
+
+        return chunks
     }
 
     private func runNotifyStage(document_id: String, source_type: String) async throws -> IngestionBranch {
@@ -507,7 +576,7 @@ public actor IngestionCoordinator {
             return .proceed
         }
 
-        await eventPublisher.publish(.document_updated(document_id: document_id))
+        eventPublisher.publish(.notification_requested(document_id: document_id))
         try await completeStageSuccess(handle)
         return .proceed
     }

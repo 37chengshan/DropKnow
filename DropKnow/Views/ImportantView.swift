@@ -3,10 +3,12 @@ import SwiftUI
 public struct ImportantView: View {
     @State private var viewModel: ImportantRemindersViewModel
     private let refreshToken: Int
+    private let onSelectDocument: ((String) -> Void)?
 
-    public init(viewModel: ImportantRemindersViewModel, refreshToken: Int = 0) {
+    public init(viewModel: ImportantRemindersViewModel, refreshToken: Int = 0, onSelectDocument: ((String) -> Void)? = nil) {
         _viewModel = State(initialValue: viewModel)
         self.refreshToken = refreshToken
+        self.onSelectDocument = onSelectDocument
     }
 
     public var body: some View {
@@ -37,6 +39,10 @@ public struct ImportantView: View {
                         evidence: item.evidence_snippet,
                         high_priority: item.is_high_priority
                     )
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        onSelectDocument?(item.document_id)
+                    }
                     .listRowSeparator(.hidden)
                 }
                 .listStyle(.plain)
