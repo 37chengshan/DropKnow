@@ -187,6 +187,61 @@ struct SearchDiagnostics: Codable, Hashable {
         emptyIndex: false,
         providerConfigured: false
     )
+
+    enum CodingKeys: String, CodingKey {
+        case embeddingEngine
+        case embeddingModel
+        case chatModel
+        case topK
+        case chatUsed
+        case fallbackReason
+        case indexedFileCount
+        case chunkCount
+        case activeRevisionCount
+        case emptyIndex
+        case providerConfigured
+    }
+
+    init(
+        embeddingEngine: String?,
+        embeddingModel: String?,
+        chatModel: String?,
+        topK: Int,
+        chatUsed: Bool,
+        fallbackReason: String?,
+        indexedFileCount: Int,
+        chunkCount: Int,
+        activeRevisionCount: Int,
+        emptyIndex: Bool,
+        providerConfigured: Bool
+    ) {
+        self.embeddingEngine = embeddingEngine
+        self.embeddingModel = embeddingModel
+        self.chatModel = chatModel
+        self.topK = topK
+        self.chatUsed = chatUsed
+        self.fallbackReason = fallbackReason
+        self.indexedFileCount = indexedFileCount
+        self.chunkCount = chunkCount
+        self.activeRevisionCount = activeRevisionCount
+        self.emptyIndex = emptyIndex
+        self.providerConfigured = providerConfigured
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        embeddingEngine = try container.decodeIfPresent(String.self, forKey: .embeddingEngine)
+        embeddingModel = try container.decodeIfPresent(String.self, forKey: .embeddingModel)
+        chatModel = try container.decodeIfPresent(String.self, forKey: .chatModel)
+        topK = try container.decodeIfPresent(Int.self, forKey: .topK) ?? Self.empty.topK
+        chatUsed = try container.decodeIfPresent(Bool.self, forKey: .chatUsed) ?? Self.empty.chatUsed
+        fallbackReason = try container.decodeIfPresent(String.self, forKey: .fallbackReason)
+        indexedFileCount = try container.decodeIfPresent(Int.self, forKey: .indexedFileCount) ?? Self.empty.indexedFileCount
+        chunkCount = try container.decodeIfPresent(Int.self, forKey: .chunkCount) ?? Self.empty.chunkCount
+        activeRevisionCount = try container.decodeIfPresent(Int.self, forKey: .activeRevisionCount) ?? Self.empty.activeRevisionCount
+        emptyIndex = try container.decodeIfPresent(Bool.self, forKey: .emptyIndex) ?? Self.empty.emptyIndex
+        providerConfigured = try container.decodeIfPresent(Bool.self, forKey: .providerConfigured) ?? Self.empty.providerConfigured
+    }
 }
 
 enum RAGIndexState: String, Codable, Hashable {

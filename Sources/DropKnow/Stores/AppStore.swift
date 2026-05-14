@@ -73,6 +73,7 @@ final class AppStore: ObservableObject {
     private let environment: AppStoreEnvironment
     private let sessionStartedAt: Date
     private let autoImportMinimumModifiedAt: Date?
+    private let providerConfigurationLoader: () -> ProviderConfiguration
     private var processingTask: Task<Void, Never>?
     private var retryWakeTask: Task<Void, Never>?
     private var pendingSearchTask: Task<Void, Never>?
@@ -107,6 +108,7 @@ final class AppStore: ObservableObject {
         runtimeBackupURL: URL? = nil,
         rag: any RAGServing = RAGService(),
         environment: AppStoreEnvironment = .live,
+        providerConfigurationLoader: @escaping () -> ProviderConfiguration = { ProviderConfiguration.load() },
         sessionStartedAt: Date = Date()
     ) {
         let normalizedSettings = Self.normalizedSettings(initialSettings)
@@ -124,6 +126,7 @@ final class AppStore: ObservableObject {
         self.processingRuntime = .current
         self.rag = rag
         self.environment = environment
+        self.providerConfigurationLoader = providerConfigurationLoader
         self.processingEngine = ProcessingEngine(initialState: initialRuntime, runtimeURL: environment.runtimeURL, recoveredAt: sessionStartedAt)
         self.sessionStartedAt = sessionStartedAt
         self.autoImportMinimumModifiedAt = AutoImportSafetyPolicy.minimumModifiedAt(for: storedFilesStatus, sessionStartedAt: sessionStartedAt)
@@ -190,7 +193,7 @@ final class AppStore: ObservableObject {
                 detail: reason
             )
         }
-        let config = ProviderConfiguration.load()
+        let config = providerConfigurationLoader()
         if config.hasAPIKey {
             return RAGProviderStatus(
                 mode: .remoteReady,
@@ -206,7 +209,7 @@ final class AppStore: ObservableObject {
     }
 
     var providerConfigURL: URL {
-        ProviderConfiguration.load().configURL
+        providerConfigurationLoader().configURL
     }
 
     var shouldOfferCalendarSettings: Bool {
@@ -911,7 +914,7 @@ final class AppStore: ObservableObject {
                     }
                     return
                 }
-                guard ProviderConfiguration.load().hasAPIKey else {
+                guard providerConfigurationLoader().hasAPIKey else {
                     let warning = "未配置 DashScope API Key，通用问答暂不可用。你仍可提问“查文件 …”来检索已解析文件；或在设置页配置 providers.local.json / DASHSCOPE_API_KEY。"
                     if activeSearchRequestID == requestID {
                         result = SearchResult(
@@ -1261,7 +1264,7 @@ final class AppStore: ObservableObject {
             }
             saveFiles()
 
-            let hasAPIKey = ProviderConfiguration.load().hasAPIKey
+            let hasAPIKey = providerConfigurationLoader().hasAPIKey
             let seed = ProcessingIndexSeed(
                 fileID: baseFile.id,
                 fileName: baseFile.fileName,
@@ -1309,7 +1312,7 @@ final class AppStore: ObservableObject {
     }
 
     private func handleRefine(_ job: IndexJob) async {
-        if !ProviderConfiguration.load().hasAPIKey {
+        if !providerConfigurationLoader().hasAPIKey {
             await processingEngine.completeRefine(
                 jobID: job.id,
                 summary: job.summary,

@@ -71,6 +71,36 @@ final class RAGSearchContractTests: XCTestCase {
         XCTAssertEqual(result.diagnostics, .empty)
     }
 
+    func testLegacySearchResultDecodePartialDiagnosticsFallsBackPerField() throws {
+        let data = Data(
+            """
+            {
+              "answer": "部分诊断结果",
+              "hits": [],
+              "engine": "zvec",
+              "diagnostics": {
+                "topK": 6,
+                "emptyIndex": true
+              }
+            }
+            """.utf8
+        )
+
+        let result = try decoder.decode(SearchResult.self, from: data)
+
+        XCTAssertEqual(result.diagnostics.topK, 6)
+        XCTAssertTrue(result.diagnostics.emptyIndex)
+        XCTAssertNil(result.diagnostics.embeddingEngine)
+        XCTAssertNil(result.diagnostics.embeddingModel)
+        XCTAssertNil(result.diagnostics.chatModel)
+        XCTAssertFalse(result.diagnostics.chatUsed)
+        XCTAssertNil(result.diagnostics.fallbackReason)
+        XCTAssertEqual(result.diagnostics.indexedFileCount, 0)
+        XCTAssertEqual(result.diagnostics.chunkCount, 0)
+        XCTAssertEqual(result.diagnostics.activeRevisionCount, 0)
+        XCTAssertFalse(result.diagnostics.providerConfigured)
+    }
+
     func testLegacySearchHitDecodeDefaultsMissingEvidenceFields() throws {
         let fileID = UUID()
         let data = Data(
