@@ -125,6 +125,46 @@ final class RAGSearchContractTests: XCTestCase {
         XCTAssertNil(hit.matchReason)
     }
 
+    func testRAGProcessResponseDecodesExtendedSearchContractFields() throws {
+        let data = Data(
+            """
+            {
+              "ok": true,
+              "engine": "zvec",
+              "answer": "本地降级结果",
+              "queryMode": "localFallback",
+              "diagnostics": {
+                "topK": 4,
+                "chatUsed": false,
+                "fallbackReason": "LOCAL_FALLBACK"
+              },
+              "hits": [
+                {
+                  "id": "chunk-1",
+                  "fileID": "11111111-1111-1111-1111-111111111111",
+                  "fileName": "高数考试通知.txt",
+                  "filePath": "/tmp/高数考试通知.txt",
+                  "snippet": "高数考试时间为 5 月 20 日 10:00，地点 A101。",
+                  "score": 0.91,
+                  "chunkIndex": 2,
+                  "revisionID": "rev-1"
+                }
+              ]
+            }
+            """.utf8
+        )
+
+        let response = try decoder.decode(RAGProcessResponse.self, from: data)
+
+        XCTAssertTrue(response.ok)
+        XCTAssertEqual(response.queryMode, .localFallback)
+        XCTAssertEqual(response.diagnostics?.topK, 4)
+        XCTAssertEqual(response.diagnostics?.chatUsed, false)
+        XCTAssertEqual(response.diagnostics?.fallbackReason, "LOCAL_FALLBACK")
+        XCTAssertEqual(response.hits?.first?.chunkIndex, 2)
+        XCTAssertEqual(response.hits?.first?.revisionID, "rev-1")
+    }
+
     func testDropFileRAGIndexStateIndexed() {
         let file = makeFile(
             parsedStatus: .parsed,

@@ -262,6 +262,18 @@ final class AppStoreTests: XCTestCase {
         XCTAssertEqual(result.queryMode, .generalChat)
     }
 
+    func testFileSearchSuccessKeepsFileSearchQueryModeAndDiagnostics() async {
+        let rag = StubRAGService(delayNanoseconds: 0)
+        let store = makeStore(files: [makeFile(filePath: "/tmp/notice.pdf")], rag: rag)
+        store.searchQuery = "查文件 考试时间"
+
+        await store.performSearch()
+
+        XCTAssertEqual(store.searchResult?.queryMode, .fileSearch)
+        XCTAssertEqual(store.searchResult?.diagnostics.topK, 6)
+        XCTAssertEqual(store.chatMessages.last?.result?.queryMode, .fileSearch)
+    }
+
     func testTrustDirectoryAllowsFutureSensitiveFilesInSameDirectory() async {
         let file = makeFile(
             filePath: "/tmp/trusted/成绩单.pdf",
@@ -583,7 +595,26 @@ private actor StubRAGService: RAGServing {
         if delayNanoseconds > 0 {
             try await Task.sleep(nanoseconds: delayNanoseconds)
         }
-        return SearchResult(answer: "answer:\(query)", hits: [], engine: "stub", warning: nil)
+        return SearchResult(
+            answer: "answer:\(query)",
+            hits: [],
+            engine: "stub",
+            warning: nil,
+            queryMode: .fileSearch,
+            diagnostics: SearchDiagnostics(
+                embeddingEngine: "stub",
+                embeddingModel: "stub-embedding",
+                chatModel: nil,
+                topK: topK,
+                chatUsed: false,
+                fallbackReason: nil,
+                indexedFileCount: 1,
+                chunkCount: 1,
+                activeRevisionCount: 1,
+                emptyIndex: false,
+                providerConfigured: true
+            )
+        )
     }
 
     func chat(query: String) async throws -> SearchResult {

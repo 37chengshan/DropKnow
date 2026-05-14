@@ -43,6 +43,8 @@ struct RAGProcessResponse: Codable {
     var errorCode: String?
     var answer: String?
     var hits: [SearchHit]?
+    var queryMode: SearchQueryMode?
+    var diagnostics: SearchDiagnostics?
     var summary: FileSummary?
     var priorityLevel: PriorityLevel?
     var keepEvents: Bool?
@@ -107,7 +109,9 @@ actor RAGService {
                 answer: response.answer ?? "没有找到足够相关的证据。",
                 hits: response.hits ?? [],
                 engine: response.engine ?? "zvec",
-                warning: response.warning
+                warning: response.warning,
+                queryMode: response.queryMode ?? .fileSearch,
+                diagnostics: response.diagnostics ?? .empty
             )
         }
         throw RAGError.response(code: response.errorCode, message: response.error ?? response.warning ?? "RAG helper failed")
@@ -122,7 +126,8 @@ actor RAGService {
                 hits: [],
                 engine: response.engine ?? "qwen3.5-flash",
                 warning: response.warning,
-                queryMode: .generalChat
+                queryMode: response.queryMode ?? .generalChat,
+                diagnostics: response.diagnostics ?? .empty
             )
         }
         throw RAGError.response(code: response.errorCode, message: response.error ?? response.warning ?? "Chat helper failed")
