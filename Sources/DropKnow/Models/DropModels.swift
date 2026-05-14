@@ -137,6 +137,9 @@ extension DropFile {
         if parsedStatus == .failed {
             return .failed
         }
+        if parsedStatus == .parsing {
+            return contentHash == nil ? .notIndexed : .indexing
+        }
         guard parsedStatus == .parsed else {
             return .notIndexed
         }
@@ -251,6 +254,35 @@ struct SearchResult: Codable, Hashable {
         self.warning = warning
         self.queryMode = queryMode
         self.diagnostics = diagnostics
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case answer
+        case hits
+        case engine
+        case warning
+        case queryMode
+        case diagnostics
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        answer = try container.decode(String.self, forKey: .answer)
+        hits = try container.decode([SearchHit].self, forKey: .hits)
+        engine = try container.decode(String.self, forKey: .engine)
+        warning = try container.decodeIfPresent(String.self, forKey: .warning)
+        queryMode = try container.decodeIfPresent(SearchQueryMode.self, forKey: .queryMode) ?? .fileSearch
+        diagnostics = try container.decodeIfPresent(SearchDiagnostics.self, forKey: .diagnostics) ?? .empty
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(answer, forKey: .answer)
+        try container.encode(hits, forKey: .hits)
+        try container.encode(engine, forKey: .engine)
+        try container.encodeIfPresent(warning, forKey: .warning)
+        try container.encode(queryMode, forKey: .queryMode)
+        try container.encode(diagnostics, forKey: .diagnostics)
     }
 }
 

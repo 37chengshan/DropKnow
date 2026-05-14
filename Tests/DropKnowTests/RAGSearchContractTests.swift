@@ -2,6 +2,8 @@ import XCTest
 @testable import DropKnow
 
 final class RAGSearchContractTests: XCTestCase {
+    private let decoder = JSONDecoder()
+
     func testSearchResultDefaultsRemainRenderable() {
         let result = SearchResult(answer: "没有找到足够相关的证据。", hits: [], engine: "zvec", warning: nil)
 
@@ -48,5 +50,134 @@ final class RAGSearchContractTests: XCTestCase {
         XCTAssertEqual(diagnostics.fallbackReason, "MISSING_API_KEY")
         XCTAssertEqual(diagnostics.indexedFileCount, 3)
         XCTAssertFalse(diagnostics.providerConfigured)
+    }
+
+    func testLegacySearchResultDecodeDefaultsMissingFields() throws {
+        let data = Data(
+            """
+            {
+              "answer": "旧版结果",
+              "hits": [],
+              "engine": "zvec",
+              "warning": null
+            }
+            """.utf8
+        )
+
+        let result = try decoder.decode(SearchResult.self, from: data)
+
+        XCTAssertEqual(result.answer, "旧版结果")
+        XCTAssertEqual(result.queryMode, .fileSearch)
+        XCTAssertEqual(result.diagnostics, .empty)
+    }
+
+    func testLegacySearchHitDecodeDefaultsMissingEvidenceFields() throws {
+        let fileID = UUID()
+        let data = Data(
+            """
+            {
+              "id": "chunk-legacy",
+              "fileID": "\(fileID.uuidString)",
+              "fileName": "通知.txt",
+              "filePath": "/tmp/通知.txt",
+              "snippet": "这是旧版命中片段",
+              "score": 0.42
+            }
+            """.utf8
+        )
+
+        let hit = try decoder.decode(SearchHit.self, from: data)
+
+        XCTAssertEqual(hit.id, "chunk-legacy")
+        XCTAssertEqual(hit.fileID, fileID)
+        XCTAssertNil(hit.chunkIndex)
+        XCTAssertNil(hit.revisionID)
+        XCTAssertNil(hit.matchReason)
+    }
+
+    func testDropFileRAGIndexStateIndexed() {
+        let file = makeFile(
+            parsedStatus: .parsed,
+            contentHash: "abc",
+            indexedContentHash: "abc",
+            indexedAt: Date()
+        )
+
+        XCTAssertEqual(file.ragIndexState, .indexed)
+    }
+
+    func testDropFileRAGIndexStateStale() {
+        let file = makeFile(
+            parsedStatus: .parsed,
+            contentHash: "abc",
+            indexedContentHash: "xyz",
+            indexedAt: Date()
+        )
+
+        XCTAssertEqual(file.ragIndexState, .stale)
+    }
+
+    func testDropFileRAGIndexStateFailed() {
+        let file = makeFile(parsedStatus: .failed)
+
+        XCTAssertEqual(file.ragIndexState, .failed)
+    }
+
+    func testDropFileRAGIndexStateBlocked() {
+        let sensitive = makeFile(parsedStatus: .sensitiveGate)
+        let ignored = makeFile(parsedStatus: .ignored)
+
+        XCTAssertEqual(sensitive.ragIndexState, .blocked)
+        XCTAssertEqual(ignored.ragIndexState, .blocked)
+    }
+
+    func testDropFileRAGIndexStateParsingWithoutContentHashIsNotIndexed() {
+        let file = makeFile(parsedStatus: .parsing, contentHash: nil)
+
+        XCTAssertEqual(file.ragIndexState, .notIndexed)
+    }
+
+    func testDropFileRAGIndexStateParsingWithContentHashIsIndexing() {
+        let file = makeFile(parsedStatus: .parsing, contentHash: "abc")
+
+        XCTAssertEqual(file.ragIndexState, .indexing)
+    }
+
+    private func makeFile(
+        parsedStatus: ParseStatus,
+        contentHash: String? = nil,
+        indexedContentHash: String? = nil,
+        indexedAt: Date? = nil
+    ) -> DropFile {
+        DropFile(
+            fileName: "test.txt",
+            filePath: "/tmp/test.txt",
+            sourceDirectory: "/tmp",
+            fileKind: .text,
+            importedAt: Date(timeIntervalSince1970: 1),
+            modifiedAt: Date(timeIntervalSince1970: 2),
+            fileSize: 12,
+            textLength: 34,
+            parsedStatus: parsedStatus,
+            sensitivityStatus: .clear,
+            priorityLevel: .normal,
+            summary: nil,
+            events: [],
+            snippets: [],
+            errorMessage: nil,
+            contentHash: contentHash,
+            fingerprintComputedAt: nil,
+            parserVersion: nil,
+            summaryVersion: nil,
+            refineModel: nil,
+            embeddingProvider: nil,
+            embeddingModel: nil,
+            embeddingDimension: nil,
+            indexedContentHash: indexedContentHash,
+            indexedAt: indexedAt,
+            refinedContentHash: nil,
+            refinedAt: nil,
+            activeIndexRevision: nil
+        )
     }
 }
