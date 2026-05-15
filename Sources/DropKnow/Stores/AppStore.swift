@@ -59,6 +59,7 @@ final class AppStore: ObservableObject {
     @Published var ragUnavailableReason: String?
     @Published var isImporting = false
     @Published var isSearching = false
+    @Published var isSearchDebouncing = false
     @Published var isRebuildingIndex = false
     @Published var historicalImportPrompt: HistoricalImportPromptState?
     @Published var pendingNavigation: SectionNavigationRequest?
@@ -79,6 +80,7 @@ final class AppStore: ObservableObject {
     private var processingTask: Task<Void, Never>?
     private var retryWakeTask: Task<Void, Never>?
     private var pendingSearchTask: Task<Void, Never>?
+    private var pendingSearchRequestID: UUID?
     private var activeSearchTask: Task<Void, Never>?
     private var activeSearchRequestID: UUID?
     private var activeSearchUserMessageID: UUID?
@@ -256,6 +258,10 @@ final class AppStore: ObservableObject {
 
     var canUseCalendarWrite: Bool {
         planCapabilities.canUseCalendarWrite
+    }
+
+    var isChatWorking: Bool {
+        isSearchDebouncing || isSearching
     }
 
     var canAddWatchDirectory: Bool {
@@ -988,14 +994,33 @@ final class AppStore: ObservableObject {
         let query = searchQuery.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !query.isEmpty else { return }
 
+        let debounceRequestID = UUID()
+        pendingSearchRequestID = debounceRequestID
+        isSearchDebouncing = true
         pendingSearchTask?.cancel()
         pendingSearchTask = Task { [weak self] in
-            if debounceNanoseconds > 0 {
-                try? await Task.sleep(nanoseconds: debounceNanoseconds)
+            do {
+                if debounceNanoseconds > 0 {
+                    try await Task.sleep(nanoseconds: debounceNanoseconds)
+                }
+            } catch is CancellationError {
+                await MainActor.run { [weak self] in
+                    guard let self, self.pendingSearchRequestID == debounceRequestID else { return }
+                    self.pendingSearchTask = nil
+                    self.pendingSearchRequestID = nil
+                    self.isSearchDebouncing = false
+                }
+                return
+            } catch {
+                return
             }
             guard !Task.isCancelled else { return }
             await MainActor.run { [weak self] in
                 guard let self else { return }
+                guard self.pendingSearchRequestID == debounceRequestID else { return }
+                self.pendingSearchTask = nil
+                self.pendingSearchRequestID = nil
+                self.isSearchDebouncing = false
                 self.activeSearchTask?.cancel()
                 self.activeSearchTask = Task { @MainActor in
                     await self.performSearch()
@@ -1028,6 +1053,7 @@ final class AppStore: ObservableObject {
     func cancelSearch() {
         pendingSearchTask?.cancel()
         pendingSearchTask = nil
+        pendingSearchRequestID = nil
 
         activeSearchTask?.cancel()
         activeSearchTask = nil
@@ -1038,6 +1064,7 @@ final class AppStore: ObservableObject {
 
         activeSearchRequestID = nil
         activeSearchUserMessageID = nil
+        isSearchDebouncing = false
         isSearching = false
     }
 
