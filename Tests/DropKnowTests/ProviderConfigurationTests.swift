@@ -29,6 +29,33 @@ final class ProviderConfigurationTests: XCTestCase {
         XCTAssertEqual(config.source, .file)
     }
 
+    func testWhitespaceEnvFallsBackToTrimmedFileKey() throws {
+        let workspace = try makeTempDirectory()
+        let configURL = workspace.appendingPathComponent("providers.local.json")
+        try Data(#"{"api_key":"  file-key  "}"#.utf8).write(to: configURL)
+
+        let config = ProviderConfiguration.load(
+            environment: ["DASHSCOPE_API_KEY": "   \n\t  "],
+            configURL: configURL
+        )
+
+        XCTAssertEqual(config.apiKey, "file-key")
+        XCTAssertTrue(config.hasAPIKey)
+        XCTAssertEqual(config.source, .file)
+    }
+
+    func testWhitespaceOnlyFileKeyIsReportedMissing() throws {
+        let workspace = try makeTempDirectory()
+        let configURL = workspace.appendingPathComponent("providers.local.json")
+        try Data(#"{"api_key":"   \n  "}"#.utf8).write(to: configURL)
+
+        let config = ProviderConfiguration.load(environment: [:], configURL: configURL)
+
+        XCTAssertEqual(config.apiKey, "")
+        XCTAssertFalse(config.hasAPIKey)
+        XCTAssertEqual(config.source, .missing)
+    }
+
     func testNoKeyReturnsEmpty() throws {
         let workspace = try makeTempDirectory()
         let configURL = workspace.appendingPathComponent("providers.local.json")

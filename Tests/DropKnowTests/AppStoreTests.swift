@@ -188,6 +188,14 @@ final class AppStoreTests: XCTestCase {
         XCTAssertTrue(store.providerStatus.headline.contains("RAG"))
     }
 
+    func testRAGStoreURLUsesInjectedEnvironmentPath() throws {
+        let workspace = try makeTempDirectory()
+        let environment = AppStoreEnvironment.temporary(baseURL: workspace)
+        let store = makeStore(environmentBaseURL: workspace, environment: environment)
+
+        XCTAssertEqual(store.ragStoreURL.standardizedFileURL.path, environment.ragStoreURL.standardizedFileURL.path)
+    }
+
     func testParseQuotaExhaustionPreventsInitialImportJobs() async throws {
         let workspace = try makeTempDirectory()
         let watchDirectory = workspace.appendingPathComponent("Watch", isDirectory: true)

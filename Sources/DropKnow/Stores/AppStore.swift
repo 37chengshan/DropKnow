@@ -3,6 +3,7 @@ import Foundation
 
 struct AppStoreEnvironment {
     var databaseURL: URL
+    var ragStoreURL: URL
     var settingsURL: URL
     var runtimeURL: URL
     var startMonitor: Bool
@@ -11,6 +12,7 @@ struct AppStoreEnvironment {
     static var live: AppStoreEnvironment {
         AppStoreEnvironment(
             databaseURL: AppPaths.databaseURL,
+            ragStoreURL: AppPaths.ragStoreURL,
             settingsURL: AppPaths.settingsURL,
             runtimeURL: AppPaths.runtimeURL,
             startMonitor: true,
@@ -25,6 +27,7 @@ struct AppStoreEnvironment {
     ) -> AppStoreEnvironment {
         AppStoreEnvironment(
             databaseURL: baseURL.appendingPathComponent("dropknow_state.json"),
+            ragStoreURL: baseURL.appendingPathComponent("RAG", isDirectory: true),
             settingsURL: baseURL.appendingPathComponent("settings.json"),
             runtimeURL: baseURL.appendingPathComponent("dropknow_runtime.json"),
             startMonitor: startMonitor,
@@ -218,6 +221,10 @@ final class AppStore: ObservableObject {
 
     var providerConfigURL: URL {
         providerConfigurationLoader().configURL
+    }
+
+    var ragStoreURL: URL {
+        environment.ragStoreURL
     }
 
     var shouldOfferCalendarSettings: Bool {

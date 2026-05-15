@@ -20,13 +20,14 @@ struct ProviderConfiguration: Hashable {
         fileManager: FileManager = .default,
         configURL: URL = AppPaths.providerConfigURL
     ) -> ProviderConfiguration {
-        let envKey = environment["DASHSCOPE_API_KEY"] ?? ""
+        let envKey = (environment["DASHSCOPE_API_KEY"] ?? "")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
         var fileKey = ""
         if fileManager.fileExists(atPath: configURL.path),
            let data = try? Data(contentsOf: configURL),
            let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
            let raw = json["api_key"] as? String {
-            fileKey = raw
+            fileKey = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         }
         let resolved = envKey.isEmpty ? fileKey : envKey
         let source: ProviderConfigurationSource

@@ -108,7 +108,7 @@ struct SettingsView: View {
 
             Section("RAG") {
                 LabeledContent("向量库", value: "zvec")
-                LabeledContent("索引目录", value: AppPaths.ragStoreURL.path)
+                LabeledContent("索引目录", value: store.ragStoreURL.path)
                 LabeledContent("索引文件数", value: "\(store.ragDiagnostics.indexedFileCount)")
                 LabeledContent("Chunk 数", value: "\(store.ragDiagnostics.chunkCount)")
                 LabeledContent("活跃修订数", value: "\(store.ragDiagnostics.activeRevisionCount)")
