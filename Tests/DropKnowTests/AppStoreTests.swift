@@ -196,6 +196,17 @@ final class AppStoreTests: XCTestCase {
         XCTAssertEqual(store.ragStoreURL.standardizedFileURL.path, environment.ragStoreURL.standardizedFileURL.path)
     }
 
+    func testDefaultRAGServiceUsesInjectedEnvironmentPath() throws {
+        let workspace = try makeTempDirectory()
+        let environment = AppStoreEnvironment.temporary(baseURL: workspace)
+        let store = makeStore(environmentBaseURL: workspace, environment: environment, rag: nil)
+
+        XCTAssertEqual(
+            store.ragServiceStoreURLForTesting?.standardizedFileURL.path,
+            environment.ragStoreURL.standardizedFileURL.path
+        )
+    }
+
     func testParseQuotaExhaustionPreventsInitialImportJobs() async throws {
         let workspace = try makeTempDirectory()
         let watchDirectory = workspace.appendingPathComponent("Watch", isDirectory: true)
@@ -675,7 +686,7 @@ final class AppStoreTests: XCTestCase {
         runtimeState: RuntimeState = .empty,
         environmentBaseURL: URL? = nil,
         environment: AppStoreEnvironment? = nil,
-        rag: any RAGServing = RAGService(),
+        rag: (any RAGServing)? = nil,
         providerConfigurationLoader: @escaping () -> ProviderConfiguration = { ProviderConfiguration.load() },
         sessionStartedAt: Date = Date()
     ) -> AppStore {

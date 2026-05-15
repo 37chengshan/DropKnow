@@ -113,13 +113,15 @@ final class AppStore: ObservableObject {
         runtimeState initialRuntime: RuntimeState = .empty,
         runtimeErrorMessage: String? = nil,
         runtimeBackupURL: URL? = nil,
-        rag: any RAGServing = RAGService(),
+        rag: (any RAGServing)? = nil,
         environment: AppStoreEnvironment = .live,
         providerConfigurationLoader: @escaping () -> ProviderConfiguration = { ProviderConfiguration.load() },
         sessionStartedAt: Date = Date()
     ) {
         let normalizedSettings = Self.normalizedSettings(initialSettings)
         let restoredFiles = Self.restoreLoadedFiles(initialFiles)
+
+        let resolvedRAG = rag ?? RAGService(storeURL: environment.ragStoreURL)
 
         self.settings = normalizedSettings.settings
         self.files = restoredFiles
@@ -131,7 +133,7 @@ final class AppStore: ObservableObject {
         self.indexQueueSummary = Self.makeIndexQueueSummary(from: initialRuntime.indexJobs)
         self.hasFailedJobs = Self.hasFailedJobs(in: initialRuntime)
         self.processingRuntime = .current
-        self.rag = rag
+        self.rag = resolvedRAG
         self.environment = environment
         self.providerConfigurationLoader = providerConfigurationLoader
         self.processingEngine = ProcessingEngine(initialState: initialRuntime, runtimeURL: environment.runtimeURL, recoveredAt: sessionStartedAt)
@@ -225,6 +227,10 @@ final class AppStore: ObservableObject {
 
     var ragStoreURL: URL {
         environment.ragStoreURL
+    }
+
+    var ragServiceStoreURLForTesting: URL? {
+        (rag as? RAGService)?.storeURL
     }
 
     var shouldOfferCalendarSettings: Bool {

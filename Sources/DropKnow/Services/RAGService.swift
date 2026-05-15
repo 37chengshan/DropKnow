@@ -67,6 +67,12 @@ struct RAGBatchIndexResponse: Codable {
 }
 
 actor RAGService {
+    nonisolated let storeURL: URL
+
+    init(storeURL: URL = AppPaths.ragStoreURL) {
+        self.storeURL = storeURL
+    }
+
     func index(file: DropFile, chunks: [String]) async -> RAGIndexOutcome {
         let batchOutcome = await indexBatch(
             files: [
@@ -162,7 +168,7 @@ actor RAGService {
         try Task.checkCancellation()
         let inputData = try JSONEncoder().encode(payload)
         let python = pythonPath()
-        let store = AppPaths.ragStoreURL.path
+        let store = storeURL.path
         let script = scriptURL.path
         let timeout = (mode == "index" || mode == "index_batch") ? 75 : 35
         let task = Task.detached(priority: .userInitiated) {
