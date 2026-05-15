@@ -837,6 +837,9 @@ final class AppStore: ObservableObject {
         }
 
         let requestID = UUID()
+        func isCurrentSearchRequest() -> Bool {
+            activeSearchRequestID == requestID && !Task.isCancelled
+        }
         activeSearchRequestID = requestID
 
         searchQuotaWarning = nil
@@ -884,7 +887,7 @@ final class AppStore: ObservableObject {
                 guard decision.allowed else {
                     await refreshRuntimeSnapshot()
                     let warning = decision.message ?? "今日高级搜索额度已用尽"
-                    if activeSearchRequestID == requestID {
+                    if isCurrentSearchRequest() {
                         searchQuotaWarning = warning
                         activeUpgradeTrigger = .searchQuota
                         lastRAGErrorMessage = nil
@@ -898,18 +901,21 @@ final class AppStore: ObservableObject {
                     return
                 }
                 result = try await rag.search(query: query, topK: 6)
+                guard isCurrentSearchRequest() else { return }
                 ragUnavailableReason = nil
                 result.hits = bindFileIDs(result.hits)
                 ragDiagnostics = result.diagnostics
                 lastRAGErrorMessage = nil
                 _ = await processingEngine.consumeUserQuota(.search, settings: settings, now: Date())
+                guard isCurrentSearchRequest() else { return }
                 await refreshRuntimeSnapshot()
+                guard isCurrentSearchRequest() else { return }
             } else {
                 let decision = await processingEngine.canConsumeUserQuota(.chat, settings: settings, now: Date())
                 guard decision.allowed else {
                     await refreshRuntimeSnapshot()
                     let warning = decision.message ?? "今日问答额度已用尽"
-                    if activeSearchRequestID == requestID {
+                    if isCurrentSearchRequest() {
                         searchQuotaWarning = warning
                         activeUpgradeTrigger = .chatQuota
                         lastRAGErrorMessage = nil
@@ -930,7 +936,7 @@ final class AppStore: ObservableObject {
                 }
                 guard providerConfigurationLoader().hasAPIKey else {
                     let warning = "未配置 DashScope API Key，通用问答暂不可用。你仍可提问“查文件 …”来检索已解析文件；或在设置页配置 providers.local.json / DASHSCOPE_API_KEY。"
-                    if activeSearchRequestID == requestID {
+                    if isCurrentSearchRequest() {
                         lastRAGErrorMessage = nil
                         result = SearchResult(
                             answer: warning,
@@ -948,13 +954,16 @@ final class AppStore: ObservableObject {
                     return
                 }
                 result = try await rag.chat(query: query)
+                guard isCurrentSearchRequest() else { return }
                 ragUnavailableReason = nil
                 ragDiagnostics = result.diagnostics
                 lastRAGErrorMessage = nil
                 _ = await processingEngine.consumeUserQuota(.chat, settings: settings, now: Date())
+                guard isCurrentSearchRequest() else { return }
                 await refreshRuntimeSnapshot()
+                guard isCurrentSearchRequest() else { return }
             }
-            guard activeSearchRequestID == requestID else { return }
+            guard isCurrentSearchRequest() else { return }
             searchResult = result
             chatMessages.append(ChatMessage(role: .assistant, text: result.answer, result: result))
             perfEngine = result.engine
@@ -962,7 +971,7 @@ final class AppStore: ObservableObject {
         } catch is CancellationError {
             return
         } catch {
-            guard activeSearchRequestID == requestID else { return }
+            guard isCurrentSearchRequest() else { return }
             perfOk = false
             if let ragError = error as? RAGError {
                 let errorText = ragError.localizedDescription

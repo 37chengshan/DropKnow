@@ -100,6 +100,122 @@ final class ChatWorkingStateTests: XCTestCase {
         XCTAssertEqual(searchQueries, [firstQuery, secondQuery])
     }
 
+    func testStaleSearchReturnDoesNotOverwriteDiagnosticsOrConsumeQuota() async throws {
+        let firstQuery = "查文件 第一条"
+        let secondQuery = "查文件 第二条"
+        let rag = CancellationInsensitivePlannedRAGService(
+            searchPlans: [
+                firstQuery: SearchPlan(
+                    delayNanoseconds: 250_000_000,
+                    outcome: .success(
+                        answer: "answer:\(firstQuery)",
+                        engine: "engine-a",
+                        diagnosticsMarker: 11
+                    )
+                ),
+                secondQuery: SearchPlan(
+                    delayNanoseconds: 20_000_000,
+                    outcome: .success(
+                        answer: "answer:\(secondQuery)",
+                        engine: "engine-b",
+                        diagnosticsMarker: 22
+                    )
+                )
+            ]
+        )
+        let store = makeStore(rag: rag)
+
+        store.searchQuery = firstQuery
+        store.submitSearch(debounceNanoseconds: 0)
+
+        try await waitUntilAsync("first search starts") {
+            let searchQueries = await rag.searchQueries
+            return searchQueries.contains(firstQuery)
+        }
+
+        store.searchQuery = secondQuery
+        store.submitSearch(debounceNanoseconds: 0)
+
+        try await waitUntil(
+            "replacement search finishes",
+            timeoutNanoseconds: 2_000_000_000
+        ) {
+            !store.isChatWorking && store.searchResult?.answer == "answer:\(secondQuery)"
+        }
+
+        try await Task.sleep(nanoseconds: 320_000_000)
+
+        XCTAssertEqual(store.searchResult?.answer, "answer:\(secondQuery)")
+        XCTAssertEqual(store.searchResult?.engine, "engine-b")
+        XCTAssertEqual(store.ragDiagnostics.embeddingEngine, "engine-b")
+        XCTAssertEqual(store.ragDiagnostics.indexedFileCount, 22)
+        XCTAssertNil(store.searchErrorMessage)
+        XCTAssertFalse(store.chatMessages.contains { $0.text == "answer:\(firstQuery)" })
+        XCTAssertEqual(store.chatMessages.filter { $0.role == .user }.map(\.text), [secondQuery])
+
+        let runtime = await store.runtimeStateSnapshot()
+        XCTAssertEqual(runtime.dailyUsage.searchUsed, 1)
+        XCTAssertEqual(store.quotaSnapshot.search.used, 1)
+    }
+
+    func testStaleSearchErrorDoesNotSetFallbackOrErrorMessage() async throws {
+        let firstQuery = "查文件 旧请求失败"
+        let secondQuery = "查文件 新请求成功"
+        let rag = CancellationInsensitivePlannedRAGService(
+            searchPlans: [
+                firstQuery: SearchPlan(
+                    delayNanoseconds: 250_000_000,
+                    outcome: .failure(
+                        code: "TIMEOUT",
+                        message: "旧请求超时"
+                    )
+                ),
+                secondQuery: SearchPlan(
+                    delayNanoseconds: 20_000_000,
+                    outcome: .success(
+                        answer: "answer:\(secondQuery)",
+                        engine: "engine-b",
+                        diagnosticsMarker: 33
+                    )
+                )
+            ]
+        )
+        let store = makeStore(rag: rag)
+
+        store.searchQuery = firstQuery
+        store.submitSearch(debounceNanoseconds: 0)
+
+        try await waitUntilAsync("first failing search starts") {
+            let searchQueries = await rag.searchQueries
+            return searchQueries.contains(firstQuery)
+        }
+
+        store.searchQuery = secondQuery
+        store.submitSearch(debounceNanoseconds: 0)
+
+        try await waitUntil(
+            "replacement search finishes",
+            timeoutNanoseconds: 2_000_000_000
+        ) {
+            !store.isChatWorking && store.searchResult?.answer == "answer:\(secondQuery)"
+        }
+
+        try await Task.sleep(nanoseconds: 320_000_000)
+
+        XCTAssertEqual(store.searchResult?.answer, "answer:\(secondQuery)")
+        XCTAssertEqual(store.searchResult?.engine, "engine-b")
+        XCTAssertEqual(store.ragDiagnostics.embeddingEngine, "engine-b")
+        XCTAssertEqual(store.ragDiagnostics.indexedFileCount, 33)
+        XCTAssertNil(store.searchErrorMessage)
+        XCTAssertNil(store.lastRAGErrorMessage)
+        XCTAssertFalse(store.chatMessages.contains { $0.result?.queryMode == .localFallback })
+        XCTAssertFalse(store.chatMessages.contains { $0.text.contains("旧请求超时") })
+
+        let runtime = await store.runtimeStateSnapshot()
+        XCTAssertEqual(runtime.dailyUsage.searchUsed, 1)
+        XCTAssertEqual(store.quotaSnapshot.search.used, 1)
+    }
+
     private func makeStore(
         settings: DropSettings = .defaults(),
         rag: any RAGServing
@@ -126,6 +242,22 @@ final class ChatWorkingStateTests: XCTestCase {
     ) async throws {
         let deadline = DispatchTime.now().uptimeNanoseconds + timeoutNanoseconds
         while !condition() {
+            if DispatchTime.now().uptimeNanoseconds >= deadline {
+                XCTFail("Timed out waiting for \(description)")
+                return
+            }
+            try await Task.sleep(nanoseconds: pollNanoseconds)
+        }
+    }
+
+    private func waitUntilAsync(
+        _ description: String,
+        timeoutNanoseconds: UInt64 = 1_500_000_000,
+        pollNanoseconds: UInt64 = 10_000_000,
+        condition: @escaping () async -> Bool
+    ) async throws {
+        let deadline = DispatchTime.now().uptimeNanoseconds + timeoutNanoseconds
+        while !(await condition()) {
             if DispatchTime.now().uptimeNanoseconds >= deadline {
                 XCTFail("Timed out waiting for \(description)")
                 return
@@ -237,5 +369,126 @@ private actor DelayedChatWorkingRAGService: RAGServing {
         events: [EventCandidate]
     ) async -> RAGProcessResponse? {
         nil
+    }
+}
+
+private struct SearchPlan: Sendable {
+    enum Outcome: Sendable {
+        case success(answer: String, engine: String, diagnosticsMarker: Int)
+        case failure(code: String?, message: String)
+    }
+
+    let delayNanoseconds: UInt64
+    let outcome: Outcome
+}
+
+private actor CancellationInsensitivePlannedRAGService: RAGServing {
+    let searchPlans: [String: SearchPlan]
+    private(set) var searchQueries: [String] = []
+    private(set) var chatQueries: [String] = []
+
+    init(searchPlans: [String: SearchPlan]) {
+        self.searchPlans = searchPlans
+    }
+
+    func indexBatch(files: [RAGBatchIndexFile]) async -> RAGIndexOutcome {
+        RAGIndexOutcome(
+            succeeded: true,
+            warning: nil,
+            results: files.map { RAGBatchIndexResult(fileID: $0.fileID, revisionID: $0.revisionID) }
+        )
+    }
+
+    func search(query: String, topK: Int) async throws -> SearchResult {
+        searchQueries.append(query)
+        let plan = searchPlans[query] ?? SearchPlan(
+            delayNanoseconds: 0,
+            outcome: .success(answer: "answer:\(query)", engine: "default-engine", diagnosticsMarker: 1)
+        )
+        await sleepIgnoringCancellation(nanoseconds: plan.delayNanoseconds)
+        switch plan.outcome {
+        case .success(let answer, let engine, let diagnosticsMarker):
+            return SearchResult(
+                answer: answer,
+                hits: [],
+                engine: engine,
+                warning: nil,
+                queryMode: .fileSearch,
+                diagnostics: SearchDiagnostics(
+                    embeddingEngine: engine,
+                    embeddingModel: "stub-embedding",
+                    chatModel: nil,
+                    topK: topK,
+                    chatUsed: false,
+                    fallbackReason: nil,
+                    indexedFileCount: diagnosticsMarker,
+                    chunkCount: diagnosticsMarker,
+                    activeRevisionCount: 1,
+                    emptyIndex: false,
+                    providerConfigured: true
+                )
+            )
+        case .failure(let code, let message):
+            throw RAGError.response(code: code, message: message)
+        }
+    }
+
+    func chat(query: String) async throws -> SearchResult {
+        chatQueries.append(query)
+        return SearchResult(
+            answer: "answer:\(query)",
+            hits: [],
+            engine: "chat-engine",
+            warning: nil,
+            queryMode: .generalChat,
+            diagnostics: SearchDiagnostics(
+                embeddingEngine: "chat-engine",
+                embeddingModel: "stub-embedding",
+                chatModel: "stub-chat",
+                topK: 0,
+                chatUsed: true,
+                fallbackReason: nil,
+                indexedFileCount: 1,
+                chunkCount: 1,
+                activeRevisionCount: 1,
+                emptyIndex: false,
+                providerConfigured: true
+            )
+        )
+    }
+
+    func diagnostics() async throws -> SearchDiagnostics {
+        SearchDiagnostics(
+            embeddingEngine: "chat-engine",
+            embeddingModel: "stub-embedding",
+            chatModel: "stub-chat",
+            topK: 6,
+            chatUsed: false,
+            fallbackReason: nil,
+            indexedFileCount: 1,
+            chunkCount: 1,
+            activeRevisionCount: 1,
+            emptyIndex: false,
+            providerConfigured: true
+        )
+    }
+
+    func refine(
+        fileName: String,
+        text: String,
+        summary: FileSummary,
+        priority: PriorityLevel,
+        events: [EventCandidate]
+    ) async -> RAGProcessResponse? {
+        nil
+    }
+
+    private func sleepIgnoringCancellation(nanoseconds: UInt64) async {
+        guard nanoseconds > 0 else { return }
+        await withCheckedContinuation { continuation in
+            DispatchQueue.global().asyncAfter(deadline: .now() + .nanoseconds(Int(nanoseconds))) {
+                continuation.resume()
+            }
+        }
     }
 }
