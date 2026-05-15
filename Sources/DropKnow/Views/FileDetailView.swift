@@ -4,6 +4,7 @@ struct FileDetailView: View {
     @EnvironmentObject private var store: AppStore
     var file: DropFile?
     @State private var renderState = FileDetailRenderState.empty
+    @State private var focusedSearchEvidence: FocusedSearchEvidence?
 
     var body: some View {
         Group {
@@ -46,13 +47,20 @@ struct FileDetailView: View {
                                 }
 
                                 if !file.snippets.isEmpty {
-                                    SemanticSnippetsSection(snippets: file.snippets)
+                                    SemanticSnippetsSection(
+                                        snippets: file.snippets,
+                                        focusedSnippetIndex: renderState.focusedSnippetIndex
+                                    )
                                         .id(FileDetailSectionAnchor.snippets)
                                 }
 
                                 if file.snippets.isEmpty, file.ragIndexState == .indexed {
                                     WarningSection(message: "该文件已索引，但当前详情没有保存可展示片段。你仍可打开原文件核验。")
                                         .id(FileDetailSectionAnchor.snippets)
+                                }
+
+                                if let message = renderState.focusedEvidenceWarningMessage {
+                                    WarningSection(message: message)
                                 }
 
                                 if !file.events.isEmpty {
@@ -68,16 +76,21 @@ struct FileDetailView: View {
                         .frame(maxWidth: 900, alignment: .leading)
                     }
                     .task(id: renderKey(for: file)) {
-                        renderState = buildRenderState(for: file)
+                        refreshRenderState(for: file)
                     }
                     .onAppear {
                         applyPendingFocus(using: proxy, for: file.id)
                     }
                     .onChange(of: file.id) {
+                        focusedSearchEvidence = nil
+                        refreshRenderState(for: file)
                         applyPendingFocus(using: proxy, for: file.id)
                     }
                     .onChange(of: store.detailFocusRequest?.id) {
                         applyPendingFocus(using: proxy, for: file.id)
+                    }
+                    .onChange(of: focusedSearchEvidence) {
+                        refreshRenderState(for: file)
                     }
                 }
             } else {
@@ -90,19 +103,27 @@ struct FileDetailView: View {
         FileDetailRenderKey(
             fileID: file.id,
             fileHash: file.hashValue,
-            highlightedEventID: store.highlightedDetailEventID
+            highlightedEventID: store.highlightedDetailEventID,
+            focusedSearchEvidence: focusedSearchEvidence
         )
     }
 
     private func buildRenderState(for file: DropFile) -> FileDetailRenderState {
-        FileDetailRenderState(
+        let focusedEvidenceState = resolveFocusedSearchEvidence(in: file)
+        return FileDetailRenderState(
             evidenceSnippets: eventSnippets(for: file),
             importanceExplanation: store.importanceExplanation(for: file),
             calendarExplanation: store.calendarExplanation(for: file, highlightedEventID: store.highlightedDetailEventID),
             fileSizeText: ByteCountFormatter.dropFileSize.string(fromByteCount: file.fileSize),
             modifiedAtText: DateFormatter.dropShort.string(from: file.modifiedAt),
-            textLengthText: "\(file.textLength)"
+            textLengthText: "\(file.textLength)",
+            focusedSnippetIndex: focusedEvidenceState.matchedSnippetIndex,
+            focusedEvidenceWarningMessage: focusedEvidenceState.warningMessage
         )
+    }
+
+    private func refreshRenderState(for file: DropFile) {
+        renderState = buildRenderState(for: file)
     }
 
     private func eventSnippets(for file: DropFile) -> [String] {
@@ -118,6 +139,11 @@ struct FileDetailView: View {
     private func applyPendingFocus(using proxy: ScrollViewProxy, for fileID: DropFile.ID) {
         guard let request = store.detailFocusRequest,
               request.fileID == fileID else { return }
+        focusedSearchEvidence = FocusedSearchEvidence(
+            snippet: normalizedSnippet(request.evidenceSnippet),
+            chunkIndex: request.chunkIndex,
+            revisionID: request.revisionID
+        )
         DispatchQueue.main.async {
             withAnimation(.easeInOut(duration: 0.2)) {
                 proxy.scrollTo(request.anchor, anchor: .top)
@@ -126,10 +152,47 @@ struct FileDetailView: View {
         }
     }
 
+    private func resolveFocusedSearchEvidence(in file: DropFile) -> FocusedSearchEvidenceState {
+        guard let focusedSearchEvidence else {
+            return .empty
+        }
+
+        if let chunkIndex = focusedSearchEvidence.chunkIndex,
+           file.snippets.indices.contains(chunkIndex) {
+            let chunkSnippet = normalizedSnippet(file.snippets[chunkIndex])
+            if focusedSearchEvidence.snippet.isEmpty || chunkSnippet == focusedSearchEvidence.snippet {
+                return FocusedSearchEvidenceState(matchedSnippetIndex: chunkIndex, warningMessage: nil)
+            }
+        }
+
+        if !focusedSearchEvidence.snippet.isEmpty,
+           let matchedSnippetIndex = file.snippets.firstIndex(where: { normalizedSnippet($0) == focusedSearchEvidence.snippet }) {
+            return FocusedSearchEvidenceState(matchedSnippetIndex: matchedSnippetIndex, warningMessage: nil)
+        }
+
+        guard !focusedSearchEvidence.snippet.isEmpty || focusedSearchEvidence.chunkIndex != nil else {
+            return .empty
+        }
+
+        let revisionMismatch = focusedSearchEvidence.revisionID != nil && focusedSearchEvidence.revisionID != file.activeIndexRevision
+        let warningMessage = revisionMismatch
+            ? "当前详情展示的是这份文件的最新索引片段；你点开的证据来自较早的索引版本，当前列表里未找到完全一致的片段。"
+            : "已定位到语义索引片段区域，但当前列表里未找到你点开的那条证据。可打开原文件继续核验。"
+        return FocusedSearchEvidenceState(matchedSnippetIndex: nil, warningMessage: warningMessage)
+    }
+
+    private func normalizedSnippet(_ snippet: String?) -> String {
+        snippet?
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacingOccurrences(of: "\r\n", with: "\n")
+            .replacingOccurrences(of: "\r", with: "\n") ?? ""
+    }
+
     private struct FileDetailRenderKey: Hashable {
         var fileID: DropFile.ID
         var fileHash: Int
         var highlightedEventID: EventCandidate.ID?
+        var focusedSearchEvidence: FocusedSearchEvidence?
     }
 
     private struct FileDetailRenderState {
@@ -139,6 +202,8 @@ struct FileDetailView: View {
         var fileSizeText: String
         var modifiedAtText: String
         var textLengthText: String
+        var focusedSnippetIndex: Int?
+        var focusedEvidenceWarningMessage: String?
 
         static let empty = FileDetailRenderState(
             evidenceSnippets: [],
@@ -146,7 +211,25 @@ struct FileDetailView: View {
             calendarExplanation: nil,
             fileSizeText: "",
             modifiedAtText: "",
-            textLengthText: ""
+            textLengthText: "",
+            focusedSnippetIndex: nil,
+            focusedEvidenceWarningMessage: nil
+        )
+    }
+
+    private struct FocusedSearchEvidence: Hashable {
+        var snippet: String
+        var chunkIndex: Int?
+        var revisionID: String?
+    }
+
+    private struct FocusedSearchEvidenceState {
+        var matchedSnippetIndex: Int?
+        var warningMessage: String?
+
+        static let empty = FocusedSearchEvidenceState(
+            matchedSnippetIndex: nil,
+            warningMessage: nil
         )
     }
 }
@@ -397,6 +480,7 @@ private struct SensitiveStatusSection: View {
 
 private struct SemanticSnippetsSection: View {
     var snippets: [String]
+    var focusedSnippetIndex: Int?
     @Environment(\.dropTheme) private var theme
     @Environment(\.colorScheme) private var colorScheme
 
@@ -409,16 +493,20 @@ private struct SemanticSnippetsSection: View {
             } else {
                 ForEach(snippets.indices, id: \.self) { index in
                     let snippet = snippets[index]
+                    let isFocused = index == focusedSnippetIndex
                     Text(snippet)
                         .font(.callout)
-                        .foregroundStyle(palette.textSecondary)
+                        .foregroundStyle(isFocused ? palette.textPrimary : palette.textSecondary)
                         .lineLimit(5)
                         .padding(12)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(palette.surfaceSubtle, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                        .background(
+                            (isFocused ? palette.accentOrange.opacity(0.12) : palette.surfaceSubtle),
+                            in: RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        )
                         .overlay(
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .stroke(palette.border, lineWidth: theme.metrics.borderWidth)
+                                .stroke(isFocused ? palette.accentOrange : palette.border, lineWidth: theme.metrics.borderWidth)
                         )
                 }
             }

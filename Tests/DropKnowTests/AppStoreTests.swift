@@ -380,15 +380,21 @@ final class AppStoreTests: XCTestCase {
             fileName: file.fileName,
             filePath: "/tmp/course/./notice.pdf",
             snippet: "证据片段",
-            score: 0.88
+            score: 0.88,
+            chunkIndex: 0,
+            revisionID: "rev-hit"
         )
         let store = makeStore(files: [file])
 
-        store.navigateToSearchHit(hit)
+        let didNavigate = store.navigateToSearchHit(hit)
 
+        XCTAssertTrue(didNavigate)
         XCTAssertEqual(store.selectedFileID, file.id)
         XCTAssertEqual(store.pendingNavigation?.section, .recent)
         XCTAssertEqual(store.detailFocusRequest?.anchor, .snippets)
+        XCTAssertEqual(store.detailFocusRequest?.evidenceSnippet, "证据片段")
+        XCTAssertEqual(store.detailFocusRequest?.chunkIndex, 0)
+        XCTAssertEqual(store.detailFocusRequest?.revisionID, "rev-hit")
     }
 
     func testNavigateToSearchHitResolvesByFilePathWhenIDMissing() {
@@ -396,8 +402,9 @@ final class AppStoreTests: XCTestCase {
         let store = makeStore(files: [file])
         let hit = SearchHit(id: "chunk-1", fileID: nil, fileName: file.fileName, filePath: file.filePath, snippet: "证据", score: 0.7)
 
-        store.navigateToSearchHit(hit)
+        let didNavigate = store.navigateToSearchHit(hit)
 
+        XCTAssertTrue(didNavigate)
         XCTAssertEqual(store.selectedFileID, file.id)
         XCTAssertEqual(store.detailFocusRequest?.anchor, .snippets)
     }
@@ -413,10 +420,13 @@ final class AppStoreTests: XCTestCase {
         )
         let store = makeStore(files: [])
 
-        store.navigateToSearchHit(hit)
+        let didNavigate = store.navigateToSearchHit(hit)
 
+        XCTAssertFalse(didNavigate)
         XCTAssertEqual(store.toastMessage, "未找到对应文件，无法定位到该搜索结果。")
         XCTAssertNil(store.selectedFileID)
+        XCTAssertNil(store.pendingNavigation)
+        XCTAssertNil(store.detailFocusRequest)
     }
 
     func testRefreshRAGDiagnosticsUpdatesStateAndClearsLastError() async {

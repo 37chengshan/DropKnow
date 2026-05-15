@@ -407,6 +407,9 @@ struct DetailFocusRequest: Identifiable, Hashable {
     var id: UUID = UUID()
     var fileID: UUID
     var anchor: FileDetailSectionAnchor
+    var evidenceSnippet: String?
+    var chunkIndex: Int?
+    var revisionID: String?
 }
 
 struct ParsedFileNotificationDescriptor: Hashable {

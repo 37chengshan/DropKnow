@@ -304,11 +304,24 @@ final class AppStore: ObservableObject {
         URL(string: "https://dropknow.app/upgrade")
     }
 
-    func navigateToFile(fileID: UUID, anchor: FileDetailSectionAnchor? = nil, eventID: EventCandidate.ID? = nil) {
+    func navigateToFile(
+        fileID: UUID,
+        anchor: FileDetailSectionAnchor? = nil,
+        eventID: EventCandidate.ID? = nil,
+        evidenceSnippet: String? = nil,
+        chunkIndex: Int? = nil,
+        revisionID: String? = nil
+    ) {
         selectedFileID = fileID
         highlightedDetailEventID = eventID
         if let anchor {
-            detailFocusRequest = DetailFocusRequest(fileID: fileID, anchor: anchor)
+            detailFocusRequest = DetailFocusRequest(
+                fileID: fileID,
+                anchor: anchor,
+                evidenceSnippet: evidenceSnippet,
+                chunkIndex: chunkIndex,
+                revisionID: revisionID
+            )
         }
         pendingNavigation = SectionNavigationRequest(section: .recent)
         activateAppIfPossible()
@@ -1044,12 +1057,20 @@ final class AppStore: ObservableObject {
         shouldSearchFiles(for: query)
     }
 
-    func navigateToSearchHit(_ hit: SearchHit) {
+    @discardableResult
+    func navigateToSearchHit(_ hit: SearchHit) -> Bool {
         guard let file = matchingFile(for: hit) else {
             toastMessage = "未找到对应文件，无法定位到该搜索结果。"
-            return
+            return false
         }
-        navigateToFile(fileID: file.id, anchor: .snippets)
+        navigateToFile(
+            fileID: file.id,
+            anchor: .snippets,
+            evidenceSnippet: hit.snippet,
+            chunkIndex: hit.chunkIndex,
+            revisionID: hit.revisionID
+        )
+        return true
     }
 
     func refreshRAGDiagnostics() async {

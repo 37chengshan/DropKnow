@@ -220,9 +220,6 @@ private struct ChatBubble: View {
                 if let result = message.result {
                     HStack(spacing: 8) {
                         StatusPill(text: result.engine, systemImage: "internaldrive")
-                        if let warning = result.warning, !warning.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                            StatusPill(text: warning, systemImage: "exclamationmark.triangle")
-                        }
                     }
 
                     if let warning = result.warning, !warning.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
@@ -274,8 +271,9 @@ private struct EvidenceHitCard: View {
     var body: some View {
         let palette = theme.palette(for: colorScheme)
         Button {
-            store.navigateToSearchHit(hit)
-            selectedSection = .recent
+            if store.navigateToSearchHit(hit) {
+                selectedSection = .recent
+            }
         } label: {
             VStack(alignment: .leading, spacing: 10) {
                 HStack(alignment: .top, spacing: 10) {
