@@ -251,6 +251,56 @@ enum RAGIndexState: String, Codable, Hashable {
     case stale = "索引过期"
     case failed = "索引失败"
     case blocked = "不可索引"
+
+    var shortLabel: String {
+        switch self {
+        case .notIndexed: "未入索引"
+        case .indexing: "索引中"
+        case .indexed: "已就绪"
+        case .stale: "需重建"
+        case .failed: "索引失败"
+        case .blocked: "不可索引"
+        }
+    }
+
+    var detailLabel: String {
+        switch self {
+        case .notIndexed: "尚未进入索引"
+        case .indexing: "语义索引生成中"
+        case .indexed: "语义索引已就绪"
+        case .stale: "语义索引已过期"
+        case .failed: "语义索引失败"
+        case .blocked: "当前不可索引"
+        }
+    }
+
+    var systemImage: String {
+        switch self {
+        case .notIndexed: "tray"
+        case .indexing: "arrow.triangle.2.circlepath"
+        case .indexed: "checkmark.circle.fill"
+        case .stale: "clock.arrow.trianglehead.counterclockwise.rotate.90"
+        case .failed: "exclamationmark.triangle.fill"
+        case .blocked: "hand.raised.fill"
+        }
+    }
+
+    var evidenceWarningMessage: String? {
+        switch self {
+        case .indexed:
+            nil
+        case .stale:
+            "文件内容已变化，当前证据和搜索可能仍基于旧索引。等待重建完成前，请优先打开原文件核验。"
+        case .failed:
+            "该文件最近一次索引失败，当前证据和搜索可能不完整。可重试失败任务，或先打开原文件核验。"
+        case .indexing:
+            "该文件仍在生成语义索引，当前证据和搜索结果可能暂不完整。"
+        case .notIndexed:
+            "该文件尚未进入语义索引，当前证据和搜索结果可能为空。"
+        case .blocked:
+            "该文件当前未进入语义索引，语义证据与搜索不会覆盖它。"
+        }
+    }
 }
 
 struct SearchHit: Identifiable, Codable, Hashable {

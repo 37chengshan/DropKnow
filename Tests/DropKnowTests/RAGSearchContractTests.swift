@@ -165,8 +165,8 @@ final class RAGSearchContractTests: XCTestCase {
         XCTAssertEqual(response.hits?.first?.revisionID, "rev-1")
     }
 
-    func testDropFileRAGIndexStateIndexed() {
-        let file = makeFile(
+    func testDropFileRAGIndexStateIndexedBecomesStaleWhenContentHashChanges() {
+        var file = makeFile(
             parsedStatus: .parsed,
             contentHash: "abc",
             indexedContentHash: "abc",
@@ -174,16 +174,8 @@ final class RAGSearchContractTests: XCTestCase {
         )
 
         XCTAssertEqual(file.ragIndexState, .indexed)
-    }
 
-    func testDropFileRAGIndexStateStale() {
-        let file = makeFile(
-            parsedStatus: .parsed,
-            contentHash: "abc",
-            indexedContentHash: "xyz",
-            indexedAt: Date()
-        )
-
+        file.contentHash = "xyz"
         XCTAssertEqual(file.ragIndexState, .stale)
     }
 

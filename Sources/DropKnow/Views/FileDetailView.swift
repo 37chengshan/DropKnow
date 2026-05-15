@@ -19,6 +19,10 @@ struct FileDetailView: View {
                                 textLengthText: renderState.textLengthText
                             )
 
+                            if let message = renderState.indexStateWarningMessage {
+                                WarningSection(message: message)
+                            }
+
                             if file.parsedStatus == .sensitiveGate {
                                 SensitiveGateView(file: file)
                             } else {
@@ -118,7 +122,8 @@ struct FileDetailView: View {
             modifiedAtText: DateFormatter.dropShort.string(from: file.modifiedAt),
             textLengthText: "\(file.textLength)",
             focusedSnippetIndex: focusedEvidenceState.matchedSnippetIndex,
-            focusedEvidenceWarningMessage: focusedEvidenceState.warningMessage
+            focusedEvidenceWarningMessage: focusedEvidenceState.warningMessage,
+            indexStateWarningMessage: indexStateWarningMessage(for: file)
         )
     }
 
@@ -188,6 +193,15 @@ struct FileDetailView: View {
             .replacingOccurrences(of: "\r", with: "\n") ?? ""
     }
 
+    private func indexStateWarningMessage(for file: DropFile) -> String? {
+        switch file.ragIndexState {
+        case .stale, .failed:
+            return file.ragIndexState.evidenceWarningMessage
+        default:
+            return nil
+        }
+    }
+
     private struct FileDetailRenderKey: Hashable {
         var fileID: DropFile.ID
         var fileHash: Int
@@ -204,6 +218,7 @@ struct FileDetailView: View {
         var textLengthText: String
         var focusedSnippetIndex: Int?
         var focusedEvidenceWarningMessage: String?
+        var indexStateWarningMessage: String?
 
         static let empty = FileDetailRenderState(
             evidenceSnippets: [],
@@ -213,7 +228,8 @@ struct FileDetailView: View {
             modifiedAtText: "",
             textLengthText: "",
             focusedSnippetIndex: nil,
-            focusedEvidenceWarningMessage: nil
+            focusedEvidenceWarningMessage: nil,
+            indexStateWarningMessage: nil
         )
     }
 
@@ -263,6 +279,7 @@ private struct DetailHeader: View {
                 }
                 Spacer()
                 VStack(alignment: .trailing, spacing: 8) {
+                    DetailIndexBadge(state: file.ragIndexState)
                     StatusPill(text: file.priorityLevel.rawValue, systemImage: file.priorityLevel.systemImage, prominent: file.priorityLevel == .high)
                     Button {
                         store.openFile(file)
@@ -276,6 +293,7 @@ private struct DetailHeader: View {
 
             HStack(spacing: 14) {
                 MetadataItem(title: "状态", value: file.parsedStatus.rawValue)
+                MetadataItem(title: "索引", value: file.ragIndexState.detailLabel)
                 MetadataItem(title: "大小", value: fileSizeText)
                 MetadataItem(title: "修改时间", value: modifiedAtText)
                 MetadataItem(title: "文本长度", value: textLengthText)
@@ -283,6 +301,48 @@ private struct DetailHeader: View {
         }
         .padding(14)
         .dropGlass(cornerRadius: 14)
+    }
+}
+
+private struct DetailIndexBadge: View {
+    var state: RAGIndexState
+    @Environment(\.dropTheme) private var theme
+    @Environment(\.colorScheme) private var colorScheme
+
+    var body: some View {
+        let palette = theme.palette(for: colorScheme)
+        Label(state.detailLabel, systemImage: state.systemImage)
+            .font(.caption.weight(.semibold))
+            .padding(.horizontal, 9)
+            .padding(.vertical, 5)
+            .background(backgroundColor(for: palette), in: Capsule())
+            .foregroundStyle(foregroundColor(for: palette))
+    }
+
+    private func foregroundColor(for palette: DropTheme.Palette) -> Color {
+        switch state {
+        case .indexed:
+            return palette.success
+        case .stale, .indexing, .blocked:
+            return palette.warning
+        case .failed:
+            return palette.danger
+        case .notIndexed:
+            return palette.textSecondary
+        }
+    }
+
+    private func backgroundColor(for palette: DropTheme.Palette) -> Color {
+        switch state {
+        case .indexed:
+            return palette.success.opacity(0.14)
+        case .stale, .indexing, .blocked:
+            return palette.warning.opacity(0.14)
+        case .failed:
+            return palette.danger.opacity(0.14)
+        case .notIndexed:
+            return palette.surfaceSubtle
+        }
     }
 }
 
