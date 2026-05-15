@@ -881,6 +881,7 @@ final class AppStore: ObservableObject {
                     if activeSearchRequestID == requestID {
                         searchQuotaWarning = warning
                         activeUpgradeTrigger = .searchQuota
+                        lastRAGErrorMessage = nil
                         result = fallbackSearch(query: query, warning: warning)
                         searchResult = result
                         ragDiagnostics = result.diagnostics
@@ -905,6 +906,7 @@ final class AppStore: ObservableObject {
                     if activeSearchRequestID == requestID {
                         searchQuotaWarning = warning
                         activeUpgradeTrigger = .chatQuota
+                        lastRAGErrorMessage = nil
                         result = SearchResult(
                             answer: warning,
                             hits: [],
@@ -923,6 +925,7 @@ final class AppStore: ObservableObject {
                 guard providerConfigurationLoader().hasAPIKey else {
                     let warning = "未配置 DashScope API Key，通用问答暂不可用。你仍可提问“查文件 …”来检索已解析文件；或在设置页配置 providers.local.json / DASHSCOPE_API_KEY。"
                     if activeSearchRequestID == requestID {
+                        lastRAGErrorMessage = nil
                         result = SearchResult(
                             answer: warning,
                             hits: [],
@@ -1054,10 +1057,23 @@ final class AppStore: ObservableObject {
         let fileQuestionSignals = [
             "通知", "作业", "考试", "报名", "缴费", "截止", "ddl", "deadline", "due date",
             "日程", "时间节点", "时间安排", "截止时间", "加入日历", "课程", "高数", "答辩",
-            "大赛", "4c", "schedule", "timeline", "meeting", "interview", "assignment",
+            "大赛", "4c"
+        ]
+        let broadEnglishQuestionSignals = [
+            "schedule", "timeline", "meeting", "interview", "assignment",
             "registration", "payment", "submit", "exam"
         ]
-        return fileSignals.contains { content.contains($0) } || fileQuestionSignals.contains { content.contains($0) }
+        let fileQuestionContextSignals = [
+            "文件", "文档", "资料", "附件", "原文", "证据", "来源", "下载",
+            "这份", "这篇", "这条", "这份文件", "这篇文档", "这份材料", "其中", "里面",
+            "document", "documents", "file", "files", "attachment", "attached", "pdf", "docx", "source", "evidence",
+            "通知", "作业", "考试", "报名", "缴费", "截止", "ddl", "deadline", "due date",
+            "日程", "时间节点", "时间安排", "截止时间", "加入日历", "课程", "高数", "答辩",
+            "大赛", "4c"
+        ]
+        return fileSignals.contains { content.contains($0) }
+            || fileQuestionSignals.contains { content.contains($0) }
+            || (broadEnglishQuestionSignals.contains { content.contains($0) } && fileQuestionContextSignals.contains { content.contains($0) })
     }
 
     @discardableResult

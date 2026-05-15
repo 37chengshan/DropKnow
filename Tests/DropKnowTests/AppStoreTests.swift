@@ -215,6 +215,7 @@ final class AppStoreTests: XCTestCase {
         var settings = DropSettings.defaults()
         settings.dailySearchLimit = 0
         let store = makeStore(settings: settings, files: [makeFile(filePath: "/tmp/notice.pdf")])
+        store.lastRAGErrorMessage = "stale error"
         store.searchQuery = "这份文件有哪些时间节点"
 
         await store.performSearch()
@@ -224,6 +225,7 @@ final class AppStoreTests: XCTestCase {
         XCTAssertEqual(store.searchResult?.queryMode, .localFallback)
         XCTAssertEqual(store.chatMessages.last?.result?.warning, "今日高级搜索额度已用尽")
         XCTAssertEqual(store.chatMessages.last?.result?.queryMode, .localFallback)
+        XCTAssertNil(store.lastRAGErrorMessage)
     }
 
     func testChatQuotaExhaustionReturnsQuotaResultWithoutRemoteChat() async {
@@ -244,6 +246,7 @@ final class AppStoreTests: XCTestCase {
     func testMissingAPIKeyGenericChatReturnsErrorFallbackQueryMode() async {
         let providerConfig = ProviderConfiguration(apiKey: "", configURL: URL(fileURLWithPath: "/tmp/providers.local.json"))
         let store = makeStore(providerConfigurationLoader: { providerConfig })
+        store.lastRAGErrorMessage = "stale error"
         store.searchQuery = "帮我总结一下今天的安排"
 
         await store.performSearch()
@@ -252,6 +255,7 @@ final class AppStoreTests: XCTestCase {
         XCTAssertEqual(store.searchResult?.warning, "未配置 API Key")
         XCTAssertEqual(store.searchResult?.queryMode, .errorFallback)
         XCTAssertEqual(store.chatMessages.last?.result?.queryMode, .errorFallback)
+        XCTAssertNil(store.lastRAGErrorMessage)
     }
 
     func testStubRAGChatReturnsGeneralChatQueryMode() async throws {
@@ -289,6 +293,21 @@ final class AppStoreTests: XCTestCase {
         XCTAssertEqual(searchCalls, ["4C 大赛有哪些时间节点"])
         XCTAssertTrue(chatCalls.isEmpty)
         XCTAssertEqual(store.searchResult?.queryMode, .fileSearch)
+    }
+
+    func testGenericEnglishMeetingQuestionStaysInChatRoute() async throws {
+        let rag = StubRAGService(delayNanoseconds: 0)
+        let providerConfig = ProviderConfiguration(apiKey: "test-key", configURL: URL(fileURLWithPath: "/tmp/providers.local.json"))
+        let store = makeStore(rag: rag, providerConfigurationLoader: { providerConfig })
+        store.searchQuery = "Can we talk about the meeting tomorrow?"
+
+        await store.performSearch()
+
+        let searchCalls = await rag.searchQueries
+        let chatCalls = await rag.chatQueries
+        XCTAssertTrue(searchCalls.isEmpty)
+        XCTAssertEqual(chatCalls, ["Can we talk about the meeting tomorrow?"])
+        XCTAssertEqual(store.searchResult?.queryMode, .generalChat)
     }
 
     func testBindFileIDsByStandardizedPathWhenHitOmitsUUID() async {
