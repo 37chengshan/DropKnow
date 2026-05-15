@@ -146,9 +146,6 @@ extension DropFile {
         if parsedStatus == .failed {
             return .failed
         }
-        if parsedStatus == .parsing {
-            return contentHash == nil ? .notIndexed : .indexing
-        }
         guard parsedStatus == .parsed else {
             return .notIndexed
         }
@@ -335,7 +332,11 @@ struct SearchResult: Codable, Hashable {
         hits = try container.decode([SearchHit].self, forKey: .hits)
         engine = try container.decode(String.self, forKey: .engine)
         warning = try container.decodeIfPresent(String.self, forKey: .warning)
-        queryMode = try container.decodeIfPresent(SearchQueryMode.self, forKey: .queryMode) ?? .fileSearch
+        if let queryModeRaw = try container.decodeIfPresent(String.self, forKey: .queryMode) {
+            queryMode = SearchQueryMode(rawValue: queryModeRaw) ?? .fileSearch
+        } else {
+            queryMode = .fileSearch
+        }
         diagnostics = try container.decodeIfPresent(SearchDiagnostics.self, forKey: .diagnostics) ?? .empty
     }
 

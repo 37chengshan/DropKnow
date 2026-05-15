@@ -71,6 +71,23 @@ final class RAGSearchContractTests: XCTestCase {
         XCTAssertEqual(result.diagnostics, .empty)
     }
 
+    func testLegacySearchResultDecodeUnknownQueryModeFallsBackToFileSearch() throws {
+        let data = Data(
+            """
+            {
+              "answer": "未知模式",
+              "hits": [],
+              "engine": "zvec",
+              "queryMode": "futureMode"
+            }
+            """.utf8
+        )
+
+        let result = try decoder.decode(SearchResult.self, from: data)
+
+        XCTAssertEqual(result.queryMode, .fileSearch)
+    }
+
     func testLegacySearchResultDecodePartialDiagnosticsFallsBackPerField() throws {
         let data = Data(
             """
@@ -199,10 +216,43 @@ final class RAGSearchContractTests: XCTestCase {
         XCTAssertEqual(file.ragIndexState, .notIndexed)
     }
 
-    func testDropFileRAGIndexStateParsingWithContentHashIsIndexing() {
+    func testDropFileRAGIndexStateParsingWithContentHashIsNotIndexed() {
         let file = makeFile(parsedStatus: .parsing, contentHash: "abc")
 
-        XCTAssertEqual(file.ragIndexState, .indexing)
+        XCTAssertEqual(file.ragIndexState, .notIndexed)
+    }
+
+    func testDropFileRAGIndexStateParsedWithoutContentHashIsNotIndexed() {
+        let file = makeFile(
+            parsedStatus: .parsed,
+            contentHash: nil,
+            indexedContentHash: "abc",
+            indexedAt: Date()
+        )
+
+        XCTAssertEqual(file.ragIndexState, .notIndexed)
+    }
+
+    func testDropFileRAGIndexStateParsedWithoutIndexedContentHashIsNotIndexed() {
+        let file = makeFile(
+            parsedStatus: .parsed,
+            contentHash: "abc",
+            indexedContentHash: nil,
+            indexedAt: Date()
+        )
+
+        XCTAssertEqual(file.ragIndexState, .notIndexed)
+    }
+
+    func testDropFileRAGIndexStateParsedWithoutIndexedAtIsNotIndexed() {
+        let file = makeFile(
+            parsedStatus: .parsed,
+            contentHash: "abc",
+            indexedContentHash: "abc",
+            indexedAt: nil
+        )
+
+        XCTAssertEqual(file.ragIndexState, .notIndexed)
     }
 
     func testFileIndexWarningCopyReturnsStaleWarning() {

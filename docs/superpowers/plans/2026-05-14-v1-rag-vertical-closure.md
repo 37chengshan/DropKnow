@@ -85,7 +85,7 @@ Modify:
 - Modify: `Tests/DropKnowTests/AppStoreTests.swift`
 - Create: `Tests/DropKnowTests/RAGSearchContractTests.swift`
 
-- [ ] **Step 1: Write decoding/default tests**
+- [x] **Step 1: Write decoding/default tests**
 
 Add `Tests/DropKnowTests/RAGSearchContractTests.swift`:
 
@@ -144,7 +144,7 @@ final class RAGSearchContractTests: XCTestCase {
 }
 ```
 
-- [ ] **Step 2: Run the focused tests and verify failure**
+- [x] **Step 2: Run the focused tests and verify failure**
 
 Run:
 
@@ -154,7 +154,7 @@ swift test --filter RAGSearchContractTests
 
 Expected: compile failure because `SearchQueryMode`, `SearchDiagnostics`, and extended `SearchHit` fields do not exist.
 
-- [ ] **Step 3: Add the Swift data types**
+- [x] **Step 3: Add the Swift data types**
 
 In `Sources/DropKnow/Models/DropModels.swift`, replace the existing `SearchHit` and `SearchResult` block with:
 
@@ -289,7 +289,7 @@ extension DropFile {
 }
 ```
 
-- [ ] **Step 4: Run focused tests**
+- [x] **Step 4: Run focused tests**
 
 Run:
 
@@ -299,7 +299,7 @@ swift test --filter RAGSearchContractTests
 
 Expected: pass.
 
-- [ ] **Step 5: Run existing AppStore tests for compile fallout**
+- [x] **Step 5: Run existing AppStore tests for compile fallout**
 
 Run:
 
@@ -309,7 +309,7 @@ swift test --filter AppStoreTests
 
 Expected: pass after the `SearchResult` initializer preserves existing call sites.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add Sources/DropKnow/Models/DropModels.swift Tests/DropKnowTests/RAGSearchContractTests.swift Tests/DropKnowTests/AppStoreTests.swift

@@ -11,7 +11,10 @@ final class AppStoreTests: XCTestCase {
         store.submitSearch(debounceNanoseconds: 50_000_000)
         try await Task.sleep(nanoseconds: 10_000_000)
         store.submitSearch(debounceNanoseconds: 50_000_000)
-        try await Task.sleep(nanoseconds: 200_000_000)
+        try await waitUntil(timeoutNanoseconds: 600_000_000) {
+            let calls = await rag.searchQueries
+            return calls.count == 1 && store.chatMessages.filter { $0.role == .user }.count == 1 && !store.isSearching
+        }
 
         let calls = await rag.searchQueries
         XCTAssertEqual(calls, ["查文件 考试时间"])
@@ -26,12 +29,19 @@ final class AppStoreTests: XCTestCase {
         store.searchQuery = "查文件 第一次"
         store.submitSearch(debounceNanoseconds: 0)
 
-        try await Task.sleep(nanoseconds: 40_000_000)
+        try await waitUntil(timeoutNanoseconds: 600_000_000) {
+            store.isSearching
+        }
 
         store.searchQuery = "查文件 第二次"
         store.submitSearch(debounceNanoseconds: 0)
-
-        try await Task.sleep(nanoseconds: 500_000_000)
+        try await waitUntil(timeoutNanoseconds: 1_500_000_000) {
+            store.chatMessages.contains { $0.text == "查文件 第二次" }
+                && store.chatMessages.contains { $0.text.contains("answer:查文件 第二次") }
+                && !store.chatMessages.contains { $0.text == "查文件 第一次" }
+                && !store.chatMessages.contains { $0.text.contains("answer:查文件 第一次") }
+                && !store.isSearching
+        }
 
         XCTAssertFalse(store.chatMessages.contains { $0.text == "查文件 第一次" })
         XCTAssertFalse(store.chatMessages.contains { $0.text.contains("answer:查文件 第一次") })
@@ -59,7 +69,9 @@ final class AppStoreTests: XCTestCase {
         XCTAssertFalse(store.isSearching)
         XCTAssertFalse(store.chatMessages.contains { $0.text == "查文件 取消测试" })
 
-        try await Task.sleep(nanoseconds: 400_000_000)
+        try await waitUntil(timeoutNanoseconds: 1_200_000_000) {
+            !store.chatMessages.contains { $0.text.contains("answer:查文件 取消测试") }
+        }
         XCTAssertFalse(store.chatMessages.contains { $0.text.contains("answer:查文件 取消测试") })
     }
 
@@ -702,6 +714,20 @@ final class AppStoreTests: XCTestCase {
             providerConfigurationLoader: providerConfigurationLoader,
             sessionStartedAt: sessionStartedAt
         )
+    }
+
+    private func waitUntil(
+        timeoutNanoseconds: UInt64,
+        pollNanoseconds: UInt64 = 20_000_000,
+        condition: @escaping @MainActor () async -> Bool
+    ) async throws {
+        let deadline = ContinuousClock.now + .nanoseconds(Int64(timeoutNanoseconds))
+        while ContinuousClock.now < deadline {
+            if await condition() { return }
+            try await Task.sleep(nanoseconds: pollNanoseconds)
+        }
+        let didSatisfy = await condition()
+        XCTAssertTrue(didSatisfy, "Condition not met before timeout")
     }
 
     private func makeFile(
