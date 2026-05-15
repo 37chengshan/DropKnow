@@ -1456,7 +1456,7 @@ git commit -m "feat: show rag queryable file states"
 - Modify: `Sources/DropKnow/Support/ProviderConfiguration.swift`
 - Modify: `Tests/DropKnowTests/ProviderConfigurationTests.swift`
 
-- [ ] **Step 1: Add provider source model**
+- [x] **Step 1: Add provider source model**
 
 In `ProviderConfiguration.swift`, extend the struct:
 
@@ -1489,7 +1489,7 @@ if !envKey.isEmpty {
 return ProviderConfiguration(apiKey: resolved, configURL: configURL, source: source)
 ```
 
-- [ ] **Step 2: Add provider source tests**
+- [x] **Step 2: Add provider source tests**
 
 In `ProviderConfigurationTests.swift`, add tests for env, file, and missing source. Example:
 
@@ -1501,7 +1501,7 @@ func testProviderConfigurationReportsMissingSource() {
 }
 ```
 
-- [ ] **Step 3: Run provider tests**
+- [x] **Step 3: Run provider tests**
 
 Run:
 
@@ -1511,7 +1511,7 @@ swift test --filter ProviderConfigurationTests
 
 Expected: pass after source implementation.
 
-- [ ] **Step 4: Refresh diagnostics from Settings**
+- [x] **Step 4: Refresh diagnostics from Settings**
 
 In `SettingsView`, add:
 
@@ -1542,7 +1542,7 @@ let providerConfig = ProviderConfiguration.load()
 LabeledContent("配置来源", value: providerConfig.source.rawValue)
 ```
 
-- [ ] **Step 5: Add retry/refresh action**
+- [x] **Step 5: Add retry/refresh action**
 
 Add a Settings button:
 
@@ -1555,7 +1555,7 @@ Button {
 .buttonStyle(DropSecondaryButtonStyle())
 ```
 
-- [ ] **Step 6: Run tests**
+- [x] **Step 6: Run tests**
 
 Run:
 
@@ -1566,7 +1566,7 @@ swift test --filter AppStoreTests
 
 Expected: pass.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add Sources/DropKnow/Views/SettingsView.swift Sources/DropKnow/Stores/AppStore.swift Sources/DropKnow/Support/ProviderConfiguration.swift Tests/DropKnowTests/ProviderConfigurationTests.swift
