@@ -212,6 +212,10 @@ final class AppStore: ObservableObject {
         )
     }
 
+    var providerConfigurationSource: ProviderConfigurationSource {
+        providerConfigurationLoader().source
+    }
+
     var providerConfigURL: URL {
         providerConfigurationLoader().configURL
     }
