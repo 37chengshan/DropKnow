@@ -464,7 +464,7 @@ final class AppStore: ObservableObject {
         if !current.isEmpty, current != hit.fileName {
             return current
         }
-        guard let file = files.first(where: { $0.id == hit.fileID || $0.filePath == hit.filePath || $0.fileName == hit.fileName }) else {
+        guard let file = matchingFile(for: hit) else {
             return current
         }
         if let evidence = file.events.sorted(by: Self.sortEventsForExplanation).first?.evidence,

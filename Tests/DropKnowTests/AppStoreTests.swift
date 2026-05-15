@@ -391,6 +391,17 @@ final class AppStoreTests: XCTestCase {
         XCTAssertEqual(store.detailFocusRequest?.anchor, .snippets)
     }
 
+    func testNavigateToSearchHitResolvesByFilePathWhenIDMissing() {
+        let file = makeFile(filePath: "/tmp/path-fallback.txt")
+        let store = makeStore(files: [file])
+        let hit = SearchHit(id: "chunk-1", fileID: nil, fileName: file.fileName, filePath: file.filePath, snippet: "证据", score: 0.7)
+
+        store.navigateToSearchHit(hit)
+
+        XCTAssertEqual(store.selectedFileID, file.id)
+        XCTAssertEqual(store.detailFocusRequest?.anchor, .snippets)
+    }
+
     func testNavigateToSearchHitShowsToastWhenFileMissing() async {
         let hit = SearchHit(
             id: "missing",

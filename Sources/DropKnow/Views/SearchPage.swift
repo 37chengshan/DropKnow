@@ -220,21 +220,27 @@ private struct ChatBubble: View {
                 if let result = message.result {
                     HStack(spacing: 8) {
                         StatusPill(text: result.engine, systemImage: "internaldrive")
-                        if let warning = result.warning {
+                        if let warning = result.warning, !warning.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                             StatusPill(text: warning, systemImage: "exclamationmark.triangle")
                         }
                     }
 
+                    if let warning = result.warning, !warning.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                        WarningSection(message: warning)
+                    }
+
+                    if result.diagnostics.emptyIndex {
+                        WarningSection(message: "当前索引为空，请先导入文件或补齐索引。")
+                    }
+
                     if !result.hits.isEmpty {
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("相关文件")
+                            Text("证据来源")
                                 .font(.caption.weight(.semibold))
                                 .foregroundStyle(.secondary)
 
-                            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 8) {
-                                ForEach(Array(result.hits.enumerated()), id: \.element.id) { index, hit in
-                                    ChatHitCard(hit: hit, isPrimary: index == 0, selectedSection: $selectedSection)
-                                }
+                            ForEach(result.hits) { hit in
+                                EvidenceHitCard(hit: hit, selectedSection: $selectedSection)
                             }
                         }
                     }
@@ -258,92 +264,67 @@ private struct ChatBubble: View {
     }
 }
 
-private struct ChatHitCard: View {
+private struct EvidenceHitCard: View {
     @EnvironmentObject private var store: AppStore
     var hit: SearchHit
-    var isPrimary: Bool
     @Binding var selectedSection: AppSection
     @Environment(\.dropTheme) private var theme
     @Environment(\.colorScheme) private var colorScheme
 
-    private var file: DropFile? {
-        store.files.first { $0.id == hit.fileID || $0.filePath == hit.filePath || $0.fileName == hit.fileName }
-    }
-
     var body: some View {
         let palette = theme.palette(for: colorScheme)
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .top, spacing: 8) {
-                Image(systemName: file?.fileKind.systemImage ?? "doc.text")
-                    .foregroundStyle(file?.priorityLevel == .high ? palette.danger : palette.textSecondary)
-                    .frame(width: 18)
+        Button {
+            store.navigateToSearchHit(hit)
+            selectedSection = .recent
+        } label: {
+            VStack(alignment: .leading, spacing: 10) {
+                HStack(alignment: .top, spacing: 10) {
+                    Image(systemName: "doc.text.magnifyingglass")
+                        .foregroundStyle(palette.accentOrange)
+                        .font(.system(size: 16, weight: .semibold))
 
-                VStack(alignment: .leading, spacing: 3) {
-                    Text(hit.fileName)
-                        .font(.callout.weight(.semibold))
-                        .lineLimit(1)
-                    if isPrimary {
-                        StatusPill(text: "主命中", systemImage: "scope")
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(hit.fileName)
+                            .font(.callout.weight(.semibold))
+                            .foregroundStyle(palette.textPrimary)
+                            .lineLimit(1)
+                        Text(hit.filePath)
+                            .font(.caption)
+                            .foregroundStyle(palette.textSecondary)
+                            .lineLimit(1)
                     }
-                    Text(store.searchSnippet(for: hit))
+
+                    Spacer(minLength: 8)
+
+                    StatusPill(text: String(format: "%.3f", hit.score), systemImage: "scope")
+                }
+
+                Text(store.searchSnippet(for: hit))
+                    .font(.caption)
+                    .foregroundStyle(palette.textSecondary)
+                    .lineLimit(4)
+
+                if let matchReason = hit.matchReason,
+                   !matchReason.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    Label(matchReason, systemImage: "text.magnifyingglass")
                         .font(.caption)
-                        .foregroundStyle(.secondary)
-                        .lineLimit(3)
+                        .foregroundStyle(palette.textSecondary)
+                        .lineLimit(2)
                 }
+
+                HStack(spacing: 6) {
+                    Image(systemName: "arrowshape.right.fill")
+                        .font(.caption2)
+                    Text("打开详情并定位到证据片段")
+                        .font(.caption)
+                }
+                .foregroundStyle(palette.accentOrange)
             }
-
-            HStack {
-                Text(String(format: "%.3f", hit.score))
-                    .font(.caption2.monospacedDigit())
-                    .foregroundStyle(.secondary)
-
-                Spacer()
-
-                Button {
-                    if let file {
-                        store.openFile(file)
-                    }
-                } label: {
-                    Label("打开", systemImage: "arrow.up.right.square")
-                }
-                .disabled(file == nil)
-                .buttonStyle(DropSecondaryButtonStyle())
-
-                Button {
-                    if let file {
-                        store.navigateToFile(fileID: file.id, anchor: .summary)
-                    }
-                } label: {
-                    Label("详情", systemImage: "sidebar.right")
-                }
-                .disabled(file == nil)
-                .buttonStyle(DropSecondaryButtonStyle())
-
-                Button {
-                    if let file {
-                        store.navigateToFile(fileID: file.id, anchor: store.explanationAnchor(for: file))
-                    }
-                } label: {
-                    Label("查看原因", systemImage: "questionmark.circle")
-                }
-                .disabled(file == nil)
-                .buttonStyle(DropSecondaryButtonStyle())
-            }
-            .font(.caption)
         }
         .padding(10)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(palette.surfaceSubtle, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .stroke(palette.border, lineWidth: theme.metrics.borderWidth)
-        )
-        .contentShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        .onTapGesture {
-            if let file {
-                store.navigateToFile(fileID: file.id, anchor: .summary)
-            }
-        }
+        .dropGlass(cornerRadius: 10, interactive: true)
+        .buttonStyle(.plain)
     }
 }
 
