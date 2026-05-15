@@ -624,6 +624,10 @@ private actor StubRAGService: RAGServing {
         return SearchResult(answer: "answer:\(query)", hits: [], engine: "stub", warning: nil, queryMode: .generalChat)
     }
 
+    func diagnostics() async throws -> SearchDiagnostics {
+        .empty
+    }
+
     func refine(
         fileName: String,
         text: String,

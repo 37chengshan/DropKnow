@@ -133,6 +133,12 @@ actor RAGService {
         throw RAGError.response(code: response.errorCode, message: response.error ?? response.warning ?? "Chat helper failed")
     }
 
+    func diagnostics() async throws -> SearchDiagnostics {
+        struct EmptyPayload: Codable {}
+        let response: RAGProcessResponse = try await run(mode: "diagnostics", payload: EmptyPayload())
+        return response.diagnostics ?? .empty
+    }
+
     func refine(fileName: String, text: String, summary: FileSummary, priority: PriorityLevel, events: [EventCandidate]) async -> RAGProcessResponse? {
         let request = RAGRefineRequest(
             fileName: fileName,
