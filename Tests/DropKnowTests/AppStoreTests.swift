@@ -271,7 +271,155 @@ final class AppStoreTests: XCTestCase {
 
         XCTAssertEqual(store.searchResult?.queryMode, .fileSearch)
         XCTAssertEqual(store.searchResult?.diagnostics.topK, 6)
+        XCTAssertEqual(store.ragDiagnostics.topK, 6)
+        XCTAssertNil(store.lastRAGErrorMessage)
         XCTAssertEqual(store.chatMessages.last?.result?.queryMode, .fileSearch)
+    }
+
+    func testFileQuestionWithoutPrefixRoutesToRAGSearch() async throws {
+        let rag = StubRAGService(delayNanoseconds: 0)
+        let file = makeFile(filePath: "/tmp/schedule/notice.pdf")
+        let store = makeStore(files: [file], rag: rag)
+        store.searchQuery = "4C 大赛有哪些时间节点"
+
+        await store.performSearch()
+
+        let searchCalls = await rag.searchQueries
+        let chatCalls = await rag.chatQueries
+        XCTAssertEqual(searchCalls, ["4C 大赛有哪些时间节点"])
+        XCTAssertTrue(chatCalls.isEmpty)
+        XCTAssertEqual(store.searchResult?.queryMode, .fileSearch)
+    }
+
+    func testBindFileIDsByStandardizedPathWhenHitOmitsUUID() async {
+        let file = makeFile(filePath: "/tmp/../tmp/course/notice.pdf")
+        let hit = SearchHit(
+            id: "hit-1",
+            fileID: nil,
+            fileName: file.fileName,
+            filePath: "/tmp/course/./notice.pdf",
+            snippet: "时间线索",
+            score: 0.91
+        )
+        let rag = StubRAGService(delayNanoseconds: 0, forcedSearchResult: SearchResult(
+            answer: "answer",
+            hits: [hit],
+            engine: "stub",
+            warning: nil,
+            queryMode: .fileSearch
+        ))
+        let store = makeStore(files: [file], rag: rag)
+        store.searchQuery = "帮我找这份通知的时间安排"
+
+        await store.performSearch()
+
+        XCTAssertEqual(store.searchResult?.hits.count, 1)
+        XCTAssertEqual(store.searchResult?.hits.first?.fileID, file.id)
+    }
+
+    func testBindFileIDsDeduplicatesResolvedHitsForSameFile() async {
+        let file = makeFile(filePath: "/tmp/course/notice.pdf")
+        let duplicatedHits = [
+            SearchHit(
+                id: "hit-1",
+                fileID: nil,
+                fileName: file.fileName,
+                filePath: "/tmp/course/./notice.pdf",
+                snippet: "第一段",
+                score: 0.95
+            ),
+            SearchHit(
+                id: "hit-2",
+                fileID: nil,
+                fileName: file.fileName,
+                filePath: "/tmp/../tmp/course/notice.pdf",
+                snippet: "第二段",
+                score: 0.92
+            )
+        ]
+        let rag = StubRAGService(delayNanoseconds: 0, forcedSearchResult: SearchResult(
+            answer: "answer",
+            hits: duplicatedHits,
+            engine: "stub",
+            warning: nil,
+            queryMode: .fileSearch
+        ))
+        let store = makeStore(files: [file], rag: rag)
+        store.searchQuery = "这份文件的证据"
+
+        await store.performSearch()
+
+        XCTAssertEqual(store.searchResult?.hits.count, 1)
+        XCTAssertEqual(store.searchResult?.hits.first?.fileID, file.id)
+    }
+
+    func testNavigateToSearchHitFocusesSnippets() async {
+        let file = makeFile(filePath: "/tmp/course/notice.pdf")
+        let hit = SearchHit(
+            id: "hit-1",
+            fileID: nil,
+            fileName: file.fileName,
+            filePath: "/tmp/course/./notice.pdf",
+            snippet: "证据片段",
+            score: 0.88
+        )
+        let store = makeStore(files: [file])
+
+        store.navigateToSearchHit(hit)
+
+        XCTAssertEqual(store.selectedFileID, file.id)
+        XCTAssertEqual(store.pendingNavigation?.section, .recent)
+        XCTAssertEqual(store.detailFocusRequest?.anchor, .snippets)
+    }
+
+    func testNavigateToSearchHitShowsToastWhenFileMissing() async {
+        let hit = SearchHit(
+            id: "missing",
+            fileID: nil,
+            fileName: "missing.pdf",
+            filePath: "/tmp/missing.pdf",
+            snippet: "证据片段",
+            score: 0.1
+        )
+        let store = makeStore(files: [])
+
+        store.navigateToSearchHit(hit)
+
+        XCTAssertEqual(store.toastMessage, "未找到对应文件，无法定位到该搜索结果。")
+        XCTAssertNil(store.selectedFileID)
+    }
+
+    func testRefreshRAGDiagnosticsUpdatesStateAndClearsLastError() async {
+        let expected = SearchDiagnostics(
+            embeddingEngine: "zvec",
+            embeddingModel: "dashscope",
+            chatModel: "qwen",
+            topK: 6,
+            chatUsed: false,
+            fallbackReason: nil,
+            indexedFileCount: 3,
+            chunkCount: 12,
+            activeRevisionCount: 3,
+            emptyIndex: false,
+            providerConfigured: true
+        )
+        let rag = StubRAGService(delayNanoseconds: 0, diagnosticsResult: .success(expected))
+        let store = makeStore(rag: rag)
+        store.lastRAGErrorMessage = "old error"
+
+        await store.refreshRAGDiagnostics()
+
+        XCTAssertEqual(store.ragDiagnostics, expected)
+        XCTAssertNil(store.lastRAGErrorMessage)
+    }
+
+    func testRefreshRAGDiagnosticsStoresErrorMessage() async {
+        let rag = StubRAGService(delayNanoseconds: 0, diagnosticsResult: .failure(StubRAGError.diagnosticsFailed))
+        let store = makeStore(rag: rag)
+
+        await store.refreshRAGDiagnostics()
+
+        XCTAssertEqual(store.lastRAGErrorMessage, StubRAGError.diagnosticsFailed.localizedDescription)
     }
 
     func testTrustDirectoryAllowsFutureSensitiveFilesInSameDirectory() async {
@@ -581,9 +729,18 @@ final class AppStoreTests: XCTestCase {
 private actor StubRAGService: RAGServing {
     let delayNanoseconds: UInt64
     private(set) var searchQueries: [String] = []
+    private(set) var chatQueries: [String] = []
+    private let forcedSearchResult: SearchResult?
+    private let diagnosticsResult: Result<SearchDiagnostics, Error>
 
-    init(delayNanoseconds: UInt64) {
+    init(
+        delayNanoseconds: UInt64,
+        forcedSearchResult: SearchResult? = nil,
+        diagnosticsResult: Result<SearchDiagnostics, Error> = .success(.empty)
+    ) {
         self.delayNanoseconds = delayNanoseconds
+        self.forcedSearchResult = forcedSearchResult
+        self.diagnosticsResult = diagnosticsResult
     }
 
     func indexBatch(files: [RAGBatchIndexFile]) async -> RAGIndexOutcome {
@@ -594,6 +751,9 @@ private actor StubRAGService: RAGServing {
         searchQueries.append(query)
         if delayNanoseconds > 0 {
             try await Task.sleep(nanoseconds: delayNanoseconds)
+        }
+        if let forcedSearchResult {
+            return forcedSearchResult
         }
         return SearchResult(
             answer: "answer:\(query)",
@@ -618,6 +778,7 @@ private actor StubRAGService: RAGServing {
     }
 
     func chat(query: String) async throws -> SearchResult {
+        chatQueries.append(query)
         if delayNanoseconds > 0 {
             try await Task.sleep(nanoseconds: delayNanoseconds)
         }
@@ -625,7 +786,12 @@ private actor StubRAGService: RAGServing {
     }
 
     func diagnostics() async throws -> SearchDiagnostics {
-        .empty
+        switch diagnosticsResult {
+        case .success(let diagnostics):
+            return diagnostics
+        case .failure(let error):
+            throw error
+        }
     }
 
     func refine(
@@ -636,5 +802,16 @@ private actor StubRAGService: RAGServing {
         events: [EventCandidate]
     ) async -> RAGProcessResponse? {
         nil
+    }
+}
+
+private enum StubRAGError: LocalizedError {
+    case diagnosticsFailed
+
+    var errorDescription: String? {
+        switch self {
+        case .diagnosticsFailed:
+            return "diagnostics failed"
+        }
     }
 }

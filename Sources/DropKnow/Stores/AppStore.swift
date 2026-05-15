@@ -48,6 +48,8 @@ final class AppStore: ObservableObject {
     @Published var searchResult: SearchResult?
     @Published var searchQuotaWarning: String?
     @Published var searchErrorMessage: String?
+    @Published var ragDiagnostics: SearchDiagnostics = .empty
+    @Published var lastRAGErrorMessage: String?
     @Published var chatMessages: [ChatMessage] = [
         ChatMessage(role: .assistant, text: "可以直接问通用问题；如果你问下载文件里的内容，例如“4C 大赛有哪些时间节点？”我会附上相关文件卡片。")
     ]
@@ -851,8 +853,8 @@ final class AppStore: ObservableObject {
         }
 
         let start = ContinuousClock().now
-        let shouldSearchFiles = shouldSearchFiles(for: query)
-        var perfMode = shouldSearchFiles ? "file" : "chat"
+        let routeToFileSearch = shouldRouteToFileSearch(query)
+        let perfMode = routeToFileSearch ? "file" : "chat"
         var perfEngine = ""
         var perfHits = 0
         var perfOk = true
@@ -871,7 +873,7 @@ final class AppStore: ObservableObject {
 
         do {
             var result: SearchResult
-            if shouldSearchFiles {
+            if routeToFileSearch {
                 let decision = await processingEngine.canConsumeUserQuota(.search, settings: settings, now: Date())
                 guard decision.allowed else {
                     await refreshRuntimeSnapshot()
@@ -881,6 +883,7 @@ final class AppStore: ObservableObject {
                         activeUpgradeTrigger = .searchQuota
                         result = fallbackSearch(query: query, warning: warning)
                         searchResult = result
+                        ragDiagnostics = result.diagnostics
                         chatMessages.append(ChatMessage(role: .assistant, text: result.answer, result: result))
                         perfEngine = result.engine
                         perfHits = result.hits.count
@@ -890,6 +893,8 @@ final class AppStore: ObservableObject {
                 result = try await rag.search(query: query, topK: 6)
                 ragUnavailableReason = nil
                 result.hits = bindFileIDs(result.hits)
+                ragDiagnostics = result.diagnostics
+                lastRAGErrorMessage = nil
                 _ = await processingEngine.consumeUserQuota(.search, settings: settings, now: Date())
                 await refreshRuntimeSnapshot()
             } else {
@@ -908,6 +913,7 @@ final class AppStore: ObservableObject {
                             queryMode: .quotaBlocked
                         )
                         searchResult = result
+                        ragDiagnostics = result.diagnostics
                         chatMessages.append(ChatMessage(role: .assistant, text: result.answer, result: result))
                         perfEngine = result.engine
                         perfHits = result.hits.count
@@ -925,6 +931,7 @@ final class AppStore: ObservableObject {
                             queryMode: .errorFallback
                         )
                         searchResult = result
+                        ragDiagnostics = result.diagnostics
                         chatMessages.append(ChatMessage(role: .assistant, text: result.answer, result: result))
                         perfEngine = result.engine
                         perfHits = result.hits.count
@@ -933,6 +940,8 @@ final class AppStore: ObservableObject {
                 }
                 result = try await rag.chat(query: query)
                 ragUnavailableReason = nil
+                ragDiagnostics = result.diagnostics
+                lastRAGErrorMessage = nil
                 _ = await processingEngine.consumeUserQuota(.chat, settings: settings, now: Date())
                 await refreshRuntimeSnapshot()
             }
@@ -949,6 +958,7 @@ final class AppStore: ObservableObject {
             if let ragError = error as? RAGError {
                 let errorText = ragError.localizedDescription
                 searchErrorMessage = errorText
+                lastRAGErrorMessage = errorText
                 alertKind = ragError.suggestedAlertKind
                 alertMessage = errorText
                 if ragError.suggestedAlertKind == .provider {
@@ -957,12 +967,14 @@ final class AppStore: ObservableObject {
             } else {
                 let errorText = error.localizedDescription
                 searchErrorMessage = errorText
+                lastRAGErrorMessage = errorText
                 alertKind = .generic
                 alertMessage = errorText
             }
             perfEngine = "error"
             let result = fallbackSearch(query: query, warning: "检索暂不可用：\(searchErrorMessage ?? "未知错误")")
             searchResult = result
+            ragDiagnostics = result.diagnostics
             chatMessages.append(ChatMessage(role: .assistant, text: result.answer, result: result))
             perfEngine = result.engine
             perfHits = result.hits.count
@@ -986,6 +998,27 @@ final class AppStore: ObservableObject {
                     await self.performSearch()
                 }
             }
+        }
+    }
+
+    func shouldRouteToFileSearch(_ query: String) -> Bool {
+        shouldSearchFiles(for: query)
+    }
+
+    func navigateToSearchHit(_ hit: SearchHit) {
+        guard let file = matchingFile(for: hit) else {
+            toastMessage = "未找到对应文件，无法定位到该搜索结果。"
+            return
+        }
+        navigateToFile(fileID: file.id, anchor: .snippets)
+    }
+
+    func refreshRAGDiagnostics() async {
+        do {
+            ragDiagnostics = try await rag.diagnostics()
+            lastRAGErrorMessage = nil
+        } catch {
+            lastRAGErrorMessage = error.localizedDescription
         }
     }
 
@@ -1014,12 +1047,17 @@ final class AppStore: ObservableObject {
     private func shouldSearchFiles(for query: String) -> Bool {
         let content = query.lowercased()
         let fileSignals = [
-            "文件", "文档", "下载", "资料", "原文", "证据", "来源", "这份", "这篇",
-            "通知", "作业", "考试", "报名", "缴费", "截止", "ddl", "deadline",
-            "日程", "时间节点", "加入日历", "课程", "高数", "答辩", "大赛", "4c",
-            "最近", "我有哪些", "有没有需要", "需要处理"
+            "文件", "文档", "资料", "附件", "原文", "证据", "来源", "下载",
+            "这份", "这篇", "这条", "这份文件", "这篇文档", "这份材料", "其中", "里面",
+            "document", "documents", "file", "files", "attachment", "attached", "pdf", "docx", "source", "evidence"
         ]
-        return fileSignals.contains { content.contains($0) }
+        let fileQuestionSignals = [
+            "通知", "作业", "考试", "报名", "缴费", "截止", "ddl", "deadline", "due date",
+            "日程", "时间节点", "时间安排", "截止时间", "加入日历", "课程", "高数", "答辩",
+            "大赛", "4c", "schedule", "timeline", "meeting", "interview", "assignment",
+            "registration", "payment", "submit", "exam"
+        ]
+        return fileSignals.contains { content.contains($0) } || fileQuestionSignals.contains { content.contains($0) }
     }
 
     @discardableResult
@@ -1547,12 +1585,31 @@ final class AppStore: ObservableObject {
         var seen = Set<String>()
         return hits.compactMap { hit in
             var bound = hit
-            bound.fileID = files.first(where: { $0.filePath == hit.filePath || $0.fileName == hit.fileName })?.id
-            let key = bound.fileID?.uuidString ?? bound.filePath
+            bound.fileID = matchingFile(for: hit)?.id
+            let key = bound.fileID?.uuidString ?? standardizedFilePath(for: hit.filePath) ?? hit.fileName
             guard !seen.contains(key) else { return nil }
             seen.insert(key)
             return bound
         }
+    }
+
+    private func matchingFile(for hit: SearchHit) -> DropFile? {
+        if let fileID = hit.fileID, let file = files.first(where: { $0.id == fileID }) {
+            return file
+        }
+
+        if let hitPath = standardizedFilePath(for: hit.filePath),
+           let file = files.first(where: { standardizedFilePath(for: $0.filePath) == hitPath }) {
+            return file
+        }
+
+        return files.first(where: { $0.fileName == hit.fileName })
+    }
+
+    private func standardizedFilePath(for path: String) -> String? {
+        let trimmed = path.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return nil }
+        return URL(fileURLWithPath: trimmed).standardizedFileURL.path
     }
 
     private func fallbackSearch(query: String, warning: String) -> SearchResult {
