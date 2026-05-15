@@ -1581,7 +1581,7 @@ git commit -m "feat: expand rag settings diagnostics"
 - Modify: `docs/superpowers/specs/2026-05-14-v1-rag-vertical-closure-design.md`
 - Modify: `docs/code_wiki.md`
 
-- [ ] **Step 1: Run Swift tests**
+- [x] **Step 1: Run Swift tests**
 
 Run:
 
@@ -1591,7 +1591,7 @@ swift test
 
 Expected: all tests pass.
 
-- [ ] **Step 2: Run RAG fixture verification**
+- [x] **Step 2: Run RAG fixture verification**
 
 Run:
 
@@ -1603,7 +1603,7 @@ Expected with local RAG dependencies configured: fixture verification passes.
 
 If the local machine lacks zvec or provider config, capture the exact classified failure from the helper and verify Settings diagnostics surfaces the same category. Do not mark the RAG fixture verification as passed in the final report unless it actually passes.
 
-- [ ] **Step 3: Update design spec status**
+- [x] **Step 3: Update design spec status**
 
 In `docs/superpowers/specs/2026-05-14-v1-rag-vertical-closure-design.md`, change:
 
@@ -1619,7 +1619,7 @@ Status: Implemented
 
 Only do this after Tasks 1-9 are implemented and verification has run.
 
-- [ ] **Step 4: Update code wiki**
+- [x] **Step 4: Update code wiki**
 
 In `docs/code_wiki.md`, update the RAG/Search section to mention:
 
@@ -1629,7 +1629,7 @@ In `docs/code_wiki.md`, update the RAG/Search section to mention:
 - `script/verify_rag_fixtures.py` is the repeatable fixture verification command for the V1 RAG path.
 ```
 
-- [ ] **Step 5: Commit verification/docs**
+- [x] **Step 5: Commit verification/docs**
 
 ```bash
 git add docs/superpowers/specs/2026-05-14-v1-rag-vertical-closure-design.md docs/code_wiki.md

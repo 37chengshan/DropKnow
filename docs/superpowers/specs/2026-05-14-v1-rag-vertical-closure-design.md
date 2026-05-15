@@ -1,7 +1,7 @@
 # DropKnow V1 RAG Vertical Closure Design
 
 Date: 2026-05-14
-Status: Draft for user review
+Status: Implemented
 Scope: V1 main-path completion for RAG search, chat flow, file display, settings diagnostics, user workflow, and real RAG verification.
 
 ## 1. Product Goal
@@ -490,6 +490,15 @@ Add a repo-local verification command or script that:
 
 The milestone should not be considered complete unless `swift test` and the RAG fixture verification pass.
 
+### 12.5 Final Verification Result
+
+Verification run on 2026-05-15:
+
+- `swift test` passed: 96 XCTest tests, 0 failures.
+- `python3 script/verify_rag_fixtures.py` did not pass on this machine because the Python environment is missing zvec. The helper classified the failure as `MISSING_ZVEC` with error `Python 环境缺少 zvec：No module named 'zvec'`.
+
+The fixture harness is present and repeatable, but real fixture pass remains environment-dependent until zvec is installed/configured locally.
+
 ## 13. Acceptance Criteria
 
 The milestone is accepted when:
@@ -525,4 +534,3 @@ The milestone is accepted when:
 - zvec availability may differ across developer machines. Missing-zvec behavior must be classified and testable.
 - Adding too much UI polish before the RAG contract stabilizes can create rework. The data contract should land first.
 - AppStore is already large. Edits should extract small helpers where useful, but avoid a broad refactor during this milestone.
-
