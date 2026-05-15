@@ -205,6 +205,70 @@ final class RAGSearchContractTests: XCTestCase {
         XCTAssertEqual(file.ragIndexState, .indexing)
     }
 
+    func testFileIndexWarningCopyReturnsStaleWarning() {
+        let file = makeFile(
+            parsedStatus: .parsed,
+            contentHash: "current",
+            indexedContentHash: "old",
+            indexedAt: Date()
+        )
+
+        XCTAssertEqual(
+            FileIndexWarningCopy.message(for: file),
+            "文件内容已变化，当前搜索可能仍基于旧版本；重建完成前请先核验原文件。"
+        )
+    }
+
+    func testFileIndexWarningCopyReturnsFailedWarningWithoutIndexedSnapshot() {
+        let file = makeFile(parsedStatus: .failed)
+
+        XCTAssertEqual(
+            FileIndexWarningCopy.message(for: file),
+            "最近一次处理未完成，当前无法用于完整检索；可重试失败任务或先打开原文件核验。"
+        )
+    }
+
+    func testFileIndexWarningCopyReturnsFailedWarningForMatchingIndexedSnapshot() {
+        let file = makeFile(
+            parsedStatus: .failed,
+            contentHash: "current",
+            indexedContentHash: "current",
+            indexedAt: Date()
+        )
+
+        XCTAssertEqual(
+            FileIndexWarningCopy.message(for: file),
+            "最近一次更新未完成，当前搜索结果可能不完整；请先核验原文件。"
+        )
+    }
+
+    func testFileIndexWarningCopyReturnsFailedWarningForStaleIndexedSnapshot() {
+        let file = makeFile(
+            parsedStatus: .failed,
+            contentHash: "current",
+            indexedContentHash: "old",
+            indexedAt: Date()
+        )
+
+        XCTAssertEqual(
+            FileIndexWarningCopy.message(for: file),
+            "最近一次更新未完成，当前搜索仍可能停留在旧版本；请先核验原文件。"
+        )
+    }
+
+    func testFileIndexWarningCopyReturnsNilForNonWarningStates() {
+        let indexed = makeFile(
+            parsedStatus: .parsed,
+            contentHash: "current",
+            indexedContentHash: "current",
+            indexedAt: Date()
+        )
+        let indexing = makeFile(parsedStatus: .parsing, contentHash: "current")
+
+        XCTAssertNil(FileIndexWarningCopy.message(for: indexed))
+        XCTAssertNil(FileIndexWarningCopy.message(for: indexing))
+    }
+
     private func makeFile(
         parsedStatus: ParseStatus,
         contentHash: String? = nil,
