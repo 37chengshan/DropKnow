@@ -171,7 +171,7 @@ struct FileGridCard: View {
                 HStack(spacing: 5) {
                     Text(item.bucket.shortTitle)
                     Text("·")
-                    Text(item.file.parsedStatus.rawValue)
+                    Text(item.file.recentProcessingStatusLabel)
                     if item.timeCount > 1 {
                         Text("· \(item.timeCount) 个时间")
                     } else if item.hasHighConfidenceEvent {
@@ -233,37 +233,89 @@ private struct RecentFileIndexBadge: View {
 
     var body: some View {
         let palette = theme.palette(for: colorScheme)
-        Label(state.shortLabel, systemImage: state.systemImage)
+        let presentation = state.recentBadgePresentation
+        Label(presentation.label, systemImage: presentation.systemImage)
             .font(.caption2.weight(.semibold))
             .padding(.horizontal, 7)
             .padding(.vertical, 4)
-            .background(backgroundColor(for: palette), in: Capsule())
-            .foregroundStyle(foregroundColor(for: palette))
+            .background(backgroundColor(for: presentation.tone, palette: palette), in: Capsule())
+            .foregroundStyle(foregroundColor(for: presentation.tone, palette: palette))
     }
 
-    private func foregroundColor(for palette: DropTheme.Palette) -> Color {
-        switch state {
-        case .indexed:
+    private func foregroundColor(for tone: RecentFileIndexTone, palette: DropTheme.Palette) -> Color {
+        switch tone {
+        case .success:
             return palette.success
-        case .stale, .indexing, .blocked:
+        case .warning:
             return palette.warning
-        case .failed:
+        case .danger:
             return palette.danger
-        case .notIndexed:
+        case .neutral:
             return palette.textSecondary
         }
     }
 
-    private func backgroundColor(for palette: DropTheme.Palette) -> Color {
-        switch state {
-        case .indexed:
+    private func backgroundColor(for tone: RecentFileIndexTone, palette: DropTheme.Palette) -> Color {
+        switch tone {
+        case .success:
             return palette.success.opacity(0.14)
-        case .stale, .indexing, .blocked:
+        case .warning:
             return palette.warning.opacity(0.14)
-        case .failed:
+        case .danger:
             return palette.danger.opacity(0.14)
-        case .notIndexed:
+        case .neutral:
             return palette.surfaceSubtle
+        }
+    }
+}
+
+private extension DropFile {
+    var recentProcessingStatusLabel: String {
+        switch parsedStatus {
+        case .queued:
+            "等待处理"
+        case .parsing:
+            "处理中"
+        case .sensitiveGate:
+            "等待确认"
+        case .parsed:
+            "已完成"
+        case .failed:
+            "处理失败"
+        case .ignored:
+            "已忽略"
+        }
+    }
+}
+
+private struct RecentFileIndexBadgePresentation {
+    var label: String
+    var systemImage: String
+    var tone: RecentFileIndexTone
+}
+
+private enum RecentFileIndexTone {
+    case neutral
+    case success
+    case warning
+    case danger
+}
+
+private extension RAGIndexState {
+    var recentBadgePresentation: RecentFileIndexBadgePresentation {
+        switch self {
+        case .notIndexed:
+            RecentFileIndexBadgePresentation(label: "未入索引", systemImage: "tray", tone: .neutral)
+        case .indexing:
+            RecentFileIndexBadgePresentation(label: "索引中", systemImage: "arrow.triangle.2.circlepath", tone: .warning)
+        case .indexed:
+            RecentFileIndexBadgePresentation(label: "已就绪", systemImage: "checkmark.circle.fill", tone: .success)
+        case .stale:
+            RecentFileIndexBadgePresentation(label: "需重建", systemImage: "clock.arrow.trianglehead.counterclockwise.rotate.90", tone: .warning)
+        case .failed:
+            RecentFileIndexBadgePresentation(label: "处理失败", systemImage: "exclamationmark.triangle.fill", tone: .danger)
+        case .blocked:
+            RecentFileIndexBadgePresentation(label: "不可索引", systemImage: "hand.raised.fill", tone: .warning)
         }
     }
 }

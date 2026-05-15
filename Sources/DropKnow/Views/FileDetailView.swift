@@ -195,8 +195,16 @@ struct FileDetailView: View {
 
     private func indexStateWarningMessage(for file: DropFile) -> String? {
         switch file.ragIndexState {
-        case .stale, .failed:
-            return file.ragIndexState.evidenceWarningMessage
+        case .stale:
+            return "文件内容已变化，当前搜索可能仍基于旧版本；重建完成前请先核验原文件。"
+        case .failed:
+            if file.hasIndexedSnapshot {
+                if file.indexedSnapshotMatchesCurrentContent {
+                    return "最近一次更新未完成，当前搜索结果可能不完整；请先核验原文件。"
+                }
+                return "最近一次更新未完成，当前搜索仍可能停留在旧版本；请先核验原文件。"
+            }
+            return "最近一次处理未完成，当前无法用于完整检索；可重试失败任务或先打开原文件核验。"
         default:
             return nil
         }
@@ -292,8 +300,7 @@ private struct DetailHeader: View {
             }
 
             HStack(spacing: 14) {
-                MetadataItem(title: "状态", value: file.parsedStatus.rawValue)
-                MetadataItem(title: "索引", value: file.ragIndexState.detailLabel)
+                MetadataItem(title: "处理", value: file.detailProcessingStatusLabel)
                 MetadataItem(title: "大小", value: fileSizeText)
                 MetadataItem(title: "修改时间", value: modifiedAtText)
                 MetadataItem(title: "文本长度", value: textLengthText)
@@ -311,37 +318,89 @@ private struct DetailIndexBadge: View {
 
     var body: some View {
         let palette = theme.palette(for: colorScheme)
-        Label(state.detailLabel, systemImage: state.systemImage)
+        let presentation = state.detailBadgePresentation
+        Label(presentation.label, systemImage: presentation.systemImage)
             .font(.caption.weight(.semibold))
             .padding(.horizontal, 9)
             .padding(.vertical, 5)
-            .background(backgroundColor(for: palette), in: Capsule())
-            .foregroundStyle(foregroundColor(for: palette))
+            .background(backgroundColor(for: presentation.tone, palette: palette), in: Capsule())
+            .foregroundStyle(foregroundColor(for: presentation.tone, palette: palette))
     }
 
-    private func foregroundColor(for palette: DropTheme.Palette) -> Color {
-        switch state {
-        case .indexed:
+    private func foregroundColor(for tone: DetailIndexTone, palette: DropTheme.Palette) -> Color {
+        switch tone {
+        case .success:
             return palette.success
-        case .stale, .indexing, .blocked:
+        case .warning:
             return palette.warning
-        case .failed:
+        case .danger:
             return palette.danger
-        case .notIndexed:
+        case .neutral:
             return palette.textSecondary
         }
     }
 
-    private func backgroundColor(for palette: DropTheme.Palette) -> Color {
-        switch state {
-        case .indexed:
+    private func backgroundColor(for tone: DetailIndexTone, palette: DropTheme.Palette) -> Color {
+        switch tone {
+        case .success:
             return palette.success.opacity(0.14)
-        case .stale, .indexing, .blocked:
+        case .warning:
             return palette.warning.opacity(0.14)
-        case .failed:
+        case .danger:
             return palette.danger.opacity(0.14)
-        case .notIndexed:
+        case .neutral:
             return palette.surfaceSubtle
+        }
+    }
+}
+
+private extension DropFile {
+    var detailProcessingStatusLabel: String {
+        switch parsedStatus {
+        case .queued:
+            "等待处理"
+        case .parsing:
+            "处理中"
+        case .sensitiveGate:
+            "等待确认"
+        case .parsed:
+            "已完成"
+        case .failed:
+            "处理失败"
+        case .ignored:
+            "已忽略"
+        }
+    }
+}
+
+private struct DetailIndexBadgePresentation {
+    var label: String
+    var systemImage: String
+    var tone: DetailIndexTone
+}
+
+private enum DetailIndexTone {
+    case neutral
+    case success
+    case warning
+    case danger
+}
+
+private extension RAGIndexState {
+    var detailBadgePresentation: DetailIndexBadgePresentation {
+        switch self {
+        case .notIndexed:
+            DetailIndexBadgePresentation(label: "未入索引", systemImage: "tray", tone: .neutral)
+        case .indexing:
+            DetailIndexBadgePresentation(label: "索引中", systemImage: "arrow.triangle.2.circlepath", tone: .warning)
+        case .indexed:
+            DetailIndexBadgePresentation(label: "已就绪", systemImage: "checkmark.circle.fill", tone: .success)
+        case .stale:
+            DetailIndexBadgePresentation(label: "需重建", systemImage: "clock.arrow.trianglehead.counterclockwise.rotate.90", tone: .warning)
+        case .failed:
+            DetailIndexBadgePresentation(label: "处理失败", systemImage: "exclamationmark.triangle.fill", tone: .danger)
+        case .blocked:
+            DetailIndexBadgePresentation(label: "不可索引", systemImage: "hand.raised.fill", tone: .warning)
         }
     }
 }
