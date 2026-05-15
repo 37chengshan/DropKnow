@@ -53,6 +53,53 @@ final class ChatWorkingStateTests: XCTestCase {
         XCTAssertFalse(store.chatMessages.contains { $0.text == "查文件 取消测试" })
     }
 
+    func testReplacementDuringDebounceDropsOlderInFlightResult() async throws {
+        let rag = DelayedChatWorkingRAGService(delayNanoseconds: 300_000_000)
+        let store = makeStore(rag: rag)
+        let firstQuery = "查文件 第一条"
+        let secondQuery = "查文件 第二条"
+
+        store.searchQuery = firstQuery
+        store.submitSearch(debounceNanoseconds: 0)
+
+        try await waitUntil("first search starts") {
+            store.isSearching && !store.isSearchDebouncing
+        }
+
+        try await Task.sleep(nanoseconds: 20_000_000)
+
+        store.searchQuery = secondQuery
+        store.submitSearch(debounceNanoseconds: 450_000_000)
+
+        XCTAssertTrue(store.isSearchDebouncing)
+        XCTAssertTrue(store.isChatWorking)
+        XCTAssertFalse(store.isSearching)
+        XCTAssertFalse(store.chatMessages.contains { $0.text == firstQuery })
+
+        try await Task.sleep(nanoseconds: 340_000_000)
+
+        XCTAssertTrue(store.isSearchDebouncing)
+        XCTAssertTrue(store.isChatWorking)
+        XCTAssertFalse(store.chatMessages.contains { $0.text == firstQuery })
+        XCTAssertFalse(store.chatMessages.contains { $0.text == "answer:\(firstQuery)" })
+
+        try await waitUntil(
+            "replacement search finishes",
+            timeoutNanoseconds: 2_000_000_000
+        ) {
+            !store.isChatWorking
+        }
+
+        XCTAssertEqual(store.searchResult?.answer, "answer:\(secondQuery)")
+        XCTAssertFalse(store.chatMessages.contains { $0.text == firstQuery })
+        XCTAssertFalse(store.chatMessages.contains { $0.text == "answer:\(firstQuery)" })
+        XCTAssertEqual(store.chatMessages.filter { $0.role == .user }.map(\.text), [secondQuery])
+        XCTAssertTrue(store.chatMessages.contains { $0.text == "answer:\(secondQuery)" })
+
+        let searchQueries = await rag.searchQueries
+        XCTAssertEqual(searchQueries, [firstQuery, secondQuery])
+    }
+
     private func makeStore(
         settings: DropSettings = .defaults(),
         rag: any RAGServing

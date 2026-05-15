@@ -88,7 +88,7 @@ struct SearchPage: View {
                         Label("发送", systemImage: "paperplane.fill")
                     }
                     .buttonStyle(DropPrimaryButtonStyle())
-                    .disabled(store.searchQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || store.isSearching)
+                    .disabled(store.searchQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
 
                     Button {
                         Task { await store.rebuildSemanticIndex() }

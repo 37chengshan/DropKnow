@@ -994,6 +994,8 @@ final class AppStore: ObservableObject {
         let query = searchQuery.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !query.isEmpty else { return }
 
+        invalidateActiveSearch()
+
         let debounceRequestID = UUID()
         pendingSearchRequestID = debounceRequestID
         isSearchDebouncing = true
@@ -1055,17 +1057,8 @@ final class AppStore: ObservableObject {
         pendingSearchTask = nil
         pendingSearchRequestID = nil
 
-        activeSearchTask?.cancel()
-        activeSearchTask = nil
-
-        if let messageID = activeSearchUserMessageID {
-            chatMessages.removeAll { $0.id == messageID }
-        }
-
-        activeSearchRequestID = nil
-        activeSearchUserMessageID = nil
+        invalidateActiveSearch()
         isSearchDebouncing = false
-        isSearching = false
     }
 
     func retryLastSearch() {
@@ -1101,6 +1094,19 @@ final class AppStore: ObservableObject {
         return fileSignals.contains { content.contains($0) }
             || fileQuestionSignals.contains { content.contains($0) }
             || (broadEnglishQuestionSignals.contains { content.contains($0) } && fileQuestionContextSignals.contains { content.contains($0) })
+    }
+
+    private func invalidateActiveSearch() {
+        activeSearchRequestID = nil
+        activeSearchTask?.cancel()
+        activeSearchTask = nil
+
+        if let messageID = activeSearchUserMessageID {
+            chatMessages.removeAll { $0.id == messageID }
+        }
+
+        activeSearchUserMessageID = nil
+        isSearching = false
     }
 
     @discardableResult
