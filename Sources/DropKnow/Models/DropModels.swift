@@ -146,6 +146,9 @@ extension DropFile {
         if parsedStatus == .failed {
             return .failed
         }
+        if parsedStatus == .parsing {
+            return contentHash == nil ? .notIndexed : .indexing
+        }
         guard parsedStatus == .parsed else {
             return .notIndexed
         }

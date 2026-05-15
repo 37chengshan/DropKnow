@@ -216,10 +216,10 @@ final class RAGSearchContractTests: XCTestCase {
         XCTAssertEqual(file.ragIndexState, .notIndexed)
     }
 
-    func testDropFileRAGIndexStateParsingWithContentHashIsNotIndexed() {
+    func testDropFileRAGIndexStateParsingWithContentHashIsIndexing() {
         let file = makeFile(parsedStatus: .parsing, contentHash: "abc")
 
-        XCTAssertEqual(file.ragIndexState, .notIndexed)
+        XCTAssertEqual(file.ragIndexState, .indexing)
     }
 
     func testDropFileRAGIndexStateParsedWithoutContentHashIsNotIndexed() {
