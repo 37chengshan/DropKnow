@@ -10,6 +10,28 @@ extension View {
     func dropWorkingBorderBeam(isActive: Bool, cornerRadius: CGFloat = 12) -> some View {
         modifier(DropWorkingBorderBeamModifier(isActive: isActive, cornerRadius: cornerRadius))
     }
+
+    @ViewBuilder
+    func dropProminentActionStyle() -> some View {
+        if #available(macOS 26.0, *) {
+            self.buttonStyle(.glassProminent)
+        } else {
+            self.buttonStyle(.borderedProminent)
+        }
+    }
+
+    @ViewBuilder
+    func dropSecondaryActionStyle() -> some View {
+        if #available(macOS 26.0, *) {
+            self.buttonStyle(.glass)
+        } else {
+            self.buttonStyle(.bordered)
+        }
+    }
+
+    func dropInsetMaterial(cornerRadius: CGFloat = 10, borderTint: Color? = nil) -> some View {
+        modifier(DropInsetMaterialModifier(cornerRadius: cornerRadius, borderTint: borderTint))
+    }
 }
 
 private struct DropGlassModifier: ViewModifier {
@@ -90,5 +112,24 @@ private struct DropWorkingBorderBeamModifier: ViewModifier {
         withAnimation(.linear(duration: 2.2).repeatForever(autoreverses: false)) {
             rotation = 360
         }
+    }
+}
+
+private struct DropInsetMaterialModifier: ViewModifier {
+    @Environment(\.dropTheme) private var theme
+    @Environment(\.colorScheme) private var colorScheme
+
+    var cornerRadius: CGFloat
+    var borderTint: Color?
+
+    func body(content: Content) -> some View {
+        let palette = theme.palette(for: colorScheme)
+        let shape = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+
+        content
+            .background(.regularMaterial, in: shape)
+            .overlay(
+                shape.stroke(borderTint ?? palette.border, lineWidth: theme.metrics.borderWidth)
+            )
     }
 }

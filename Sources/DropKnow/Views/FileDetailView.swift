@@ -278,7 +278,7 @@ private struct DetailHeader: View {
                         Label("打开原文件", systemImage: "arrow.up.right.square")
                     }
                     .font(.caption)
-                    .buttonStyle(DropSecondaryButtonStyle())
+                    .dropSecondaryActionStyle()
                 }
             }
 
@@ -306,8 +306,8 @@ private struct DetailIndexBadge: View {
             .font(.caption.weight(.semibold))
             .padding(.horizontal, 9)
             .padding(.vertical, 5)
-            .background(backgroundColor(for: presentation.tone, palette: palette), in: Capsule())
             .foregroundStyle(foregroundColor(for: presentation.tone, palette: palette))
+            .dropInsetMaterial(cornerRadius: 999, borderTint: backgroundColor(for: presentation.tone, palette: palette))
     }
 
     private func foregroundColor(for tone: DetailIndexTone, palette: DropTheme.Palette) -> Color {
@@ -475,11 +475,7 @@ private struct EventsSection: View {
                         .font(.caption)
                     }
                     .padding(12)
-                    .background(palette.surfaceSubtle, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .stroke(palette.border, lineWidth: theme.metrics.borderWidth)
-                    )
+                    .dropInsetMaterial(cornerRadius: 10)
                 }
             }
         }
@@ -516,11 +512,7 @@ private struct ExplanationSection: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(10)
-                    .background(palette.surfaceSubtle, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .stroke(palette.border, lineWidth: theme.metrics.borderWidth)
-                    )
+                    .dropInsetMaterial(cornerRadius: 10)
                 }
             }
         }
@@ -545,21 +537,21 @@ private struct SensitiveGateView: View {
                 } label: {
                     Label("本次解析", systemImage: "checkmark.shield")
                 }
-                .buttonStyle(DropPrimaryButtonStyle())
+                .dropProminentActionStyle()
 
                 Button {
                     Task { await store.trustDirectory(for: file) }
                 } label: {
                     Label("信任该目录", systemImage: "folder.badge.gearshape")
                 }
-                .buttonStyle(DropSecondaryButtonStyle())
+                .dropSecondaryActionStyle()
 
                 Button(role: .destructive) {
                     Task { await store.ignoreFile(file) }
                 } label: {
                     Label("永不解析此文件", systemImage: "xmark.shield")
                 }
-                .buttonStyle(DropSecondaryButtonStyle())
+                .dropSecondaryActionStyle()
             }
         }
     }
@@ -602,14 +594,7 @@ private struct SemanticSnippetsSection: View {
                         .lineLimit(5)
                         .padding(12)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(
-                            (isFocused ? palette.accentOrange.opacity(0.12) : palette.surfaceSubtle),
-                            in: RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        )
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .stroke(isFocused ? palette.accentOrange : palette.border, lineWidth: theme.metrics.borderWidth)
-                        )
+                        .dropInsetMaterial(cornerRadius: 10, borderTint: isFocused ? palette.accentOrange.opacity(0.5) : nil)
                 }
             }
         }
@@ -636,11 +621,7 @@ private struct EvidenceSnippetsSection: View {
                         .lineLimit(5)
                         .padding(12)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(palette.surfaceSubtle, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .stroke(palette.border, lineWidth: theme.metrics.borderWidth)
-                        )
+                        .dropInsetMaterial(cornerRadius: 10)
                 }
             }
         }
@@ -702,14 +683,10 @@ private struct UpgradeNudge: View {
                 store.openUpgradePage(trigger: trigger)
             }
             .font(.caption)
-            .buttonStyle(DropSecondaryButtonStyle())
+            .dropSecondaryActionStyle()
         }
         .padding(10)
-        .background(palette.accentOrange.opacity(0.08), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .stroke(palette.border, lineWidth: theme.metrics.borderWidth)
-        )
+        .dropInsetMaterial(cornerRadius: 10, borderTint: palette.accentOrange.opacity(0.45))
     }
 }
 
@@ -726,8 +703,8 @@ struct StatusPill: View {
             .font(.caption.weight(.medium))
             .padding(.horizontal, 9)
             .padding(.vertical, 5)
-            .background(prominent ? palette.danger.opacity(0.14) : palette.surfaceSubtle, in: Capsule())
             .foregroundStyle(prominent ? palette.danger : palette.textSecondary)
+            .dropInsetMaterial(cornerRadius: 999, borderTint: prominent ? palette.danger.opacity(0.45) : nil)
     }
 }
 

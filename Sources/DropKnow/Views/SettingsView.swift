@@ -10,7 +10,6 @@ struct SettingsView: View {
         Form {
             Section("基础设置") {
                 Toggle("自动解析新文件", isOn: $store.settings.autoParseNewFiles)
-                    .toggleStyle(DropToggleStyle())
                 if store.isInitialImportWindowFixed {
                     LabeledContent("首次导入范围", value: "最近 \(store.effectiveImportRecentDays) 天")
                     Text(store.initialImportWindowMessage)
@@ -20,7 +19,6 @@ struct SettingsView: View {
                     Stepper("首次导入最近 \(store.settings.importRecentDays) 天", value: $store.settings.importRecentDays, in: 1...30)
                 }
                 Toggle("敏感文件始终询问", isOn: $store.settings.sensitiveAlwaysAsk)
-                    .toggleStyle(DropToggleStyle())
             }
 
             Section("目录设置") {
@@ -35,7 +33,7 @@ struct SettingsView: View {
                             Label("移除", systemImage: "minus.circle")
                         }
                         .labelStyle(.iconOnly)
-                        .buttonStyle(DropSecondaryButtonStyle())
+                        .dropSecondaryActionStyle()
                     }
                 }
 
@@ -44,7 +42,7 @@ struct SettingsView: View {
                 } label: {
                     Label("添加授权目录", systemImage: "folder.badge.plus")
                 }
-                .buttonStyle(DropSecondaryButtonStyle())
+                .dropSecondaryActionStyle()
 
                 if !store.planCapabilities.canManageMultipleWatchDirectories {
                     HStack {
@@ -56,7 +54,7 @@ struct SettingsView: View {
                             store.openUpgradePage(trigger: .directoryLimit)
                         }
                         .font(theme.typography.body(.caption))
-                        .buttonStyle(DropSecondaryButtonStyle())
+                        .dropSecondaryActionStyle()
                     }
                 }
             }
@@ -71,7 +69,7 @@ struct SettingsView: View {
                 } label: {
                     Label("查看订阅版", systemImage: "sparkles.rectangle.stack")
                 }
-                .buttonStyle(DropPrimaryButtonStyle())
+                .dropProminentActionStyle()
             }
 
             Section("功能边界") {
@@ -88,7 +86,7 @@ struct SettingsView: View {
                             store.openUpgradePage(trigger: .calendar)
                         }
                         .font(theme.typography.body(.caption))
-                        .buttonStyle(DropSecondaryButtonStyle())
+                        .dropSecondaryActionStyle()
                     }
                 }
             }
@@ -102,7 +100,7 @@ struct SettingsView: View {
                     } label: {
                         Label("重试失败任务", systemImage: "arrow.clockwise")
                     }
-                    .buttonStyle(DropSecondaryButtonStyle())
+                    .dropSecondaryActionStyle()
                 }
             }
 
@@ -123,7 +121,7 @@ struct SettingsView: View {
                 } label: {
                     Label("刷新 RAG 诊断", systemImage: "arrow.clockwise")
                 }
-                .buttonStyle(DropSecondaryButtonStyle())
+                .dropSecondaryActionStyle()
             }
 
             Section("Provider") {
@@ -144,7 +142,7 @@ struct SettingsView: View {
                         store.openProviderConfigLocation()
                     }
                     .font(theme.typography.body(.caption))
-                    .buttonStyle(DropSecondaryButtonStyle())
+                    .dropSecondaryActionStyle()
                 }
             }
         }

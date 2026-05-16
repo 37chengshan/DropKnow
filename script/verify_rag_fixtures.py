@@ -67,6 +67,7 @@ def main():
             ("高等数学考试在哪天", "exam_notice.txt", "2026 年 6 月 18 日"),
             ("报名截止是什么时候", "registration_deadline.txt", "2026 年 5 月 28 日 18:00"),
             ("计算机网络调到哪个教室", "class_schedule.md", "B203"),
+            ("查文件：exam_notice.txt 提到了哪个日期", "exam_notice.txt", "2026 年 6 月 18 日"),
         ]
         for query, expected_file, expected_phrase in cases:
             response = run_helper("search", store, {"query": query, "topK": 6})

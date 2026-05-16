@@ -33,6 +33,93 @@ def tokenize(text):
     return words + chars
 
 
+def extract_file_targets(query):
+    pattern = r"[A-Za-z0-9_\-\u4e00-\u9fff\.]+\.(?:pdf|docx|txt|md|markdown)"
+    targets = re.findall(pattern, query, flags=re.I)
+    seen = set()
+    ordered = []
+    for item in targets:
+        key = item.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        ordered.append(item)
+    return ordered
+
+
+def chunk_keyword_score(query, text):
+    score = 0.0
+    query_lower = query.lower()
+    text_lower = text.lower()
+    tokens = [token for token in tokenize(query) if len(token.strip()) > 1]
+    for token in set(tokens):
+        if token in text_lower:
+            score += 1.0
+
+    if any(flag in query_lower for flag in ("日期", "时间", "哪天", "date", "day")):
+        if re.search(r"\d{4}年\d{1,2}月\d{1,2}日|\d{4}[/-]\d{1,2}[/-]\d{1,2}", text):
+            score += 2.0
+    if any(flag in query_lower for flag in ("地点", "位置", "哪里", "location", "where")):
+        if re.search(r"[\u4e00-\u9fff]{2,20}[·•]?\s*(南京|北京|上海|广州|深圳|杭州|苏州|成都|武汉|西安)|地点|地址|教室|会场", text):
+            score += 2.0
+
+    return score
+
+
+def direct_file_hits(db, query, top_k):
+    targets = extract_file_targets(query)
+    if not targets:
+        return []
+
+    hits = []
+    seen_chunk_ids = set()
+    for target in targets:
+        rows = db.execute(
+            """
+            select c.chunk_id, c.file_id, c.file_name, c.file_path, c.text, c.chunk_index, c.revision_id
+            from chunks c
+            join active_revisions a
+              on a.file_id = c.file_id and a.revision_id = c.revision_id
+            where lower(c.file_name) = lower(?)
+               or lower(c.file_name) like lower(?)
+            """,
+            (target, f"%{os.path.splitext(target)[0]}%"),
+        ).fetchall()
+
+        if not rows:
+            continue
+
+        ranked_rows = sorted(
+            rows,
+            key=lambda row: (
+                chunk_keyword_score(query, row[4]),
+                -row[5],
+            ),
+            reverse=True,
+        )
+
+        for row in ranked_rows[: min(top_k, 3)]:
+            chunk_id, file_id, file_name, file_path, text, chunk_index, revision_id = row
+            if chunk_id in seen_chunk_ids:
+                continue
+            seen_chunk_ids.add(chunk_id)
+            hits.append(
+                {
+                    "id": chunk_id,
+                    "fileID": file_id,
+                    "fileName": file_name,
+                    "filePath": file_path,
+                    "snippet": text[:700],
+                    "score": 1.25 + chunk_keyword_score(query, text),
+                    "chunkIndex": int(chunk_index),
+                    "revisionID": revision_id,
+                    "matchReason": "命中文件名",
+                }
+            )
+
+    return hits[:top_k]
+
+
 def config_path(store):
     return os.path.join(os.path.dirname(store), "providers.local.json")
 
@@ -338,6 +425,42 @@ def metadata_diagnostics(store, config=None, api=None):
     }
 
 
+def index_status(payload, store):
+    db = connect_metadata(store)
+    statuses = []
+    for item in payload.get("files", []):
+        file_id = item.get("fileID", "")
+        expected_revision_id = item.get("expectedRevisionID")
+        active_row = db.execute(
+            "select revision_id from active_revisions where file_id = ?",
+            (file_id,),
+        ).fetchone()
+        active_revision_id = active_row[0] if active_row else None
+        chunk_row = db.execute(
+            """
+            select count(*)
+            from chunks c
+            join active_revisions a
+              on a.file_id = c.file_id and a.revision_id = c.revision_id
+            where c.file_id = ?
+            """,
+            (file_id,),
+        ).fetchone()
+        chunk_count = int(chunk_row[0] if chunk_row else 0)
+        revision_matches = not expected_revision_id or active_revision_id == expected_revision_id
+        statuses.append(
+            {
+                "fileID": file_id,
+                "indexed": bool(active_revision_id and revision_matches and chunk_count > 0),
+                "chunkCount": chunk_count,
+                "activeRevisionID": active_revision_id,
+                "expectedRevisionID": expected_revision_id,
+            }
+        )
+    emit({"ok": True, "engine": "metadata", "files": statuses})
+    return 0
+
+
 def load_zvec():
     try:
         import zvec
@@ -508,8 +631,11 @@ def search(payload, store):
         output_fields=["file_id", "file_name", "file_path", "chunk_index"],
     )
 
-    hits = []
+    hits = direct_file_hits(db, query, top_k)
+    seen_chunk_ids = {hit["id"] for hit in hits}
     for doc in docs:
+        if doc.id in seen_chunk_ids:
+            continue
         row = db.execute(
             """
             select c.file_id, c.file_name, c.file_path, c.text, c.chunk_index, c.revision_id
@@ -535,6 +661,9 @@ def search(payload, store):
                 "matchReason": "命中文件片段",
             }
         )
+        seen_chunk_ids.add(doc.id)
+        if len(hits) >= top_k:
+            break
 
     chat_warning = None
     chat_used = False
@@ -675,7 +804,7 @@ def chat(payload, store):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("mode", choices=["index", "index_batch", "search", "refine", "chat", "diagnostics"])
+    parser.add_argument("mode", choices=["index", "index_batch", "index_status", "search", "refine", "chat", "diagnostics"])
     parser.add_argument("--store", required=True)
     args = parser.parse_args()
 
@@ -684,6 +813,8 @@ def main():
         return index(payload, args.store)
     if args.mode == "index_batch":
         return index_batch(payload, args.store)
+    if args.mode == "index_status":
+        return index_status(payload, args.store)
     if args.mode == "refine":
         return refine(payload, args.store)
     if args.mode == "chat":

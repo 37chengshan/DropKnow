@@ -647,11 +647,14 @@ final class AppStore: ObservableObject {
         defer { isRebuildingIndex = false }
 
         let start = ContinuousClock().now
-        let candidates = files.filter { file in
+        let parsedFiles = files.filter { file in
             file.parsedStatus == .parsed &&
             FileManager.default.fileExists(atPath: file.filePath) &&
-            DocumentParser.kind(for: URL(fileURLWithPath: file.filePath)) != .unsupported &&
-            needsIndexBackfill(file)
+            DocumentParser.kind(for: URL(fileURLWithPath: file.filePath)) != .unsupported
+        }
+        let verifiedMissingIndexIDs = await verifiedMissingIndexFileIDs(for: parsedFiles)
+        let candidates = parsedFiles.filter { file in
+            needsIndexBackfill(file) || verifiedMissingIndexIDs.contains(file.id)
         }
 
         var enqueued = 0
@@ -671,6 +674,33 @@ final class AppStore: ObservableObject {
                 "enqueued": "\(enqueued)"
             ]
         )
+    }
+
+    private func verifiedMissingIndexFileIDs(for files: [DropFile]) async -> Set<DropFile.ID> {
+        let locallyIndexedFiles = files.filter { file in
+            file.ragIndexState == .indexed && file.activeIndexRevision != nil
+        }
+        guard !locallyIndexedFiles.isEmpty else { return [] }
+
+        do {
+            let statuses = try await rag.indexStatuses(
+                files: locallyIndexedFiles.map {
+                    RAGIndexStatusFile(fileID: $0.id.uuidString, expectedRevisionID: $0.activeIndexRevision)
+                }
+            )
+            return Set(statuses.compactMap { status in
+                guard !status.indexed, let id = UUID(uuidString: status.fileID) else { return nil }
+                return id
+            })
+        } catch {
+            PerfTrace.log(
+                name: "index.backfill.verify",
+                start: ContinuousClock().now,
+                success: false,
+                metadata: ["error": error.localizedDescription]
+            )
+            return []
+        }
     }
 
     func retryFailedJobs() async {

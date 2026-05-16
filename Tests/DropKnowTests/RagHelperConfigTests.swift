@@ -41,6 +41,26 @@ final class RagHelperConfigTests: XCTestCase {
         XCTAssertEqual(diagnostics?["emptyIndex"] as? Bool, true)
     }
 
+    func testRagHelperIndexStatusReportsMissingChunksWithoutZvec() throws {
+        let base = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: base, withIntermediateDirectories: true, attributes: nil)
+        defer { try? FileManager.default.removeItem(at: base) }
+
+        let object = try runHelper(
+            script: try ragHelperScriptURL(),
+            mode: "index_status",
+            store: base.appendingPathComponent("rag_store"),
+            payload: #"{"files":[{"fileID":"file-1","expectedRevisionID":"rev-1"}]}"#
+        )
+
+        let files = object["files"] as? [[String: Any]]
+        XCTAssertEqual(object["ok"] as? Bool, true)
+        XCTAssertEqual(files?.first?["fileID"] as? String, "file-1")
+        XCTAssertEqual(files?.first?["indexed"] as? Bool, false)
+        XCTAssertEqual(files?.first?["chunkCount"] as? Int, 0)
+        XCTAssertEqual(files?.first?["expectedRevisionID"] as? String, "rev-1")
+    }
+
     private func ragHelperScriptURL() throws -> URL {
         let fileURL = URL(fileURLWithPath: #file)
         let root = fileURL

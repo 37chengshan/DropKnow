@@ -20,6 +20,32 @@ struct RAGBatchIndexRequest: Codable {
     var files: [RAGBatchIndexFile]
 }
 
+struct RAGIndexStatusFile: Codable {
+    var fileID: String
+    var expectedRevisionID: String?
+}
+
+struct RAGIndexStatusRequest: Codable {
+    var files: [RAGIndexStatusFile]
+}
+
+struct RAGIndexFileStatus: Codable, Hashable {
+    var fileID: String
+    var indexed: Bool
+    var chunkCount: Int
+    var activeRevisionID: String?
+    var expectedRevisionID: String?
+}
+
+struct RAGIndexStatusResponse: Codable {
+    var ok: Bool
+    var engine: String?
+    var errorCode: String?
+    var warning: String?
+    var error: String?
+    var files: [RAGIndexFileStatus]?
+}
+
 struct RAGSearchRequest: Codable {
     var query: String
     var topK: Int
@@ -105,6 +131,15 @@ actor RAGService {
         } catch {
             return RAGIndexOutcome(succeeded: false, warning: error.localizedDescription, results: [])
         }
+    }
+
+    func indexStatuses(files: [RAGIndexStatusFile]) async throws -> [RAGIndexFileStatus] {
+        let request = RAGIndexStatusRequest(files: files)
+        let response: RAGIndexStatusResponse = try await run(mode: "index_status", payload: request)
+        if response.ok {
+            return response.files ?? []
+        }
+        throw RAGError.response(code: response.errorCode, message: response.error ?? response.warning ?? "RAG index status failed")
     }
 
     func search(query: String, topK: Int) async throws -> SearchResult {

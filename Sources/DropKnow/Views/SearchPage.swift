@@ -29,7 +29,7 @@ struct SearchPage: View {
                         store.retryLastSearch()
                     }
                     .font(.caption)
-                    .buttonStyle(DropSecondaryButtonStyle())
+                    .dropSecondaryActionStyle()
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 10)
@@ -74,9 +74,9 @@ struct SearchPage: View {
             VStack(alignment: .leading, spacing: 8) {
                 HStack(spacing: 10) {
                     TextField("问通用问题，或问文件里的内容、时间、待办、证据来源...", text: $store.searchQuery, axis: .vertical)
-                        .textFieldStyle(DropTextFieldStyle())
+                        .textFieldStyle(.roundedBorder)
+                        .controlSize(.large)
                         .focused($isInputFocused)
-                        .dropFieldChrome(isFocused: isInputFocused)
                         .lineLimit(1...4)
                         .onSubmit {
                             store.submitSearch()
@@ -87,7 +87,7 @@ struct SearchPage: View {
                     } label: {
                         Label("发送", systemImage: "paperplane.fill")
                     }
-                    .buttonStyle(DropPrimaryButtonStyle())
+                    .dropProminentActionStyle()
                     .disabled(store.searchQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
 
                     Button {
@@ -96,7 +96,7 @@ struct SearchPage: View {
                         Label("补齐索引", systemImage: "arrow.triangle.2.circlepath")
                     }
                     .disabled(store.isRebuildingIndex)
-                    .buttonStyle(DropSecondaryButtonStyle())
+                    .dropSecondaryActionStyle()
                 }
 
                 if let warning = store.searchQuotaWarning, !warning.isEmpty {
@@ -111,7 +111,7 @@ struct SearchPage: View {
                             }
                         }
                         .font(.caption)
-                        .buttonStyle(DropSecondaryButtonStyle())
+                        .dropSecondaryActionStyle()
                     }
                 }
             }
@@ -140,7 +140,7 @@ private struct ChatWorkingStatusBar: View {
                     store.cancelSearch()
                 }
                 .font(.caption)
-                .buttonStyle(DropSecondaryButtonStyle())
+                .dropSecondaryActionStyle()
             }
             .padding(.horizontal, 12)
             .padding(.top, 12)
@@ -187,13 +187,13 @@ private struct ProviderStatusBanner: View {
                 store.openProviderSettings()
             }
             .font(.caption)
-            .buttonStyle(DropSecondaryButtonStyle())
+            .dropSecondaryActionStyle()
 
             Button("配置位置") {
                 store.openProviderConfigLocation()
             }
             .font(.caption)
-            .buttonStyle(DropSecondaryButtonStyle())
+            .dropSecondaryActionStyle()
         }
         .padding(12)
         .dropGlass(cornerRadius: 14)
@@ -245,14 +245,7 @@ private struct ChatBubble: View {
             }
             .padding(12)
             .frame(maxWidth: message.role == .user ? 520 : .infinity, alignment: .leading)
-            .background(
-                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .fill(message.role == .user ? palette.accentOrange.opacity(0.14) : palette.surfaceSubtle)
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .stroke(palette.border, lineWidth: theme.metrics.borderWidth)
-            )
+            .dropInsetMaterial(cornerRadius: 12, borderTint: message.role == .user ? palette.accentOrange.opacity(0.45) : nil)
 
             if message.role == .assistant {
                 Spacer(minLength: 40)

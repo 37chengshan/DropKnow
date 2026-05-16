@@ -1,0 +1,21 @@
+.DS_Store
+.build/
+.venv/
+dist/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Xcode / Swift
+.swiftpm/
+*.xcuserstate
+xcuserdata/
+
+# IDE / Tools
+.trae/
+.codex/
+
+# Third-party vendored directories
+zvec-main/

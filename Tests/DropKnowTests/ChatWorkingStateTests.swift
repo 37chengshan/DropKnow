@@ -291,6 +291,18 @@ private actor DelayedChatWorkingRAGService: RAGServing {
         )
     }
 
+    func indexStatuses(files: [RAGIndexStatusFile]) async throws -> [RAGIndexFileStatus] {
+        files.map {
+            RAGIndexFileStatus(
+                fileID: $0.fileID,
+                indexed: true,
+                chunkCount: 1,
+                activeRevisionID: $0.expectedRevisionID,
+                expectedRevisionID: $0.expectedRevisionID
+            )
+        }
+    }
+
     func search(query: String, topK: Int) async throws -> SearchResult {
         searchQueries.append(query)
         if delayNanoseconds > 0 {
@@ -397,6 +409,18 @@ private actor CancellationInsensitivePlannedRAGService: RAGServing {
             warning: nil,
             results: files.map { RAGBatchIndexResult(fileID: $0.fileID, revisionID: $0.revisionID) }
         )
+    }
+
+    func indexStatuses(files: [RAGIndexStatusFile]) async throws -> [RAGIndexFileStatus] {
+        files.map {
+            RAGIndexFileStatus(
+                fileID: $0.fileID,
+                indexed: true,
+                chunkCount: 1,
+                activeRevisionID: $0.expectedRevisionID,
+                expectedRevisionID: $0.expectedRevisionID
+            )
+        }
     }
 
     func search(query: String, topK: Int) async throws -> SearchResult {

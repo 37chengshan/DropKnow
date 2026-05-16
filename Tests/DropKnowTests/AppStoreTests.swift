@@ -219,6 +219,60 @@ final class AppStoreTests: XCTestCase {
         )
     }
 
+    func testRebuildSemanticIndexBackfillsLocallyIndexedFileMissingRAGChunks() async throws {
+        let workspace = try makeTempDirectory()
+        let fileURL = workspace.appendingPathComponent("20250916120002HSTeKa.pdf")
+        try createFile(at: fileURL, modifiedAt: Date())
+        let file = makeRuntimeIndexedFile(filePath: fileURL.path)
+        let rag = StubRAGService(
+            delayNanoseconds: 0,
+            indexStatuses: [
+                RAGIndexFileStatus(
+                    fileID: file.id.uuidString,
+                    indexed: false,
+                    chunkCount: 0,
+                    activeRevisionID: file.activeIndexRevision,
+                    expectedRevisionID: file.activeIndexRevision
+                )
+            ]
+        )
+        let store = makeStore(files: [file], environmentBaseURL: workspace, rag: rag)
+
+        await store.rebuildSemanticIndex()
+        let snapshot = await store.runtimeStateSnapshot()
+
+        XCTAssertEqual(snapshot.parseJobs.count, 1)
+        XCTAssertEqual(snapshot.parseJobs.first?.fileID, file.id)
+        XCTAssertEqual(snapshot.parseJobs.first?.trigger, .manualBackfill)
+        XCTAssertEqual(store.toastMessage, "已加入补齐索引队列：1 个文件")
+    }
+
+    func testRebuildSemanticIndexSkipsLocallyIndexedFileWhenRAGChunksExist() async throws {
+        let workspace = try makeTempDirectory()
+        let fileURL = workspace.appendingPathComponent("ready.pdf")
+        try createFile(at: fileURL, modifiedAt: Date())
+        let file = makeRuntimeIndexedFile(filePath: fileURL.path)
+        let rag = StubRAGService(
+            delayNanoseconds: 0,
+            indexStatuses: [
+                RAGIndexFileStatus(
+                    fileID: file.id.uuidString,
+                    indexed: true,
+                    chunkCount: 2,
+                    activeRevisionID: file.activeIndexRevision,
+                    expectedRevisionID: file.activeIndexRevision
+                )
+            ]
+        )
+        let store = makeStore(files: [file], environmentBaseURL: workspace, rag: rag)
+
+        await store.rebuildSemanticIndex()
+        let snapshot = await store.runtimeStateSnapshot()
+
+        XCTAssertTrue(snapshot.parseJobs.isEmpty)
+        XCTAssertEqual(store.toastMessage, "已加入补齐索引队列：0 个文件")
+    }
+
     func testParseQuotaExhaustionPreventsInitialImportJobs() async throws {
         let workspace = try makeTempDirectory()
         let watchDirectory = workspace.appendingPathComponent("Watch", isDirectory: true)
@@ -778,6 +832,21 @@ final class AppStoreTests: XCTestCase {
         )
     }
 
+    private func makeRuntimeIndexedFile(filePath: String) -> DropFile {
+        let runtime = ProcessingRuntime.current
+        var file = makeFile(filePath: filePath)
+        file.parserVersion = runtime.parserVersion
+        file.summaryVersion = runtime.summaryVersion
+        file.refineModel = runtime.refineModel
+        file.embeddingProvider = runtime.embeddingProvider
+        file.embeddingModel = runtime.embeddingModel
+        file.embeddingDimension = runtime.embeddingDimension
+        file.priorityLevel = .normal
+        file.refinedContentHash = nil
+        file.refinedAt = nil
+        return file
+    }
+
     private func makeEventCandidate(
         title: String = "高数考试",
         eventType: EventType = .exam,
@@ -817,19 +886,37 @@ private actor StubRAGService: RAGServing {
     private(set) var chatQueries: [String] = []
     private let forcedSearchResult: SearchResult?
     private let diagnosticsResult: Result<SearchDiagnostics, Error>
+    private let indexStatusesResult: [RAGIndexFileStatus]
 
     init(
         delayNanoseconds: UInt64,
         forcedSearchResult: SearchResult? = nil,
-        diagnosticsResult: Result<SearchDiagnostics, Error> = .success(.empty)
+        diagnosticsResult: Result<SearchDiagnostics, Error> = .success(.empty),
+        indexStatuses: [RAGIndexFileStatus] = []
     ) {
         self.delayNanoseconds = delayNanoseconds
         self.forcedSearchResult = forcedSearchResult
         self.diagnosticsResult = diagnosticsResult
+        self.indexStatusesResult = indexStatuses
     }
 
     func indexBatch(files: [RAGBatchIndexFile]) async -> RAGIndexOutcome {
         RAGIndexOutcome(succeeded: true, warning: nil, results: files.map { RAGBatchIndexResult(fileID: $0.fileID, revisionID: $0.revisionID) })
+    }
+
+    func indexStatuses(files: [RAGIndexStatusFile]) async throws -> [RAGIndexFileStatus] {
+        if !indexStatusesResult.isEmpty {
+            return indexStatusesResult
+        }
+        return files.map {
+            RAGIndexFileStatus(
+                fileID: $0.fileID,
+                indexed: true,
+                chunkCount: 1,
+                activeRevisionID: $0.expectedRevisionID,
+                expectedRevisionID: $0.expectedRevisionID
+            )
+        }
     }
 
     func search(query: String, topK: Int) async throws -> SearchResult {

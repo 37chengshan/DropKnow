@@ -4,10 +4,7 @@ struct RecentDownloadsView: View {
     @EnvironmentObject private var store: AppStore
     @SceneStorage("recentFileBucket") private var selectedBucketRaw = RecentFileBucket.all.rawValue
     @State private var renderState = RecentDownloadsRenderState.empty
-    private let columns = [
-        GridItem(.flexible(minimum: 210), spacing: 8),
-        GridItem(.flexible(minimum: 210), spacing: 8)
-    ]
+    private let cardMinimumWidth: CGFloat = 210
 
     private var selectedBucket: RecentFileBucket {
         RecentFileBucket(rawValue: selectedBucketRaw) ?? .all
@@ -32,34 +29,38 @@ struct RecentDownloadsView: View {
                 }
 
                 ScrollView {
-                    LazyVStack(alignment: .leading, spacing: 12) {
-                        ForEach(renderState.groups) { group in
-                            VStack(alignment: .leading, spacing: 7) {
-                                HStack(spacing: 6) {
-                                    Label(group.bucket.title, systemImage: group.bucket.systemImage)
-                                        .font(.caption.weight(.semibold))
-                                    Text("\(group.files.count)")
-                                        .font(.caption2.weight(.medium))
-                                        .foregroundStyle(.secondary)
-                                }
-                                .foregroundStyle(.secondary)
+                    GeometryReader { proxy in
+                        let columns = adaptiveColumns(for: proxy.size.width)
+                        LazyVStack(alignment: .leading, spacing: 12) {
+                            ForEach(renderState.groups) { group in
+                                VStack(alignment: .leading, spacing: 7) {
+                                    HStack(spacing: 6) {
+                                        Label(group.bucket.title, systemImage: group.bucket.systemImage)
+                                            .font(.caption.weight(.semibold))
+                                        Text("\(group.files.count)")
+                                            .font(.caption2.weight(.medium))
+                                            .foregroundStyle(.secondary)
+                                    }
+                                    .foregroundStyle(.secondary)
 
-                                LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
-                                    ForEach(group.files) { file in
-                                        FileGridCard(item: file, isSelected: store.selectedFileID == file.id)
+                                    LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
+                                        ForEach(group.files) { file in
+                                            FileGridCard(item: file, isSelected: store.selectedFileID == file.id)
+                                        }
                                     }
                                 }
                             }
                         }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 12)
+                        .padding(.bottom, 12)
                     }
-                    .padding(.horizontal, 12)
-                    .padding(.bottom, 12)
                 }
             }
-            .frame(minWidth: 500, idealWidth: 560)
+            .frame(minWidth: 320, idealWidth: 520, maxWidth: 700)
 
             FileDetailView(file: store.selectedFile)
-                .frame(minWidth: 520)
+                .frame(minWidth: 420, idealWidth: 620)
         }
         .overlay {
             if store.files.isEmpty {
@@ -78,6 +79,12 @@ struct RecentDownloadsView: View {
     private struct RecentDownloadsRenderKey: Hashable {
         var filesHash: Int
         var selectedBucketRaw: String
+    }
+
+    private func adaptiveColumns(for availableWidth: CGFloat) -> [GridItem] {
+        let contentWidth = max(availableWidth - 24, cardMinimumWidth)
+        let columnCount = max(Int(contentWidth / (cardMinimumWidth + 8)), 1)
+        return Array(repeating: GridItem(.flexible(minimum: cardMinimumWidth), spacing: 8), count: columnCount)
     }
 
     private struct RecentDownloadsRenderState {
@@ -207,14 +214,7 @@ struct FileGridCard: View {
         .onTapGesture {
             store.selectedFileID = item.file.id
         }
-        .background(
-            RoundedRectangle(cornerRadius: 8, style: .continuous)
-                .fill(isSelected ? palette.accentOrange.opacity(0.14) : palette.surfaceSubtle)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 8, style: .continuous)
-                .stroke(isSelected ? palette.accentOrange.opacity(0.32) : palette.border, lineWidth: theme.metrics.borderWidth)
-        )
+        .dropInsetMaterial(cornerRadius: 8, borderTint: isSelected ? palette.accentOrange.opacity(0.5) : nil)
     }
 
     private var iconColor: Color {
@@ -238,8 +238,8 @@ private struct RecentFileIndexBadge: View {
             .font(.caption2.weight(.semibold))
             .padding(.horizontal, 7)
             .padding(.vertical, 4)
-            .background(backgroundColor(for: presentation.tone, palette: palette), in: Capsule())
             .foregroundStyle(foregroundColor(for: presentation.tone, palette: palette))
+            .dropInsetMaterial(cornerRadius: 999, borderTint: backgroundColor(for: presentation.tone, palette: palette))
     }
 
     private func foregroundColor(for tone: RecentFileIndexTone, palette: DropTheme.Palette) -> Color {
@@ -344,10 +344,7 @@ private struct CategoryFilterBar: View {
                         .font(.caption.weight(.medium))
                         .padding(.horizontal, 9)
                         .padding(.vertical, 6)
-                        .background(
-                            Capsule()
-                                .fill(selected == bucket ? palette.accentOrange.opacity(0.16) : palette.surfaceSubtle)
-                        )
+                        .dropInsetMaterial(cornerRadius: 999, borderTint: selected == bucket ? palette.accentOrange.opacity(0.5) : nil)
                     }
                     .buttonStyle(.plain)
                     .foregroundStyle(selected == bucket ? palette.accentOrange : palette.textPrimary)
